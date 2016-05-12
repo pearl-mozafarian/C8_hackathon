@@ -7,8 +7,9 @@ $(document).ready(function () {
 
     $(".now-button").click(nowClicked);
     
-    listenAjax("cats");
-    
+    listenAjax();
+
+    watchAjax();
 
     readAjax();
 
@@ -145,11 +146,16 @@ function watchAjax() {
             if (response.success) {
                 console.log(response);
                 //push response into resultsArray
-                iWant.queueArray.push(response.video);
+                for(i=0;i<response.video.length;i++){
+                    iWant.queueArray.push(response.video[i]);
+                }
+                console.log("results array", iWant.queueArray);
                 
-                //call display function with resultsArray
-                
+                //call display function
+                displayWatch();
+
                 // return results array
+                return response;
             } else {
                 console.log(response);
 
@@ -300,8 +306,13 @@ function displayRead() {
 /******************DISPLAY WATCH ***************************/
 
 /**
- * displayWatch - displays
+ * displayWatch - inputs video ID from queue array into iframe src to play video
  */
+
+function displayWatch(){
+    console.log("blah");
+}
+
 /******************DISPLAY LISTEN TO ***********************/
 
 /**
