@@ -19,7 +19,7 @@ var iWant = {
 
 function randomizeOptions() {
     var randomVerb = iWant.verbArray[generateRandomNumber(iWant.verbArray.length)];
-    var randomNoun = iWant.nounArray[generateRandomNumber(iWant.nounArray.length)]
+    var randomNoun = iWant.nounArray[generateRandomNumber(iWant.nounArray.length)];
 }
 
 /**
@@ -30,7 +30,23 @@ function randomizeOptions() {
 function generateRandomNumber(length) {
    return Math.floor(Math.random()*length);
 }
+/**
+ * displayOptions - this function generates a random number to be used in randomize options
+ * @param {string, string}
+ */
+function displayOptions() {
+    
+}
 
+/**
+ * nowClicked
+ * @param 
+ * @return 
+ */
+
+function nowClicked() {
+    
+}
 /**************************************** AJAX CALLS ********************************************************/
 
 /****************** READ AJAX ****************************/
