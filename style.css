@@ -4,41 +4,47 @@
     text-align: center;
     font-family: openSansLight;
     border-radius: 2%;
+    box-sizing: border-box;
 }
 
 body {
     background-image: url('image/background.jpg')
 }
 
-@font-face {
+@font-face{
     font-family: openSansLight;
     src: url(opensanslight.ttf);
 }
 
 .main-heading{
     font-size: 6em;
-    margin: 10vh 0 3vh 0;
-    text-shadow: 1px 1px 1px #b4bab7;
+    text-shadow: 5px 5px 5px #000000;
+    color: white;
 }
 
 p {
     font-size: 4em;
     font-weight: bold;
+    text-shadow: 4px 4px 4px #000000;
+    color: white;
+    font-weight: bold;
 }
 
-button {
+button{
     box-shadow: 5px 5px 5px #434345;
     color: white;
     left: 0;
     top: 0;
 }
-.now-button {
+
+.now-button{
     height: 10vh;
     font-size: 5vh;
     margin-top: 5vh;
     font-weight: bold;
-    background-color: #44b5ff;
+    background-color: rgba(68,181,255,0.8);
 }
+
 .now-button:hover {
     background-color: #6bafff;
 }
@@ -53,16 +59,50 @@ button {
     padding: 3vh;
 }
 
-.start-over {
-
-}
-
 .verb, input{
     font-size: 3em;
     border: 1px solid #b9b9b9;
     margin: 3vh 0;
-    box-shadow: 3px 3px 3px black;
+    box-shadow: 6px 6px 6px black;
+    background-color: rgba(255,255,255,0.9);
 }
 
+#read {
+    height: 80vh;
+}
 
+.tweets {
+    height: 31%;
+    border: 1px solid black;
+    margin: 1vh 0;
+    background-color: rgba(255,255,255,0.9);
+    box-shadow: 3px 3px 3px #000000;
+}
+.tweets-pic, .tweets-username {
+    margin-top: 1%;
+}
 
+.tweets-pic {
+    position: relative;
+    border: 1px solid black;
+    height: 40%;
+}
+
+.tweets-username {
+    border: 1px solid black;
+    height: 17%;
+}
+
+.text {
+    position: relative;
+    border: 1px solid black;
+    height: 50%;
+    top: 5%;
+}
+
+.shares {
+    position: relative;
+    border: 1px solid black;
+    height: 17%;
+    top: 5%;
+}
