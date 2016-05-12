@@ -49,9 +49,16 @@ function generateRandomNumber(length) {
  * @param {string, string}
  */
 function displayOptions(randomVerb, randomNoun) {
-    randomVerb = ""+randomVerb+"";
-    $('.verb option[value = randomVerb]').attr("selected",true);
     $(".noun").val(randomNoun);
+    $(".verb option").attr("selected" , false);
+    switch (randomVerb){
+        case "listen": $(".verb option[value='listen']").attr("selected" , true);
+            break;
+        case "watch": $(".verb option[value='watch']").attr("selected" , true);
+            break;
+        case "read": $(".verb option[value='read']").attr("selected" , true);
+            break;
+    }
 }
 
 /**
@@ -146,7 +153,6 @@ function watchAjax(input) {
 /****************** READ LISTEN TO ***********************/
 
 /**
-<<<<<<< HEAD
  * listenAjax - calls iTunes API using search criteria, returns array of
  * @param input {string} - the search term to use
  */
