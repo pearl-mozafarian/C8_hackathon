@@ -6,13 +6,13 @@ $(document).ready(function () {
     randomizeOptions();
 
     $(".now-button").click(nowClicked);
-    
-    listenAjax("cats");
-    
+ 
+    $("#startOver").click(function () {
+        iWant.queueArray = [];
+        iWant.displayArray = [];
 
-    readAjax();
+    });
 
-    randomizeOptions();
 
 });//////end of document.ready
 
@@ -22,6 +22,7 @@ var iWant = {
     verbArray: ["read","listen","watch"],
     nounArray: ["cats","dogs"],
     queueArray: [],
+    displayArray: [],
     selectedVerb : null,
     selectedNoun: "cats"
 };
@@ -160,9 +161,6 @@ function watchAjax() {
     });
 }
 /****************** LISTEN TO ***********************/
-
-
-/****************** READ LISTEN TO ***********************/
 
 /**
  * listenAjax - calls iTunes API using search criteria, returns array of
