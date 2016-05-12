@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 randomizeOptions();
     
-    readAjax();
+    //readAjax();
 
 });//////end of document.ready
 
@@ -20,7 +20,7 @@ var iWant = {
     queueArray: [],
     
     selectedVerb : null,
-    selectedNoun: null
+    selectedNoun: "cats"
 };
 /********************************** LANDING PAGE FUNCTIONS ************************************************/
 
@@ -109,15 +109,14 @@ function readAjax() {
 
 /**
  * watchAjax - calls youtube API using search criteria, returns array of video objects containing title and ID of each. Returns max 50 results.
- * @param input {string}
  */
 
-function watchAjax(input) {
+function watchAjax() {
     $.ajax({
 
         dataType: 'json',
         data: {
-            q: input,
+            q: iWant.selectedNoun,
             maxResults: 50
         },
         method: 'POST',
@@ -157,52 +156,89 @@ function listenAjax(input) {
 
         dataType: 'jsonp',
         data: {
-            term: input,
+            term: iWant.selectedNoun,
             media: "music"
         },
         method: 'GET',
         url: "https://itunes.apple.com/search",
         success: function (response) {
-            if (response.success) {
-                console.log(response);
-                //push response into resultsArray
+            if (response) {
+                console.log("music", response);
 
-                //iWant.queueArray.push(response.video);
+                //push response into queueArray
+                for(i=0; i<response.results.length; i++){
+                    iWant.queueArray.push(response.results[i]);
+                }
 
-                //call second AJAX call with podcast as criteria
+                console.log("array before randomize", iWant.queueArray);
+                //randomize method on queue array
+                var currentIndex = iWant.queueArray.length;
+                var randomIndex;
 
-                $.ajax({
+                while (currentIndex > 0) {//if there are still indexes left to look at
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
 
-                    dataType: 'jsonp',
-                    data: {
-                        term: input,
-                        media: "podcast"
-                    },
-                    method: 'GET',
-                    url: "https://itunes.apple.com/search",
-                    success: function (response) {
-                        if (response.success) {
-                            console.log(response);
-                            //push response into resultsArray
+                    /*switches two indexes with use of variable for storing value of first to be switched*/
+                    var swap = iWant.queueArray[currentIndex];
+                    iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
+                    iWant.queueArray[randomIndex] = swap;
+                }
 
-                            //iWant.queueArray.push(response.video);
-
-                            //call display function with resultsArray
-
-                            // return results array
-                        } else {
-                            console.log(response);
-
-                            //return error message
-                        }
-                    }
-
-                });
+                console.log("array after randomize", iWant.queueArray);
+                //call displayListen function
+                //displayListen();
 
             } else {
-                console.log(response);
+                console.log("music error", response);
 
                 //return error message
+            }
+        }
+
+    });
+
+    $.ajax({
+
+        dataType: 'jsonp',
+        data: {
+            term: input,
+            media: "podcast"
+        },
+        method: 'GET',
+        url: "https://itunes.apple.com/search",
+        success: function (response) {
+            if (response) {
+                console.log("podcast," , response);
+
+                //push response into queueArray
+                for(i=0; i<response.results.length; i++){
+                    iWant.queueArray.push(response.results[i]);
+                }
+
+                console.log("array before randomize", iWant.queueArray);
+                //randomize method on queue array
+                var currentIndex = iWant.queueArray.length;
+                var randomIndex;
+
+                while (currentIndex > 0) {//if there are still indexes left to look at
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+
+                    /*switches two indexes with use of variable for storing value of first to be switched*/
+                    var swap = iWant.queueArray[currentIndex];
+                    iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
+                    iWant.queueArray[randomIndex] = swap;
+                }
+
+                console.log("array after randomize", iWant.queueArray);
+
+                // return results array
+                return response;
+
+            } else {
+                //return error message
+                console.log("podcast error", response);
             }
         }
 
@@ -220,11 +256,11 @@ function listenAjax(input) {
 /******************DISPLAY WATCH ***************************/
 
 /**
- * displayWatch
+ * displayWatch - displays
  */
 /******************DISPLAY LISTEN TO ***********************/
 
 /**
- * displayListen
+ * displayListen - pulls a random song/podcast out of the queueArray and displays that item in the listen element of the page
  */
 
