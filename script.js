@@ -239,7 +239,7 @@ function displayRead() {
 
     for(i = 0; i <= 3; i++) {
         var tweet = iWant.queueArray[i];
-        var tweetdiv = '#tweet' + i;
+        var tweetdiv = '#tweet' + (i + 1);
         var avatar = tweetdiv + ' .avatar';
         var text = tweetdiv + ' .text';
         var name = tweetdiv + ' .name';
@@ -253,7 +253,6 @@ function displayRead() {
         $(userName).text(tweet.userName);
         $(retweets).text(tweet.retweets);
         $(favorites).text(tweet.favorites);
-        
     }
 }
 
@@ -267,4 +266,14 @@ function displayRead() {
 /**
  * displayListen
  */
+
+/******************DISPLAY ERROR ***********************/
+
+/**
+ * displayError
+ */
+
+function displayError() {
+    
+}
 
