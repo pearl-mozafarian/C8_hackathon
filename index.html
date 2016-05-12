@@ -14,10 +14,10 @@
 <body>
     <!--<button class="start-over">Start Over</button>-->
     <!--<div class="next-and-prev col-md-12">-->
-        <!--<button class="next col-md-1">Next</button>-->
+        <!--<button class="next col-md-1"><span class="glyphicon glyphicon-circle-arrow-right"></span>Next</button>-->
         <!--<button class="prev col-md-offset-11">Previous</button>-->
     <!--</div>-->
-    <h1 class="main-heading">I Want To</h1>
+    <p class="main-heading">I Want To</p>
     <section class="container-fluid">
         <div id="landing" class="col-md-offset-1 col-md-10">
             <select class="verb col-md-offset-4">
@@ -29,10 +29,68 @@
                 <input type="text" class="noun col-md-12">
                 <button class="now-button col-md-offset-5 col-md-2">NOW</button>
         </div>
-        <div id="read" class="col-md-offset-1 col-md-10"></div>
-        <div id="watch" class="col-md-offset-1 col-md-10"></div>
-        <div id="listen" class="col-md-offset-1 col-md-10"></div>
-        <div id="error" class="col-md-offset-1 col-md-10"></div>
+        <div id="read" class="col-md-offset-2 col-md-8">
+            <div class="tweets col-md-12" id="tweet1">
+                <div class="tweets-pic col-md-offset-1 col-md-1"><img class="avatar"></div>
+                <div class="tweets-username col-md-9"><span class="name"></span><span class="userName"></span></div>
+                <div class="text col-md-9"></div>
+                <div class="shares col-md-offset-2 col-md-9">
+                    <span></span>
+                    <span class="retweets"></span>
+                    <span></span>
+                    <span class="favorites"></span>
+                </div>
+            </div>
+            <div class="tweets col-md-12" id="tweet2">
+                <div class="tweets-pic col-md-offset-1 col-md-1"><img class="avatar"></div>
+                <div class="tweets-username col-md-9"><span class="name"></span><span class="userName"></span></div>
+                <div class="text col-md-9"></div>
+                <div class="shares col-md-offset-2 col-md-9">
+                    <span></span>
+                    <span class="retweets"></span>
+                    <span></span>
+                    <span class="favorites"></span>
+                </div>
+            </div>
+            <div class="tweets col-md-12" id="tweet3">
+                <div class="tweets-pic col-md-offset-1 col-md-1"><img class="avatar"></div>
+                <div class="tweets-username col-md-9"><span class="name"></span><span class="userName"></span></div>
+                <div class="text col-md-9"></div>
+                <div class="shares col-md-offset-2 col-md-9">
+                    <span></span>
+                    <span class="retweets"></span>
+                    <span></span>
+                    <span class="favorites"></span>
+                </div>
+            </div>
+
+        <!--<div id="watch" class="col-md-offset-1 col-md-10">-->
+            <!--<iframe id="ytplayer" class="col-md-12" type="text/html" width="854" height="480" src="" frameborder="0"/>-->
+            <!--<div id="videoTitle" class="col-md-12"></div>-->
+        <!--</div>-->
+
+
+        <div id="watch" class="col-md-offset-1 col-md-10">
+            <iframe id="ytplayer" class="col-md-12" type="text/html" width="854" height="480" src="" frameborder="0"/>
+        </div>
+
+        <div id="listen" class="col-md-12">
+            <div id="albumArt col-md-offset-4 col-md-4"></div>
+            <div id="albumName col-md-offset-4 col-md-4"></div>
+            <div id="songName col-md-offset-4 col-md-4"></div>
+            <div id="audioControls col-md-offset-4 col-md-4">
+                <audio controls src=""></audio>
+            </div>
+            <div class="audioLink col-md-offset-4 col-md-4"></div>
+
+        </div>
+
+
+
+        <!--<div id="error" class="col-md-offset-1 col-md-10">-->
+            <!--<h1>We couldn't find what you were looking for. Try again!</h1>-->
+        <!--</div>-->
+
     </section>
 </body>
 </html>
