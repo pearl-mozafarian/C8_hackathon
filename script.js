@@ -6,20 +6,20 @@ $(document).ready(function () {
     $('#watch').hide();
 
     randomizeOptions();
+
+    $(".now-button").click(nowClicked);
     
     listenAjax("cats");
-
-randomizeOptions();
+    
+    randomizeOptions();
 });//////end of document.ready
 
 /*********************************************** GLOBAL VARIABLES *****************************************/
 var iWant = {
 
-    verbArray: ["read","listen to","watch"],
+    verbArray: ["read","listen","watch"],
     nounArray: ["cats","dogs"],
-
     queueArray: [],
-    
     selectedVerb : null,
     selectedNoun: null
 };
@@ -69,7 +69,16 @@ function displayOptions(randomVerb, randomNoun) {
  */
 
 function nowClicked() {
-    
+    iWant.selectedNoun = $(".noun").val();
+    iWant.selectedVerb = $(".verb").val();
+    switch (iWant.selectedVerb) {
+        case "read": readAjax();
+            break;
+        case "listen": listenAjax();
+            break;
+        case "watch": watchAjax();
+            break;
+    }
 }
 /**************************************** AJAX CALLS ********************************************************/
 
