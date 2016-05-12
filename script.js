@@ -153,7 +153,6 @@ function watchAjax(input) {
 /****************** READ LISTEN TO ***********************/
 
 /**
-<<<<<<< HEAD
  * listenAjax - calls iTunes API using search criteria, returns array of
  * @param input {string} - the search term to use
  */
