@@ -96,14 +96,14 @@ button{
     height: 17%;
 }
 
-.tweets-content {
+.text {
     position: relative;
     border: 1px solid black;
     height: 50%;
     top: 5%;
 }
 
-.tweets-share {
+.retweet {
     position: relative;
     border: 1px solid black;
     height: 17%;
