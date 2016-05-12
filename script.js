@@ -1,12 +1,14 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
 randomizeOptions();
+    readAjax();
 });//////end of document.ready
 
 /*********************************************** GLOBAL VARIABLES *****************************************/
 var iWant = {
     verbArray: ["read","listen","watch"],
     nounArray: ["cat","dog"],
+    queueArray: [],
     selectedVerb : null,
     selectedNoun: null
 };
@@ -56,14 +58,52 @@ function nowClicked() {
 /****************** READ AJAX ****************************/
 
 /**
- * readAjax
+ * readAjax - pulling text of tweets from twitter api, and creating object with username, and text of tweet
  */
+
+function readAjax() {
+    $.ajax({
+        dataType: 'json',
+        data: {
+            search_term: iWant.selectedNoun,
+        },
+        method: 'post',
+        url: 'http://s-apis.learningfuze.com/hackathon/twitter/index.php',
+        success: function(result) {
+            for (i=0; i < result.tweets.statuses.length; i++){
+                var tweet = result.tweets.statuses[i];
+
+                var username = tweet.user.screen_name;
+                var text = tweet.text;
+                var name = tweet.user.name;
+                var avatarUrl = tweet.user.profile_image_url_https;
+                var retweets = tweet.retweet_count;
+                var favorites = tweet.favorite_count;
+
+                var tweet_object = {
+                    'avatarUrl': avatarUrl,
+                    'name': name,
+                    'userName': '@' + username,
+                    'text': text,
+                    'retweets': retweets,
+                    'favorites': favorites
+                };
+
+                iWant.queueArray.push(tweet_object);
+            }
+        }
+    })
+}
+
 /****************** WATCH ***************************/
 
 /**
  * watchAjax
  */
 /****************** LISTON TO ***********************/
+
+
+/****************** READ LISTON TO ***********************/
 
 /**
  * listenAjax
@@ -87,3 +127,4 @@ function nowClicked() {
 /**
  * displayListen
  */
+
