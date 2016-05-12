@@ -13,6 +13,9 @@ $(document).ready(function () {
         $('#read, #watch, #listen, #error').hide();
         $('#landing').show();
     });
+    
+    $('.next').click(next);
+    $('.prev').click(prev);
 
 
 });//////end of document.ready
@@ -75,14 +78,7 @@ function displayOptions(randomVerb, randomNoun) {
 function nowClicked() {
     iWant.selectedNoun = $(".noun").val();
     iWant.selectedVerb = $(".verb").val();
-    switch (iWant.selectedVerb) {
-        case "read": readAjax();
-            break;
-        case "listen": listenAjax();
-            break;
-        case "watch": watchAjax();
-            break;
-    }
+    next();
 }
 /**************************************** AJAX CALLS ********************************************************/
 
@@ -342,6 +338,34 @@ function displayError(verb) {
         case 'listen':
             error_div.text('iTunes cannot be reached. Please try again');
             break;
+    }
+}
+
+/**
+ * next - when next arrow is clicked, it calls the display function for the appropriate verb
+ */
+
+function next() {
+    switch (iWant.selectedVerb) {
+        case "read": readAjax();
+            break;
+        case "listen": listenAjax();
+            break;
+        case "watch": watchAjax();
+            break;
+    }
+}
+
+/**
+ * prev - when previous arrow is clicked, it decremenets the index to the appropriate number according to the current verb
+ */
+
+function prev() {
+    if (iWant.selectedVerb == 'read') {
+        iWant.index -= 3;
+    }
+    else {
+        iWant.index--;
     }
 }
 
