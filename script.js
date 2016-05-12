@@ -13,6 +13,9 @@ $(document).ready(function () {
         $('#read, #watch, #listen, #error').hide();
         $('#landing').show();
     });
+    
+    $('.next').click(next);
+    $('.prev').click(prev);
 
 });//////end of document.ready
 
@@ -74,14 +77,7 @@ function displayOptions(randomVerb, randomNoun) {
 function nowClicked() {
     iWant.selectedNoun = $(".noun").val();
     iWant.selectedVerb = $(".verb").val();
-    switch (iWant.selectedVerb) {
-        case "read": readAjax();
-            break;
-        case "listen": listenAjax();
-            break;
-        case "watch": watchAjax();
-            break;
-    }
+    next();
 }
 /**************************************** AJAX CALLS ********************************************************/
 
@@ -186,28 +182,41 @@ function listenAjax(input) {
         success: function (response) {
             if (response) {
                 console.log("music", response);
-
+                var musicArray = response.results;
                 //push response into queueArray
-                for(i=0; i<response.results.length; i++){
-                    iWant.queueArray.push(response.results[i]);
-                }
 
-                console.log("array before randomize", iWant.queueArray);
+                for(i=0; i< musicArray.length; i++){
+                    var song = {
+                        atrist: musicArray[i].artistName,
+                        album: musicArray[i].collectionName,
+                        title: musicArray[i].trackName,
+                        picture: musicArray[i].artworkUrl100,
+                        audio: musicArray[i].previewUrl,
+                        link: musicArray[i].trackViewUrl
+                    };
+                    iWant.queueArray.push(song);
+
+                }
+                console.log("q array: ", iWant.queueArray);
+
+                displayListen();
+
+                // console.log("array before randomize", iWant.queueArray);
                 //randomize method on queue array
-                var currentIndex = iWant.queueArray.length;
-                var randomIndex;
+                // var currentIndex = iWant.queueArray.length;
+                // var randomIndex;
+                //
+                // while (currentIndex > 0) {//if there are still indexes left to look at
+                //     randomIndex = Math.floor(Math.random() * currentIndex);
+                //     currentIndex--;
+                //
+                //     /*switches two indexes with use of variable for storing value of first to be switched*/
+                //     var swap = iWant.queueArray[currentIndex];
+                //     iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
+                //     iWant.queueArray[randomIndex] = swap;
+                // }
 
-                while (currentIndex > 0) {//if there are still indexes left to look at
-                    randomIndex = Math.floor(Math.random() * currentIndex);
-                    currentIndex--;
-
-                    /*switches two indexes with use of variable for storing value of first to be switched*/
-                    var swap = iWant.queueArray[currentIndex];
-                    iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
-                    iWant.queueArray[randomIndex] = swap;
-                }
-
-                console.log("array after randomize", iWant.queueArray);
+                // console.log("array after randomize", iWant.queueArray);
                 //call displayListen function
                 //displayListen();
 
@@ -216,55 +225,56 @@ function listenAjax(input) {
 
                 //return error message
             }
-        }
+        }///end of success
 
     });
 
-    $.ajax({
 
-        dataType: 'jsonp',
-        data: {
-            term: input,
-            media: "podcast"
-        },
-        method: 'GET',
-        url: "https://itunes.apple.com/search",
-        success: function (response) {
-            if (response) {
-                console.log("podcast," , response);
-
-                //push response into queueArray
-                for(i=0; i<response.results.length; i++){
-                    iWant.queueArray.push(response.results[i]);
-                }
-
-                console.log("array before randomize", iWant.queueArray);
-                //randomize method on queue array
-                var currentIndex = iWant.queueArray.length;
-                var randomIndex;
-
-                while (currentIndex > 0) {//if there are still indexes left to look at
-                    randomIndex = Math.floor(Math.random() * currentIndex);
-                    currentIndex--;
-
-                    /*switches two indexes with use of variable for storing value of first to be switched*/
-                    var swap = iWant.queueArray[currentIndex];
-                    iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
-                    iWant.queueArray[randomIndex] = swap;
-                }
-
-                console.log("array after randomize", iWant.queueArray);
-
-                // return results array
-                return response;
-
-            } else {
-                //return error message
-                console.log("podcast error", response);
-            }
-        }
-
-    });
+    // $.ajax({
+    //
+    //     dataType: 'jsonp',
+    //     data: {
+    //         term: input,
+    //         media: "podcast"
+    //     },
+    //     method: 'GET',
+    //     url: "https://itunes.apple.com/search",
+    //     success: function (response) {
+    //         if (response) {
+    //             console.log("podcast," , response);
+    //
+    //             //push response into queueArray
+    //             for(i=0; i<response.results.length; i++){
+    //                 iWant.queueArray.push(response.results[i]);
+    //             }
+    //
+    //             // console.log("array before randomize", iWant.queueArray);
+    //             //randomize method on queue array
+    //             var currentIndex = iWant.queueArray.length;
+    //             var randomIndex;
+    //
+    //             while (currentIndex > 0) {//if there are still indexes left to look at
+    //                 randomIndex = Math.floor(Math.random() * currentIndex);
+    //                 currentIndex--;
+    //
+    //                 /*switches two indexes with use of variable for storing value of first to be switched*/
+    //                 var swap = iWant.queueArray[currentIndex];
+    //                 iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
+    //                 iWant.queueArray[randomIndex] = swap;
+    //             }
+    //
+    //             // console.log("array after randomize", iWant.queueArray);
+    //
+    //             // return results array
+    //             return response;
+    //
+    //         } else {
+    //             //return error message
+    //             console.log("podcast error", response);
+    //         }
+    //     }
+    //
+    // });
 }
 
 /**************************************** Display Functions ********************************************************/
@@ -280,7 +290,7 @@ function displayRead() {
     $('#landing').hide();
     $('#read').show();
 
-    for(i = 0; i <= 3; i++) {
+    for(var i = iWant.index; i <= iWant.index + 3; i++) {
         var tweet = iWant.queueArray[i];
         var tweetdiv = '#tweet' + (i + 1);
         var avatar = tweetdiv + ' .avatar';
@@ -297,6 +307,8 @@ function displayRead() {
         $(retweets).text(tweet.retweets);
         $(favorites).text(tweet.favorites);
     }
+
+    iWant.index += 3;
 }
 
 /******************DISPLAY WATCH ***************************/
@@ -309,6 +321,8 @@ function displayWatch(){
 
     var id = iWant.queueArray[iWant.index].id;
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
+    
+    iWant.index++;
 }
 
 /******************DISPLAY LISTEN TO ***********************/
@@ -316,6 +330,12 @@ function displayWatch(){
 /**
  * displayListen - pulls a random song/podcast out of the queueArray and displays that item in the listen element of the page
  */
+
+function displayListen() {
+    $("#landing").hide();
+    $("#listen").show();
+
+}
 
 /******************DISPLAY ERROR ***********************/
 
@@ -339,6 +359,34 @@ function displayError(verb) {
         case 'listen':
             error_div.text('iTunes cannot be reached. Please try again');
             break;
+    }
+}
+
+/**
+ * next - when next arrow is clicked, it calls the display function for the appropriate verb
+ */
+
+function next() {
+    switch (iWant.selectedVerb) {
+        case "read": readAjax();
+            break;
+        case "listen": listenAjax();
+            break;
+        case "watch": watchAjax();
+            break;
+    }
+}
+
+/**
+ * prev - when previous arrow is clicked, it decremenets the index to the appropriate number according to the current verb
+ */
+
+function prev() {
+    if (iWant.selectedVerb == 'read') {
+        iWant.index -= 3;
+    }
+    else {
+        iWant.index--;
     }
 }
 
