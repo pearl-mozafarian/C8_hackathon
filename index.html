@@ -13,11 +13,11 @@
 </head>
 <body>
     <!--<button class="start-over">Start Over</button>-->
-    <!--<div class="next-and-prev col-md-12">-->
-        <!--<button class="next col-md-1"><span class="glyphicon glyphicon-circle-arrow-right"></span>Next</button>-->
-        <!--<button class="prev col-md-offset-11">Previous</button>-->
-    <!--</div>-->
     <p class="main-heading">I Want To</p>
+    <!--<div class="next-and-prev col-md-12">-->
+        <!--<span class="glyphicon glyphicon-circle-arrow-left"></span>-->
+        <!--<span class="glyphicon glyphicon-circle-arrow-right col-md-offset-11"></span>-->
+    <!--</div>-->
     <section class="container-fluid">
         <div id="landing" class="col-md-offset-1 col-md-10">
             <select class="verb col-md-offset-4">
@@ -64,32 +64,25 @@
                 </div>
             </div>
 
-        <!--<div id="watch" class="col-md-offset-1 col-md-10">-->
-            <!--<iframe id="ytplayer" class="col-md-12" type="text/html" width="854" height="480" src="" frameborder="0"/>-->
-            <!--<div id="videoTitle" class="col-md-12"></div>-->
-        <!--</div>-->
-
-
         <div id="watch" class="col-md-offset-1 col-md-10">
             <iframe id="ytplayer" class="col-md-12" type="text/html" width="854" height="480" src="" frameborder="0"/>
+            <div id="videoTitle" class="col-md-12"></div>
         </div>
 
-        <div id="listen" class="col-md-12">
-            <div id="albumArt col-md-offset-4 col-md-4"></div>
-            <div id="albumName col-md-offset-4 col-md-4"></div>
-            <div id="songName col-md-offset-4 col-md-4"></div>
-            <div id="audioControls col-md-offset-4 col-md-4">
-                <audio controls src=""></audio>
+        <div id="listen" class="col-md-offset-1 col-md-10">
+            <div id="albumArt" class="col-md-offset-4 col-md-4"></div>
+            <div id="albumName" class="col-md-offset-4 col-md-4"></div>
+            <div id="songName" class="col-md-offset-4 col-md-4"></div>
+            <div id="audioControls" class="col-md-offset-4 col-md-4">
+                <audio controls></audio>
             </div>
-            <div class="audioLink col-md-offset-4 col-md-4"></div>
-
+            <div id="audioLink col-md-offset-4 col-md-4"></div>
         </div>
 
 
-
-        <!--<div id="error" class="col-md-offset-1 col-md-10">-->
-            <!--<h1>We couldn't find what you were looking for. Try again!</h1>-->
-        <!--</div>-->
+        <div id="error" class="col-md-offset-1 col-md-10">
+            <h1>We couldn't find what you were looking for. Try again!</h1>
+        </div>
 
     </section>
 </body>
