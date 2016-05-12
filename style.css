@@ -18,11 +18,15 @@ body {
 .main-heading{
     font-size: 6em;
     margin: 10vh 0 3vh 0;
-    text-shadow: 1px 1px 1px #b4bab7;
+    text-shadow: 5px 5px 5px #000000;
+    color: white;
 }
 
 p {
     font-size: 4em;
+    font-weight: bold;
+    text-shadow: 4px 4px 4px #000000;
+    color: white;
     font-weight: bold;
 }
 
@@ -38,7 +42,7 @@ button{
     font-size: 5vh;
     margin-top: 5vh;
     font-weight: bold;
-    background-color: #44b5ff;
+    background-color: rgba(68,181,255,0.8);
 }
 
 .now-button:hover {
@@ -59,7 +63,7 @@ button{
     font-size: 3em;
     border: 1px solid #b9b9b9;
     margin: 3vh 0;
-    box-shadow: 3px 3px 3px black;
+    box-shadow: 6px 6px 6px black;
 }
 
 
