@@ -6,7 +6,7 @@ $(document).ready(function () {
     randomizeOptions();
 
     $(".now-button").click(nowClicked);
- 
+
     $("#startOver").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
