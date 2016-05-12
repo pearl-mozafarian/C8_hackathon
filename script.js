@@ -9,6 +9,12 @@ $(document).ready(function () {
     
     readAjax();
 
+    $("#startOver").click(function () {
+        iWant.queueArray = [];
+        iWant.displayArray = [];
+
+    });
+
 });//////end of document.ready
 
 /*********************************************** GLOBAL VARIABLES *****************************************/
@@ -17,6 +23,7 @@ var iWant = {
     verbArray: ["read","listen","watch"],
     nounArray: ["cats","dogs"],
     queueArray: [],
+    displayArray: [],
     selectedVerb : null,
     selectedNoun: null
 };
@@ -155,9 +162,6 @@ function watchAjax(input) {
     });
 }
 /****************** LISTEN TO ***********************/
-
-
-/****************** READ LISTEN TO ***********************/
 
 /**
  * listenAjax - calls iTunes API using search criteria, returns array of
