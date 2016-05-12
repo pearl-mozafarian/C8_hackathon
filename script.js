@@ -6,10 +6,6 @@ $(document).ready(function () {
     randomizeOptions();
 
     $(".now-button").click(nowClicked);
-    
-   listenAjax();
-
-    watchAjax();
  
     $("#startOver").click(function () {
         iWant.queueArray = [];
@@ -17,6 +13,7 @@ $(document).ready(function () {
         $('#read, #watch, #listen, #error').hide();
         $('#landing').show();
     });
+
 });//////end of document.ready
 
 /*********************************************** GLOBAL VARIABLES *****************************************/
