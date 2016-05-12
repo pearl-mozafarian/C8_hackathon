@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen').hide();
+    // $('#read, #watch, #listen').hide();
 
     randomizeOptions();
 
