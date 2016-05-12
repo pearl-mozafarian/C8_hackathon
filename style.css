@@ -67,8 +67,9 @@ button{
     background-color: rgba(255,255,255,0.9);
 }
 
-#read {
+#read, #watch, #listen {
     height: 80vh;
+    border: 1px solid black;
 }
 
 .tweets {
@@ -105,4 +106,9 @@ button{
     border: 1px solid black;
     height: 17%;
     top: 5%;
+}
+
+.albumArt {
+    height: 50%;
+    border: 1px solid black;
 }
