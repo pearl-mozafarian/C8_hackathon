@@ -6,11 +6,16 @@ $(document).ready(function () {
     randomizeOptions();
 
     $(".now-button").click(nowClicked);
+    
+   listenAjax();
+
+    watchAjax();
  
     $("#startOver").click(function () {
         iWant.queueArray = [];
-        iWant.displayArray = [];
-
+        iWant.index = 0;
+        $('#read, #watch, #listen, #error').hide();
+        $('#landing').show();
     });
 
 
@@ -22,7 +27,7 @@ var iWant = {
     verbArray: ["read","listen","watch"],
     nounArray: ["cats","dogs"],
     queueArray: [],
-    displayArray: [],
+    index: 0,
     selectedVerb : null,
     selectedNoun: "cats"
 };
@@ -146,11 +151,16 @@ function watchAjax() {
             if (response.success) {
                 console.log(response);
                 //push response into resultsArray
-                iWant.queueArray.push(response.video);
+                for(i=0;i<response.video.length;i++){
+                    iWant.queueArray.push(response.video[i]);
+                }
+                console.log("results array", iWant.queueArray);
                 
-                //call display function with resultsArray
-                
+                //call display function
+                displayWatch();
+
                 // return results array
+                return response;
             } else {
                 console.log(response);
 
@@ -297,8 +307,15 @@ function displayRead() {
 /******************DISPLAY WATCH ***************************/
 
 /**
- * displayWatch - displays
+ * displayWatch - inputs video ID from queue array into iframe src to play video
  */
+
+function displayWatch(){
+
+    var id = iWant.queueArray[iWant.index].id;
+    $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
+}
+
 /******************DISPLAY LISTEN TO ***********************/
 
 /**
