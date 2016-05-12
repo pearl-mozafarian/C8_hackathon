@@ -7,6 +7,7 @@ randomizeOptions();
 var iWant = {
     verbArray: ["read","listen to","watch"],
     nounArray: ["cat","dog"],
+    queueArray: [],
     selectedVerb : null,
     selectedNoun: null
 };
@@ -29,15 +30,14 @@ function readAjax() {
     $.ajax({
         dataType: 'json',
         data: {
-            search_term: iWant.selectedNoun,
-        }
+            search_term: iWant.selectedNoun
+        },
         method: 'post',
-        url: 's-apis.learningfuze.com/hackathon/twitter/index.php',
+        url: 'http://s-apis.learningfuze.com/hackathon/twitter/index.php',
         success: function(result) {
-            for (i=0; i < result.statuses; i++){
-                queueArray[i] = result.statuses[i].text;
+            for (i=0; i < result.tweets.statuses.length; i++){
+                iWant.queueArray[i] = result.tweets.statuses[i].text;
             }
-            console.log(queueArray);
         }
     })
 }
@@ -46,3 +46,6 @@ function readAjax() {
 
 /****************** READ LISTON TO ***********************/
 
+$(document).ready(function() {
+    readAjax();
+});
