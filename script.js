@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     $(".now-button").click(nowClicked);
     
-    listenAjax();
+   listenAjax();
 
     watchAjax();
  
@@ -312,9 +312,9 @@ function displayRead() {
  */
 
 function displayWatch(){
-    //take src of queueArray[index].url and push into iframe src with appropriate text wrapping
-    var url = iWant.queueArray[iWant.index].url
-    //take title of queueArray[index].title and push into title text
+
+    var id = iWant.queueArray[iWant.index].id;
+    $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 }
 
 /******************DISPLAY LISTEN TO ***********************/
