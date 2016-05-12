@@ -1,9 +1,9 @@
-
+/*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
 randomizeOptions();
 });//////end of document.ready
 
-/****************GLOBAL VARIABLES*******************/
+/*********************************************** GLOBAL VARIABLES *****************************************/
 var iWant = {
     verbArray: ["read","listen to","watch"],
     nounArray: ["cat","dog"],
@@ -11,21 +11,35 @@ var iWant = {
     selectedVerb : null,
     selectedNoun: null
 };
-/*****************LANDING PAGE FUNCTIONS***********/
-//randomizeOptions function for randomizing verbs and nouns in landing page
+/********************************** LANDING PAGE FUNCTIONS ************************************************/
+
+
+/**
+ * randomizeOptions - randomizeOptions function for randomizing verbs and nouns in landing page
+ */
 
 function randomizeOptions() {
     var randomVerb = iWant.verbArray[generateRandomNumber(iWant.verbArray.length)];
     var randomNoun = iWant.nounArray[generateRandomNumber(iWant.nounArray.length)]
 }
-//this function generates a random number to be used in randomize options
+
+/**
+ * generateRandomNumber - this function generates a random number to be used in randomize options
+ * @param {number}
+ * @return {number}
+ */
 function generateRandomNumber(length) {
    return Math.floor(Math.random()*length);
 }
 
-/******************AJAX CALLS **************************************************************/
+/**************************************** AJAX CALLS ********************************************************/
 
 /****************** READ AJAX ****************************/
+
+/**
+ * readAjax - pulling text of tweets from twitter api
+ */
+
 function readAjax() {
     $.ajax({
         dataType: 'json',
@@ -42,10 +56,17 @@ function readAjax() {
     })
 }
 
-/****************** READ WATCH ***************************/
+/****************** WATCH ***************************/
+
+/**
+ * watchAjax
+ */
+/****************** LISTON TO ***********************/
+
 
 /****************** READ LISTON TO ***********************/
 
-$(document).ready(function() {
-    readAjax();
-});
+/**
+ * listenAjax
+ */
+
