@@ -4,6 +4,7 @@
     text-align: center;
     font-family: openSansLight;
     border-radius: 2%;
+    box-sizing: border-box;
 }
 
 body {
@@ -64,8 +65,47 @@ button{
     border: 1px solid #b9b9b9;
     margin: 3vh 0;
     box-shadow: 6px 6px 6px black;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.9);
 }
 
+#read {
+    margin-top: 18vh;
+    height: 80vh;
+    border: 1px solid black;
+}
 
+.tweets {
+    height: 31%;
+    border: 1px solid black;
+    margin: 1vh 0;
+    background-color: rgba(255,255,255,0.9);
+    box-shadow: 3px 3px 3px #000000;
+}
+.tweets-pic, .tweets-username {
+    margin-top: 1%;
+}
 
+.tweets-pic {
+    position: relative;
+    border: 1px solid black;
+    height: 38%;
+}
+
+.tweets-username {
+    border: 1px solid black;
+    height: 17%;
+}
+
+.tweets-content {
+    position: relative;
+    border: 1px solid black;
+    height: 50%;
+    top: 5%;
+}
+
+.tweets-share {
+    position: relative;
+    border: 1px solid black;
+    height: 17%;
+    top: 5%;
+}
