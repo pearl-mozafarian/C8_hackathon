@@ -7,10 +7,6 @@ $(document).ready(function () {
 
     $(".now-button").click(nowClicked);
     
-   listenAjax();
-
-    watchAjax();
- 
     $("#startOver").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
