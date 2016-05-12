@@ -1,24 +1,27 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
+    //hiding all other wrappers beside the landing page
+    $('#read, #watch, #listen').hide();
 
     randomizeOptions();
+
+    $(".now-button").click(nowClicked);
     
     listenAjax("cats");
-
-randomizeOptions();
     
-    //readAjax();
+
+    readAjax();
+
+    randomizeOptions();
 
 });//////end of document.ready
 
 /*********************************************** GLOBAL VARIABLES *****************************************/
 var iWant = {
 
-    verbArray: ["read","listen to","watch"],
+    verbArray: ["read","listen","watch"],
     nounArray: ["cats","dogs"],
-
     queueArray: [],
-    
     selectedVerb : null,
     selectedNoun: "cats"
 };
@@ -49,9 +52,16 @@ function generateRandomNumber(length) {
  * @param {string, string}
  */
 function displayOptions(randomVerb, randomNoun) {
-    randomVerb = ""+randomVerb+"";
-    $('.verb option[value = randomVerb]').attr("selected",true);
     $(".noun").val(randomNoun);
+    $(".verb option").attr("selected" , false);
+    switch (randomVerb){
+        case "listen": $(".verb option[value='listen']").attr("selected" , true);
+            break;
+        case "watch": $(".verb option[value='watch']").attr("selected" , true);
+            break;
+        case "read": $(".verb option[value='read']").attr("selected" , true);
+            break;
+    }
 }
 
 /**
@@ -61,7 +71,16 @@ function displayOptions(randomVerb, randomNoun) {
  */
 
 function nowClicked() {
-    
+    iWant.selectedNoun = $(".noun").val();
+    iWant.selectedVerb = $(".verb").val();
+    switch (iWant.selectedVerb) {
+        case "read": readAjax();
+            break;
+        case "listen": listenAjax();
+            break;
+        case "watch": watchAjax();
+            break;
+    }
 }
 /**************************************** AJAX CALLS ********************************************************/
 
@@ -101,6 +120,7 @@ function readAjax() {
 
                 iWant.queueArray.push(tweet_object);
             }
+            displayRead();
         }
     })
 }
@@ -145,7 +165,6 @@ function watchAjax() {
 /****************** READ LISTEN TO ***********************/
 
 /**
-<<<<<<< HEAD
  * listenAjax - calls iTunes API using search criteria, returns array of
  * @param input {string} - the search term to use
  */
@@ -251,8 +270,33 @@ function listenAjax(input) {
 /******************DISPLAY READ ****************************/
 
 /**
- * displayRead
+ * displayRead - takes the values of each object in the queueArray and injects them into the DOM
  */
+
+function displayRead() {
+    $('#landing').hide();
+    $('#read').show();
+
+    for(i = 0; i <= 3; i++) {
+        var tweet = iWant.queueArray[i];
+        var tweetdiv = '#tweet' + i;
+        var avatar = tweetdiv + ' .avatar';
+        var text = tweetdiv + ' .text';
+        var name = tweetdiv + ' .name';
+        var userName = tweetdiv + ' .userName';
+        var retweets = tweetdiv + ' .retweets';
+        var favorites = tweetdiv + ' .favorites';
+        
+        $(avatar).attr('src', tweet.avatarUrl);
+        $(text).text(tweet.text);
+        $(name).text(tweet.name);
+        $(userName).text(tweet.userName);
+        $(retweets).text(tweet.retweets);
+        $(favorites).text(tweet.favorites);
+        
+    }
+}
+
 /******************DISPLAY WATCH ***************************/
 
 /**
