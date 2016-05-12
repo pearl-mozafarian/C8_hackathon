@@ -18,7 +18,6 @@ body {
 
 .main-heading{
     font-size: 6em;
-    margin: 10vh 0 3vh 0;
     text-shadow: 5px 5px 5px #000000;
     color: white;
 }
@@ -68,10 +67,9 @@ button{
     background-color: rgba(255,255,255,0.9);
 }
 
-#read {
-    margin-top: 18vh;
+#read, #watch, #listen {
     height: 80vh;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
 }
 
 .tweets {
@@ -88,7 +86,7 @@ button{
 .tweets-pic {
     position: relative;
     border: 1px solid black;
-    height: 38%;
+    height: 40%;
 }
 
 .tweets-username {
@@ -103,9 +101,19 @@ button{
     top: 5%;
 }
 
-.retweet {
+.shares {
     position: relative;
     border: 1px solid black;
     height: 17%;
     top: 5%;
+}
+
+.albumArt {
+    height: 50%;
+    border: 1px solid black;
+}
+
+#videoTitle {
+    background-color: red;
+    height: 15vh;
 }
