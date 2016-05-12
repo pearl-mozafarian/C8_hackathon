@@ -10,7 +10,7 @@ body {
     background-image: url('image/background.jpg')
 }
 
-@font-face {
+@font-face{
     font-family: openSansLight;
     src: url(opensanslight.ttf);
 }
@@ -26,19 +26,21 @@ p {
     font-weight: bold;
 }
 
-button {
+button{
     box-shadow: 5px 5px 5px #434345;
     color: white;
     left: 0;
     top: 0;
 }
-.now-button {
+
+.now-button{
     height: 10vh;
     font-size: 5vh;
     margin-top: 5vh;
     font-weight: bold;
     background-color: #44b5ff;
 }
+
 .now-button:hover {
     background-color: #6bafff;
 }
@@ -51,10 +53,6 @@ button {
     font-size: 3vh;
     background-color: red;
     padding: 3vh;
-}
-
-.start-over {
-
 }
 
 .verb, input{
