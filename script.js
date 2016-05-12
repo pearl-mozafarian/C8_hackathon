@@ -322,6 +322,8 @@ function displayWatch(){
 
     var id = iWant.queueArray[iWant.index].id;
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
+    
+    iWant.index++;
 }
 
 /******************DISPLAY LISTEN TO ***********************/
