@@ -10,10 +10,14 @@ $(document).ready(function () {
     listenAjax();
 
     watchAjax();
+ 
+    $("#startOver").click(function () {
+        iWant.queueArray = [];
+        iWant.index = 0;
+        $('#read, #watch, #listen, #error').hide();
+        $('#landing').show();
+    });
 
-    readAjax();
-
-    randomizeOptions();
 
 });//////end of document.ready
 
@@ -23,6 +27,7 @@ var iWant = {
     verbArray: ["read","listen","watch"],
     nounArray: ["cats","dogs"],
     queueArray: [],
+    index: 0,
     selectedVerb : null,
     selectedNoun: "cats"
 };
@@ -167,9 +172,6 @@ function watchAjax() {
 }
 /****************** LISTEN TO ***********************/
 
-
-/****************** READ LISTEN TO ***********************/
-
 /**
  * listenAjax - calls iTunes API using search criteria, returns array of
  * @param input {string} - the search term to use
@@ -310,7 +312,9 @@ function displayRead() {
  */
 
 function displayWatch(){
-    console.log("blah");
+    //take src of queueArray[index].url and push into iframe src with appropriate text wrapping
+    var url = iWant.queueArray[iWant.index].url
+    //take title of queueArray[index].title and push into title text
 }
 
 /******************DISPLAY LISTEN TO ***********************/
