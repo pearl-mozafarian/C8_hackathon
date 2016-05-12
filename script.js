@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    // $('#read, #watch, #listen').hide();
+    $('#read, #watch, #listen, #error').hide();
 
     randomizeOptions();
 
@@ -308,10 +308,25 @@ function displayRead() {
 /******************DISPLAY ERROR ***********************/
 
 /**
- * displayError
+ * displayError - If it is called for something other than an ajax fail message, it will display the default please try again, otherwise it will display a message specific to the server failure
+ * @param verb {string} - either read, listen, or watch depending on which ajax call is calling the function
  */
 
-function displayError() {
-    
+function displayError(verb) {
+    $('#landing, #read, #listen, #watch').hide();
+    $('#error').show();
+    var error_div = $('#error div');
+
+    switch(verb) {
+        case 'read':
+            error_div.text('Twitter cannot be reached. Please try again');
+            break;
+        case 'watch':
+            error_div.text('YouTube cannot be reached. Please try again');
+            break;
+        case 'listen':
+            error_div.text('iTunes cannot be reached. Please try again');
+            break;
+    }
 }
 
