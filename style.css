@@ -2,42 +2,67 @@
     padding: 0;
     margin: 0;
     text-align: center;
+    font-family: openSansLight;
+    border-radius: 2%;
 }
 
 body {
-    font-family: openSansLight;
+    background-image: url('image/background.jpg')
 }
 
 @font-face {
     font-family: openSansLight;
     src: url(opensanslight.ttf);
 }
-.main-heading {
-    margin-top:
+
+.main-heading{
+    font-size: 6em;
+    margin: 10vh 0 3vh 0;
+    text-shadow: 1px 1px 1px #b4bab7;
 }
+
+p {
+    font-size: 4em;
+    font-weight: bold;
+}
+
 button {
-    background-color: #ff0009;
     box-shadow: 5px 5px 5px #434345;
     color: white;
-    border-radius: 2%;
     left: 0;
     top: 0;
 }
 .now-button {
     height: 10vh;
     font-size: 5vh;
+    margin-top: 5vh;
+    font-weight: bold;
+    background-color: #44b5ff;
+}
+.now-button:hover {
+    background-color: #6bafff;
 }
 
-.prev, .next{
+.next-and-prev {
+    top: 50vh;
+}
+
+.prev, .next {
     font-size: 3vh;
-    height: 15vh;
-    width: 15vh;
-    border-radius: 50%;
+    background-color: red;
+    padding: 3vh;
 }
 
-.landing {
-    border: 1px solid black;
+.start-over {
+
 }
 
-.verb, .noun {
+.verb, input{
+    font-size: 3em;
+    border: 1px solid #b9b9b9;
+    margin: 3vh 0;
+    box-shadow: 3px 3px 3px black;
 }
+
+
+
