@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    // $('#read, #watch, #listen').hide();
+    $('#read, #watch, #listen, #error').hide();
 
     randomizeOptions();
 
@@ -195,6 +195,7 @@ function listenAjax(input) {
                     iWant.queueArray.push(song);
                 }
                 console.log("q array: ", iWant.queueArray);
+
                 displayListen();
 
                 // console.log("array before randomize", iWant.queueArray);
@@ -317,7 +318,8 @@ function displayRead() {
  */
 
 function displayListen() {
-    
+    $("#landing").hide();
+    $("#listen").show();
 
 }
 
