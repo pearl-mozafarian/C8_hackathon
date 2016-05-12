@@ -48,9 +48,6 @@ button{
     background-color: #6bafff;
 }
 
-.next-and-prev {
-    top: 50vh;
-}
 
 .prev, .next {
     font-size: 3vh;
@@ -106,30 +103,25 @@ button{
     top: 5%;
 }
 
-.albumArt {
+#albumArt {
     height: 50%;
     border: 1px solid black;
     background-color: rgba(255,255,255,0.9);
 }
 
-.albumName, .songName, .audioLink {
+#albumName, #songName, #audioLink {
     height: 10%;
     border: 1px solid black;
     background-color: rgba(255,255,255,0.9);
 }
 
-.audioControls {
+#audioControls {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 15%;
     border: 1px solid black;
     background-color: rgba(255,255,255,0.9);
-}
-
-#videoTitle {
-    background-color: red;
-    height: 15vh;
 }
 
 #error {
