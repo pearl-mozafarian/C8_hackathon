@@ -183,28 +183,41 @@ function listenAjax(input) {
         success: function (response) {
             if (response) {
                 console.log("music", response);
-
+                var musicArray = response.results;
                 //push response into queueArray
-                for(var i=0; i<response.results.length; i++){
-                    iWant.queueArray.push(response.results[i]);
-                }
 
-                console.log("array before randomize", iWant.queueArray);
+                for(i=0; i< musicArray.length; i++){
+                    var song = {
+                        atrist: musicArray[i].artistName,
+                        album: musicArray[i].collectionName,
+                        title: musicArray[i].trackName,
+                        picture: musicArray[i].artworkUrl100,
+                        audio: musicArray[i].previewUrl,
+                        link: musicArray[i].trackViewUrl
+                    };
+                    iWant.queueArray.push(song);
+
+                }
+                console.log("q array: ", iWant.queueArray);
+
+                displayListen();
+
+                // console.log("array before randomize", iWant.queueArray);
                 //randomize method on queue array
-                var currentIndex = iWant.queueArray.length;
-                var randomIndex;
+                // var currentIndex = iWant.queueArray.length;
+                // var randomIndex;
+                //
+                // while (currentIndex > 0) {//if there are still indexes left to look at
+                //     randomIndex = Math.floor(Math.random() * currentIndex);
+                //     currentIndex--;
+                //
+                //     /*switches two indexes with use of variable for storing value of first to be switched*/
+                //     var swap = iWant.queueArray[currentIndex];
+                //     iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
+                //     iWant.queueArray[randomIndex] = swap;
+                // }
 
-                while (currentIndex > 0) {//if there are still indexes left to look at
-                    randomIndex = Math.floor(Math.random() * currentIndex);
-                    currentIndex--;
-
-                    /*switches two indexes with use of variable for storing value of first to be switched*/
-                    var swap = iWant.queueArray[currentIndex];
-                    iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
-                    iWant.queueArray[randomIndex] = swap;
-                }
-
-                console.log("array after randomize", iWant.queueArray);
+                // console.log("array after randomize", iWant.queueArray);
                 //call displayListen function
                 //displayListen();
 
@@ -213,55 +226,56 @@ function listenAjax(input) {
 
                 //return error message
             }
-        }
+        }///end of success
 
     });
 
-    $.ajax({
 
-        dataType: 'jsonp',
-        data: {
-            term: input,
-            media: "podcast"
-        },
-        method: 'GET',
-        url: "https://itunes.apple.com/search",
-        success: function (response) {
-            if (response) {
-                console.log("podcast," , response);
-
-                //push response into queueArray
-                for(i=0; i<response.results.length; i++){
-                    iWant.queueArray.push(response.results[i]);
-                }
-
-                console.log("array before randomize", iWant.queueArray);
-                //randomize method on queue array
-                var currentIndex = iWant.queueArray.length;
-                var randomIndex;
-
-                while (currentIndex > 0) {//if there are still indexes left to look at
-                    randomIndex = Math.floor(Math.random() * currentIndex);
-                    currentIndex--;
-
-                    /*switches two indexes with use of variable for storing value of first to be switched*/
-                    var swap = iWant.queueArray[currentIndex];
-                    iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
-                    iWant.queueArray[randomIndex] = swap;
-                }
-
-                console.log("array after randomize", iWant.queueArray);
-
-                // return results array
-                return response;
-
-            } else {
-                //return error message
-                console.log("podcast error", response);
-            }
-        }
-
-    });
+    // $.ajax({
+    //
+    //     dataType: 'jsonp',
+    //     data: {
+    //         term: input,
+    //         media: "podcast"
+    //     },
+    //     method: 'GET',
+    //     url: "https://itunes.apple.com/search",
+    //     success: function (response) {
+    //         if (response) {
+    //             console.log("podcast," , response);
+    //
+    //             //push response into queueArray
+    //             for(i=0; i<response.results.length; i++){
+    //                 iWant.queueArray.push(response.results[i]);
+    //             }
+    //
+    //             // console.log("array before randomize", iWant.queueArray);
+    //             //randomize method on queue array
+    //             var currentIndex = iWant.queueArray.length;
+    //             var randomIndex;
+    //
+    //             while (currentIndex > 0) {//if there are still indexes left to look at
+    //                 randomIndex = Math.floor(Math.random() * currentIndex);
+    //                 currentIndex--;
+    //
+    //                 /*switches two indexes with use of variable for storing value of first to be switched*/
+    //                 var swap = iWant.queueArray[currentIndex];
+    //                 iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
+    //                 iWant.queueArray[randomIndex] = swap;
+    //             }
+    //
+    //             // console.log("array after randomize", iWant.queueArray);
+    //
+    //             // return results array
+    //             return response;
+    //
+    //         } else {
+    //             //return error message
+    //             console.log("podcast error", response);
+    //         }
+    //     }
+    //
+    // });
 }
 
 /**************************************** Display Functions ********************************************************/
@@ -315,6 +329,12 @@ function displayWatch(){
 /**
  * displayListen - pulls a random song/podcast out of the queueArray and displays that item in the listen element of the page
  */
+
+function displayListen() {
+    $("#landing").hide();
+    $("#listen").show();
+
+}
 
 /******************DISPLAY ERROR ***********************/
 
