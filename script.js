@@ -1,5 +1,9 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
+    //hiding all other wrappers beside the landing page
+    $('#read').hide();
+    $('#listen').hide();
+    $('#watch').hide();
 
     randomizeOptions();
     
@@ -105,6 +109,7 @@ function readAjax() {
 
                 iWant.queueArray.push(tweet_object);
             }
+            displayRead();
         }
     })
 }
@@ -218,8 +223,33 @@ function listenAjax(input) {
 /******************DISPLAY READ ****************************/
 
 /**
- * displayRead
+ * displayRead - takes the values of each object in the queueArray and injects them into the DOM
  */
+
+function displayRead() {
+    $('#landing').hide();
+    $('#read').show();
+
+    for(i = 0; i <= 3; i++) {
+        var tweet = iWant.queueArray[i];
+        var tweetdiv = '#tweet' + i;
+        var avatar = tweetdiv + ' .avatar';
+        var text = tweetdiv + ' .text';
+        var name = tweetdiv + ' .name';
+        var userName = tweetdiv + ' .userName';
+        var retweets = tweetdiv + ' .retweets';
+        var favorites = tweetdiv + ' .favorites';
+        
+        $(avatar).attr('src', tweet.avatarUrl);
+        $(text).text(tweet.text);
+        $(name).text(tweet.name);
+        $(userName).text(tweet.userName);
+        $(retweets).text(tweet.retweets);
+        $(favorites).text(tweet.favorites);
+        
+    }
+}
+
 /******************DISPLAY WATCH ***************************/
 
 /**
