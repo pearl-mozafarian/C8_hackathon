@@ -21,3 +21,11 @@ function randomizeOptions() {
 function generateRandomNumber(length) {
    return Math.floor(Math.random()*length);
 }
+
+/******************AJAX CALLS **************************************************************/
+
+/****************** READ AJAX ****************************/
+
+/****************** READ WATCH ***************************/
+
+/****************** READ LISTON TO ***********************/
