@@ -6,7 +6,7 @@ randomizeOptions();
 
 /*********************************************** GLOBAL VARIABLES *****************************************/
 var iWant = {
-    verbArray: ["read","listen to","watch"],
+    verbArray: ["read","listen","watch"],
     nounArray: ["cat","dog"],
     queueArray: [],
     selectedVerb : null,
@@ -21,7 +21,9 @@ var iWant = {
 
 function randomizeOptions() {
     var randomVerb = iWant.verbArray[generateRandomNumber(iWant.verbArray.length)];
-    var randomNoun = iWant.nounArray[generateRandomNumber(iWant.nounArray.length)]
+    var randomNoun = iWant.nounArray[generateRandomNumber(iWant.nounArray.length)];
+    console.log("random verb: ", randomVerb);
+    displayOptions(randomVerb, randomNoun);
 }
 
 /**
@@ -32,7 +34,25 @@ function randomizeOptions() {
 function generateRandomNumber(length) {
    return Math.floor(Math.random()*length);
 }
+/**
+ * displayOptions - this function generates a random number to be used in randomize options
+ * @param {string, string}
+ */
+function displayOptions(randomVerb, randomNoun) {
+    randomVerb = ""+randomVerb+"";
+    $('.verb option[value = randomVerb]').attr("selected",true);
+    $(".noun").val(randomNoun);
+}
 
+/**
+ * nowClicked
+ * @param 
+ * @return 
+ */
+
+function nowClicked() {
+    
+}
 /**************************************** AJAX CALLS ********************************************************/
 
 /****************** READ AJAX ****************************/
@@ -87,5 +107,24 @@ function readAjax() {
 
 /**
  * listenAjax
+ */
+
+/**************************************** Display Functions ********************************************************/
+
+
+/******************DISPLAY READ ****************************/
+
+/**
+ * displayRead
+ */
+/******************DISPLAY WATCH ***************************/
+
+/**
+ * displayWatch
+ */
+/******************DISPLAY LISTON TO ***********************/
+
+/**
+ * displayListen
  */
 
