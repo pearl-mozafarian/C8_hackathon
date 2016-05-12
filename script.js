@@ -6,10 +6,6 @@ $(document).ready(function () {
     randomizeOptions();
 
     $(".now-button").click(nowClicked);
-    
-   listenAjax();
-
-    watchAjax();
  
     $("#startOver").click(function () {
         iWant.queueArray = [];
@@ -193,7 +189,7 @@ function listenAjax(input) {
                 console.log("music", response);
 
                 //push response into queueArray
-                for(i=0; i<response.results.length; i++){
+                for(var i=0; i<response.results.length; i++){
                     iWant.queueArray.push(response.results[i]);
                 }
 
@@ -285,7 +281,7 @@ function displayRead() {
     $('#landing').hide();
     $('#read').show();
 
-    for(i = 0; i <= 3; i++) {
+    for(var i = iWant.index; i <= iWant.index + 3; i++) {
         var tweet = iWant.queueArray[i];
         var tweetdiv = '#tweet' + (i + 1);
         var avatar = tweetdiv + ' .avatar';
@@ -302,6 +298,8 @@ function displayRead() {
         $(retweets).text(tweet.retweets);
         $(favorites).text(tweet.favorites);
     }
+
+    iWant.index += 3;
 }
 
 /******************DISPLAY WATCH ***************************/
