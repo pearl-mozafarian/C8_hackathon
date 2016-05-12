@@ -4,27 +4,28 @@
     height: 100%;
     width: 100%;
     text-align: center;
-    font-family:
+    font-family: openSans;
 }
 
 @font-face {
-    source: url();
+    font-family: openSans;
+    src: url(opensans.ttf);
 
 }
 button {
-    background-color: #37a1ff;
-    box-shadow: 5px 5px 5px #262628;
+    background-color: #ff0009;
+    box-shadow: 5px 5px 5px #434345;
     color: white;
     border-radius: 2%;
     left: 0;
     top: 0;
 }
 .now-button {
-    height: 25vh;
+    height: 20vh;
     margin-bottom: 5vh;
 }
 
-.prev , .next{
+.prev, .next, .start-over{
     height: 15vh;
     width: 15vh;
 }
