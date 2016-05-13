@@ -3,6 +3,8 @@ $(document).ready(function () {
     //hiding all other wrappers beside the landing page
     $('#read, #watch, #listen, #error, .next, .prev').hide();
 
+    autocomplete();
+
     randomizeOptions();
 
     $(".now-button").click(nowClicked);
@@ -32,7 +34,6 @@ var iWant = {
     interval: null
 };
 /********************************** LANDING PAGE FUNCTIONS ************************************************/
-
 
 /**
  * randomizeOptions - randomizeOptions function for randomizing verbs and nouns in landing page
@@ -427,6 +428,18 @@ function prev() {
         }
     }
     next();
+}
+
+
+/**
+ * autocomplete - sets datalist with autocomplete options
+ */
+
+function autocomplete() {
+    for (var i = 0; i < iWant.nounArray.length; i++){
+        var option = $("<option>").val(iWant.nounArray[i]);
+        $("#noun-list").append(option);
+    }
 }
 
 /******************************************************** Top Secret ********************************************************/
