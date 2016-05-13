@@ -1,50 +1,63 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error, .next, .prev').hide();
+    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn').hide();
+
+    loadNouns();
 
     autocomplete();
 
     randomizeOptions();
 
-    $("#nowButton").click(nowClicked);
-    
-    $("#startOver").click(function () {
+   // $("#nowButton").click(nowClicked);
+    $("#nowButton").on("click", function(){
+        nowClicked();
+    });
+
+    $("#startOverBtn").click(function () {
+        console.log('clicked');
         iWant.queueArray = [];
         iWant.index = 0;
-        $('#read, #watch, #listen, #error').hide();
+        $("#audio").attr('src', "");
+        $('#read, #watch, #listen, #error, #startOverBtn').hide();
+
         $('#landing').show();
     });
 
     $("#random-btn").click(randomizeOptions);
 
-    $('.next').click(next);
-    $('.prev').click(prev);
+    $(window).unload(nounStorage);
+
+    $('#selectNext').click(next);
+    $('#selectPrev').click(prev);
 
 });//////end of document.ready
 
 /*********************************************** GLOBAL VARIABLES *****************************************/
-var iWant = {
 
+/**
+ * iWant - main object
+ * @type {{verbArray: string[], nounArray: string[], queueArray: Array, index: number, selectedVerb: null, selectedNoun: null, secretI: number, interval: null}}
+ */
+var iWant = {
     verbArray: ["read", "listen to", "watch"],
     nounArray: ["cats", "dogs", "space", "nature", "cars", "football", "politics", "comics", "robots", "horses", "science", "ghosts", "Disney", "America", "England", "Japan", "the ocean", "fire", "blues", "hip hop", "basketball", "fashion", "babies", "cute baby animals", "technology", "sloths", "magic", "otters", "bacon", "mysteries"],
     queueArray: [],
     index: 0,
-    selectedVerb : null,
+    selectedVerb: null,
     selectedNoun: null,
     secretI: 1,
     interval: null
 };
+
 /********************************** LANDING PAGE FUNCTIONS ************************************************/
 
 /**
  * randomizeOptions - randomizeOptions function for randomizing verbs and nouns in landing page
  */
-
 function randomizeOptions() {
     var randomVerb = iWant.verbArray[generateRandomNumber(iWant.verbArray.length)];
     var randomNoun = iWant.nounArray[generateRandomNumber(iWant.nounArray.length)];
-    console.log("random verb: ", randomVerb);
     displayOptions(randomVerb, randomNoun);
 }
 
@@ -54,39 +67,40 @@ function randomizeOptions() {
  * @return {number}
  */
 function generateRandomNumber(length) {
-    return Math.floor(Math.random()*length);
+    return Math.floor(Math.random() * length);
 }
+
 /**
  * displayOptions - this function generates a random number to be used in randomize options
- * @param {string, string}
+ * @params {string, string}
  */
-
 function displayOptions(randomVerb, randomNoun) {
-    $(".noun").val(randomNoun);
-    // $(".verb option").attr("selected" , false);
+    $("#nounInput").val(randomNoun);
+
     switch (randomVerb){
-        case "listen to": $(".verb").val('listen');
+        case "listen to": $("#verbSelect").val('listen');
             break;
-        case "watch": $(".verb").val('watch');
+        case "watch": $("#verbSelect").val('watch');
             break;
-        case "read": $(".verb").val('read');
+        case "read": $("#verbSelect").val('read');
             break;
     }
 }
 
 /**
- * nowClicked
- * @param
- * @return
+ * nowClicked - calls correct ajax call based on the verb chosen
  */
-
 function nowClicked() {
-    iWant.selectedNoun = $(".noun").val();
-    iWant.selectedVerb = $(".verb").val();
-    
+    iWant.selectedNoun = $("#nounInput").val();
+    iWant.selectedVerb = $("#verbSelect").val();
+
     if (iWant.selectedNoun == 'shane'){
         secret();
     } else {
+        if (iWant.nounArray.indexOf(iWant.selectedNoun) == -1){
+            iWant.nounArray.push(iWant.selectedNoun);
+        }
+
         switch (iWant.selectedVerb) {
             case "read":
                 readAjax();
@@ -108,17 +122,16 @@ function nowClicked() {
 /**
  * readAjax - pulling text of tweets from twitter api, and creating object with username, and text of tweet
  */
-
 function readAjax() {
     $.ajax({
         dataType: 'json',
         data: {
-            search_term: iWant.selectedNoun,
+            search_term: iWant.selectedNoun
         },
         method: 'post',
         url: 'http://s-apis.learningfuze.com/hackathon/twitter/index.php',
-        success: function(result) {
-            for (i=0; i < result.tweets.statuses.length; i++){
+        success: function (result) {
+            for (i = 0; i < result.tweets.statuses.length; i++) {
                 var tweet = result.tweets.statuses[i];
 
                 var username = tweet.user.screen_name;
@@ -149,7 +162,6 @@ function readAjax() {
 /**
  * watchAjax - calls youtube API using search criteria, returns array of video objects containing title and ID of each. Returns max 50 results.
  */
-
 function watchAjax() {
     $.ajax({
 
@@ -162,9 +174,9 @@ function watchAjax() {
         url: "http://s-apis.learningfuze.com/hackathon/youtube/search.php",
         success: function (response) {
             if (response.success) {
-                console.log("watch",response);
+                console.log("watch", response);
                 //push response into resultsArray
-                for(i=0;i<response.video.length;i++){
+                for (i = 0; i < response.video.length; i++) {
                     iWant.queueArray.push(response.video[i]);
                 }
                 console.log("results array", iWant.queueArray);
@@ -187,9 +199,7 @@ function watchAjax() {
 
 /**
  * listenAjax - calls iTunes API using search criteria, returns array of
- * @param input {string} - the search term to use
  */
-
 function listenAjax() {
     //calls query with music as only criteria first
 
@@ -202,6 +212,7 @@ function listenAjax() {
 
         success: function (response) {
             console.log('spotify', response);
+
 
             for (i = 0; i < response.tracks.items.length; i++) {
 
@@ -221,6 +232,7 @@ function listenAjax() {
 
             displayListen();
 
+
         }
     });
 }
@@ -233,14 +245,13 @@ function listenAjax() {
 /**
  * displayRead - takes the values of each object in the queueArray and injects them into the DOM
  */
-
 function displayRead() {
     $('#landing').hide();
-    $('#read, .next, .prev').show();
+    $('#read, #selectNext, #selectPrev, #startOverBtn').show();
 
     var j = 0;
 
-    for(var i = iWant.index; i < iWant.index + 3; i++) {
+    for (var i = iWant.index; i < iWant.index + 3; i++) {
         var tweet = iWant.queueArray[i];
         var tweetdiv = '#tweet' + (j + 1);
         var avatar = tweetdiv + ' .avatar';
@@ -273,13 +284,13 @@ function displayRead() {
  * displayWatch - inputs video ID from queue array into iframe src to play video
  */
 
-function displayWatch(){
+function displayWatch() {
 
     var id = iWant.queueArray[iWant.index].id;
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 
     $('#landing').hide();
-    $('#watch, .next, .prev').show();
+    $('#watch, #selectNext, #selectPrev, #startOverBtn').show();
 
 
     iWant.index++;
@@ -290,100 +301,119 @@ function displayWatch(){
 /**
  * displayListen - pulls a random song/podcast out of the queueArray and displays that item in the listen element of the page
  */
-
 function displayListen() {
     $("#landing").hide();
-    $("#listen, .next, .prev").show();
+    $("#listen, #selectNext, #selectPrev, #startOverBtn").show();
 
     var obj = iWant.queueArray;
     var ind = iWant.index;
-    $("#pic").attr("src", obj[ind].picture);
+    $("#pic").attr("src", iWant.queueArray[iWant.index].picture);
     $("#artistName").text(obj[ind].artist);
     $("#albumName").text(obj[ind].album);
     $("#songName").text(obj[ind].title);
-    $("#audio").attr("src", obj[ind].audio);
     $("#linkForAudio").attr("href", obj[ind].link);
+    $("#audio").attr("src", obj[ind].audio);
     $("#audio")[0].play();
     iWant.index += 1;
 }
 
-    /******************DISPLAY ERROR ***********************/
+/******************DISPLAY ERROR ***********************/
 
-    /**
-     * displayError - If it is called for something other than an ajax fail message, it will display the default please try again, otherwise it will display a message specific to the server failure
-     * @param verb {string} - either read, listen, or watch depending on which ajax call is calling the function
-     */
+/**
+ * displayError - If it is called for something other than an ajax fail message, it will display the default please try again, otherwise it will display a message specific to the server failure
+ * @param verb {string} - either read, listen, or watch depending on which ajax call is calling the function
+ */
+function displayError(verb) {
+    $('#landing, #read, #listen, #watch').hide();
+    $('#error, #startOverBtn').show();
+    var error_div = $('#error div');
 
-    function displayError(verb) {
-        $('#landing, #read, #listen, #watch').hide();
-        $('#error').show();
-        var error_div = $('#error div');
-
-        switch (verb) {
-            case 'read':
-                error_div.text('Twitter cannot be reached. Please try again');
-                break;
-            case 'watch':
-                error_div.text('YouTube cannot be reached. Please try again');
-                break;
-            case 'listen':
-                error_div.text('iTunes cannot be reached. Please try again');
-                break;
-        }
+    switch (verb) {
+        case 'read':
+            error_div.text('Twitter cannot be reached. Please try again');
+            break;
+        case 'watch':
+            error_div.text('YouTube cannot be reached. Please try again');
+            break;
+        case 'listen':
+            error_div.text('iTunes cannot be reached. Please try again');
+            break;
     }
+}
 
-    /**
-     * next - when next arrow is clicked, it calls the display function for the appropriate verb
-     */
-
-    function next() {
-        switch (iWant.selectedVerb) {
-            case "read":
-                displayRead();
-                break;
-            case "listen":
-                displayListen();
-                break;
-            case "watch":
-                displayWatch();
-                break;
-        }
+/**
+ * next - when next arrow is clicked, it calls the display function for the appropriate verb
+ */
+function next() {
+    switch (iWant.selectedVerb) {
+        case "read":
+            displayRead();
+            break;
+        case "listen":
+            displayListen();
+            break;
+        case "watch":
+            displayWatch();
+            break;
     }
+}
 
-    /**
-     * prev - when previous arrow is clicked, it decremenets the index to the appropriate number according to the current verb
-     */
-
-
-
-    function prev() {
-        if (iWant.selectedVerb == 'read') {
-            if (iWant.index >= 6) {
-                iWant.index -= 6;
-            }
-            else {
-                iWant.index = 12;
-            }
+/**
+ * prev - when previous arrow is clicked, it decremenets the index to the appropriate number according to the current verb
+ */
+function prev() {
+    if (iWant.selectedVerb == 'read') {
+        if (iWant.index >= 6) {
+            iWant.index -= 6;
         }
         else {
-            if (iWant.index > 0) {
-                iWant.index -= 2;
-            }
+            iWant.index = 12;
         }
-        next();
     }
-
-
+    else {
+        if (iWant.index > 0) {
+            iWant.index -= 2;
+        }
+    }
+    next();
+}
 
 /**
  * autocomplete - sets datalist with autocomplete options
  */
-
 function autocomplete() {
-    for (var i = 0; i < iWant.nounArray.length; i++){
+    for (var i = 0; i < iWant.nounArray.length; i++) {
         var option = $("<option>").val(iWant.nounArray[i]);
         $("#noun-list").append(option);
     }
+}
+
+/**
+ * nounStorage - function to store noun array in local storage
+ * @return {string}
+ */
+function nounStorage() {
+    var storage = {
+        'nouns': iWant.nounArray
+    };
+
+    var nouns = JSON.stringify(storage);
+
+    window.localStorage.setItem('nouns', nouns);
+    return nouns;
+}
+
+/**
+ * loadNouns - function to load stored nouns
+ * @return {Array}
+ */
+function loadNouns() {
+    var nouns = window.localStorage.getItem('nouns');
+    if(nouns != null){
+        var nounStorage = JSON.parse(nouns);
+        iWant.nounArray = nounStorage.nouns;
+    }
+    // return nounStorage.nouns;
 }
 
 /******************************************************** Top Secret ********************************************************/
@@ -392,11 +422,11 @@ function autocomplete() {
  * secretDOMObj - create something secret
  * @params {number, number, number}
  */
-function secretDOMObj(){
+function secretDOMObj() {
     var i = iWant.secretI;
     if (i < 23) {
-        var top = Math.round(Math.random() * (window.innerHeight / 2));
-        var left = Math.round(Math.random() * ((window.innerWidth / 4) * 3));
+        var top = Math.round(Math.random() * 200);
+        var left = Math.round(Math.random() * 800);
 
         var dialog = $("<div>").addClass('modal-dialog modal-lg secret');
         var content = $("<div>").addClass('modal-content');
@@ -409,7 +439,7 @@ function secretDOMObj(){
             "data-dismiss": "modal"
         }).addClass("btn btn-default").text("Close");
         var title = $("<h4>").addClass('modal-title').text("Modal Model");
-    
+
         $(header).append(title);
         $(body).append(image);
         $(footer).append(close);
@@ -426,6 +456,8 @@ function secretDOMObj(){
 /**
  * secret - interval creating secret objects
  */
-function secret(){
+function secret() {
+    $("#audio").attr("src", "audio/top-secret-song.mp3");
+    $("#audio")[0].play();
     iWant.interval = setInterval(secretDOMObj, 300);
 }

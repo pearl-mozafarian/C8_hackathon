@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     text-align: center;
-    font-family: openSansLight;
+    font-family: 'Raleway', sans-serif;
     box-sizing: border-box;
 }
 
@@ -10,42 +10,92 @@ body {
     background-image: url('image/background.jpg')
 }
 
-@font-face {
-    font-family: openSansLight;
-    src: url(opensanslight.ttf);
-}
-
 .main-heading {
     font-size: 6em;
-    text-shadow: 5px 5px 5px #000000;
+    text-shadow: 0 5px 4px #344152;
     color: white;
 }
 
 p {
     font-size: 4em;
-    font-weight: bold;
-    text-shadow: 4px 4px 4px #000000;
+    text-shadow: 0 5px 6px #344152;
     color: white;
-    font-weight: bold;
+    font-weight: 900;
 }
 
-button {
-    box-shadow: 5px 5px 5px #434345;
+a.start-over-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-shadow: 0 1px 1px #344152;
+    text-decoration: none;
     color: white;
-    left: 0;
-    top: 0;
+    width: 115px;
+    height: 50px;
+    top: 10px;
+    background: #4CAF50;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px -2px #344152;
+    transition: all 0.2s;
 }
 
-.now-button {
-    height: 10vh;
-    font-size: 5vh;
-    margin-top: 5vh;
-    font-weight: bold;
-    background-color: rgba(68,181,255,0.8);
+a.start-over-btn:active {
+    top: 18px;
+    box-shadow: 0px 7px 0px 0px #344152;
 }
 
-.now-button:hover {
-    background-color: #6bafff;
+.button-group{
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+a.now-button {
+    text-shadow: 0 1px 1px #344152;
+    text-decoration: none;
+    color: white;
+    width: 300px;
+    height: 100px;
+    top: 10px;
+    background: #4CAF50;
+    position: relative;
+    padding: 16px 50px;
+    font-size: 50px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px -2px #344152;
+    transition: all 0.2s;
+}
+
+a.now-button:active {
+    top: 18px;
+    box-shadow: 0px 7px 0px 0px #344152;
+}
+
+.rb-wrapper{
+    margin-top: 50px;
+}
+
+a.random-button {
+    text-shadow: 0 1px 1px #344152;
+    text-decoration: none;
+    color: white;
+    width: 200px;
+    margin-top: 20px;
+    height: 70px;
+    background: #BA68C8;
+    position: relative;
+    padding: 10px 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px -2px #344152;
+    transition: all 0.2s;
+}
+
+a.random-button:active {
+    top: 8px;
+    box-shadow: 0px 7px 0px 0px #344152;
 }
 
 .prev, .next {
@@ -65,7 +115,7 @@ button {
     font-size: 3em;
     border: 1px solid #b9b9b9;
     margin: 3vh 0;
-    box-shadow: 6px 6px 6px black;
+    box-shadow: 0 10px 20px -2px #344152;
     background-color: rgba(255,255,255,0.9);
     text-align: center;
 }
@@ -74,41 +124,25 @@ button {
     height: 80vh;
 }
 
+#read {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .tweets {
-    height: 31%;
-    border: 1px solid black;
-    margin: 1vh 0;
-    background-color: rgba(255,255,255,0.9);
-    box-shadow: 3px 3px 3px #000000;
+    width: 42%;
+    background-color: rgba(255,255,255,0.95);
+    box-shadow: 3px 3px 18px -1px black;
 }
 
-.tweets-pic, .tweets-username {
-    margin-top: 1%;
+div.tweet-box, div.tweet-box>div, div.tweet-box>div>h3, div.tweet-box>div>h4 {
+    text-align: left;
 }
 
-.tweets-pic {
-    position: relative;
-    border: 1px solid black;
-    height: 40%;
-}
-
-.tweets-username {
-    border: 1px solid black;
-    height: 17%;
-}
-
-.text {
-    position: relative;
-    border: 1px solid black;
-    height: 50%;
-    top: 5%;
-}
-
-.shares {
-    position: relative;
-    border: 1px solid black;
-    height: 17%;
-    top: 5%;
+div.tweet-box>div>h3 {
+    font-weight: 700;
 }
 
 
@@ -121,6 +155,12 @@ button {
 
 .glyphicon.glyphicon-apple {
     font-size: 30px;
+}
+
+#start-over {
+    position: fixed;
+    top: 5%;
+    left: 5%;
 }
 
 /**************************************************** TOP SECRET ***************************************************/
