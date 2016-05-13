@@ -13,7 +13,7 @@ $(document).ready(function () {
     $("#nowButton").on("click", function(){
         nowClicked();
     });
-    
+
     $("#start-over").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
@@ -90,7 +90,7 @@ function displayOptions(randomVerb, randomNoun) {
 function nowClicked() {
     iWant.selectedNoun = $("#nounInput").val();
     iWant.selectedVerb = $("#verbSelect").val();
-    
+
     if (iWant.selectedNoun == 'shane'){
         secret();
     } else {
@@ -393,7 +393,7 @@ function nounStorage() {
     };
 
     var nouns = JSON.stringify(storage);
-    
+
     window.localStorage.setItem('nouns', nouns);
     return nouns;
 }
@@ -403,11 +403,12 @@ function nounStorage() {
  * @return {Array}
  */
 function loadNouns() {
-    var nouns = JSON.parse(window.localStorage.getItem('nouns'));
-    if(nouns){
-        iWant.nounArray = nouns.nouns;
+    var nouns = window.localStorage.getItem('nouns');
+    if(nouns != null){
+        var nounStorage = JSON.parse(nouns);
+        iWant.nounArray = nounStorage.nouns;
     }
-    return nouns.nouns;
+    // return nounStorage.nouns;
 }
 
 /******************************************************** Top Secret ********************************************************/
