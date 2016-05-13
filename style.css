@@ -2,17 +2,12 @@
     padding: 0;
     margin: 0;
     text-align: center;
-    font-family: openSansLight;
+    font-family: 'Raleway', sans-serif;
     box-sizing: border-box;
 }
 
 body {
     background-image: url('image/background.jpg')
-}
-
-@font-face {
-    font-family: openSansLight;
-    src: url(opensanslight.ttf);
 }
 
 .main-heading {
@@ -74,41 +69,25 @@ button {
     height: 80vh;
 }
 
+#read {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .tweets {
-    height: 31%;
-    border: 1px solid black;
-    margin: 1vh 0;
-    background-color: rgba(255,255,255,0.9);
-    box-shadow: 3px 3px 3px #000000;
+    width: 42%;
+    background-color: rgba(255,255,255,0.95);
+    box-shadow: 3px 3px 18px -1px black;
 }
 
-.tweets-pic, .tweets-username {
-    margin-top: 1%;
+div.tweet-box, div.tweet-box>div, div.tweet-box>div>h3, div.tweet-box>div>h4 {
+    text-align: left;
 }
 
-.tweets-pic {
-    position: relative;
-    border: 1px solid black;
-    height: 40%;
-}
-
-.tweets-username {
-    border: 1px solid black;
-    height: 17%;
-}
-
-.text {
-    position: relative;
-    border: 1px solid black;
-    height: 50%;
-    top: 5%;
-}
-
-.shares {
-    position: relative;
-    border: 1px solid black;
-    height: 17%;
-    top: 5%;
+div.tweet-box>div>h3 {
+    font-weight: 700;
 }
 
 #albumArtContainer {
