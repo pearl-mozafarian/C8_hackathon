@@ -1,0 +1,362 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    font-family: 'Raleway', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightseagreen;
+    background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.5) 50%);
+    background-size: 90px 90px;
+
+}
+
+.main-heading {
+    font-size: 6em;
+    text-shadow: 0 5px 4px #344152;
+    color: #fff;
+    background-color: transparent;
+}
+
+.main-heading > h1 {
+    font-size: 1em;
+    text-shadow: 0 2px 6px #344152;
+    color: #fff;
+    font-weight: 900;
+}
+
+.blurb{
+    font-size: 4em;
+    text-shadow: 0 2px 6px #344152;
+    color: white;
+    font-weight: 900;
+}
+
+/********* input styles *********/
+
+.input-container {
+    clear:both;
+    position: relative;
+    left: 50%;
+    /*top: 40px;*/
+    width: 500px;
+    height: 150px;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+
+input[type=text] {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /*height: 200px;*/
+    background-color: transparent;
+    color: #fff;
+    font-weight: 600;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #fff;
+    font-size: 3em;
+    text-align: center;
+
+}
+
+.border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    width: 0;
+    height: 2px;
+    padding: 0;
+    margin: 0;
+    background-color: #BA68C8;
+    transition: .2s width ease-out;
+}
+
+.border--animate {
+    width: 100%;
+}
+
+/* / end of input styles */
+
+/********* button styles *********/
+
+a.start-over-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-shadow: 0 1px 1px #344152;
+    text-decoration: none;
+    color: white;
+    width: 115px;
+    height: 50px;
+    background-color: #ef5350;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: 0 7px 8px -2px #000;
+    transition: all 0.2s;
+}
+
+a.start-over-btn:active {
+    top: 30px;
+    box-shadow: 0 7px 0 0 #000;
+}
+
+.button-group{
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+a.now-button {
+    text-shadow: 0 1px 1px #344152;
+    text-decoration: none;
+    color: white;
+    width: 300px;
+    height: 100px;
+    top: 10px;
+    background: #8BC34A;
+    position: relative;
+    padding: 16px 50px;
+    font-size: 50px;
+    border-radius: 10px;
+    box-shadow: 0 7px 8px -2px #000;
+    transition: all 0.2s;
+}
+
+a.now-button:active {
+    top: 18px;
+    box-shadow: 0 7px 0 0 #000;
+}
+
+.rb-wrapper{
+    margin-top: 50px;
+}
+
+a.random-button {
+    text-shadow: 0 1px 1px #344152;
+    text-decoration: none;
+    color: white;
+    width: 200px;
+    margin-top: 20px;
+    height: 70px;
+    background: #BA68C8;
+    position: relative;
+    padding: 10px 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: 0 7px 8px -2px #000;
+    transition: all 0.2s;
+}
+
+a.random-button:active {
+    top: 8px;
+    box-shadow: 0 7px 0 0 #000;
+}
+
+.prev, .next {
+    color: white;
+    font-size: 10vh;
+    padding: 3vh;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.next {
+    right: 2%;
+}
+
+/*end of button styles*/
+
+
+/************** Select input styles ***************/
+select {
+    background-color: transparent;
+    width: 500px;
+    padding: 0 0 0 200px;
+    color: #fff;
+    border: none;
+    border-bottom: 2px solid #fff;
+    border-radius: 0;
+    font-size: 3em;
+    margin: 3vh 0;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* Remove focus */
+select:focus {
+    outline: none;
+}
+/* Use custom arrow */
+.mdl-selectfield select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+
+.mdl-selectfield {
+    position: relative;
+}
+
+/*End of select input style*/
+
+.prev {
+    left: 2%
+}
+
+#listen {
+    height: 80vh;
+}
+
+#read {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#music-background {
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: -2%;
+    z-index: -1;
+}
+
+#music-background-cover {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.42);
+    position: absolute;
+    border: 5px solid white;
+}
+
+.tweets {
+    width: 42%;
+    background-color: rgba(255,255,255,0.95);
+    box-shadow: 3px 3px 18px -1px black;
+}
+
+div.tweet-box, div.tweet-box>div, div.tweet-box>div>h3, div.tweet-box>div>h4 {
+    text-align: left;
+}
+
+div.tweet-box>div>h3 {
+    font-weight: 700;
+}
+
+
+#error {
+    color: white;
+    text-shadow: 3px 3px 3px black;
+    font-weight: bold;
+    top: 30vh;
+}
+
+.glyphicon.glyphicon-apple {
+    font-size: 30px;
+}
+
+#start-over {
+    position: fixed;
+    top: 5%;
+    left: 5%;
+}
+
+/**************************************************** TOP SECRET ***************************************************/
+
+.secret{
+    position: fixed;
+}
+
+.secret-image {
+    max-width: 886px;
+}
+
+/****************************************** Pearl for listen page***********************************************/
+#listen {
+    /*border: 1px solid black;*/
+    /*box-shadow: 5px 5px 10px black;*/
+    position: relative;
+}
+
+#listenInfoDiv {
+    font-size: 0;
+    position: relative;
+    width: 120vh;
+    height: 60vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+}
+#insideInfo {
+    height:100%;
+    width: 50%;
+    float: left;
+    /*border-radius: 10px;*/
+    overflow: hidden;
+    background-color: rgba(64,64,64,0.4);
+    position: relative;
+    padding-top: 2%;
+
+    /*top: 10%*/
+}
+#albumName, #songName,/* #audioLink,*/ #artistName {
+    text-align: center;
+    display: block;
+    color: #ffffff;
+    margin-bottom: 2%;
+    font-size: 1vw;
+    height: 25%;
+    /*background-color: rgba(255,255,255,0.9);*/
+}
+
+#linkForAudio {
+    position: absolute;
+    bottom: 2%;
+    right: 2%;
+}
+
+#spotify {
+    height: 4vh;
+}
+
+#audioControls {
+    margin: auto;
+    width: 100%;
+    /*justify-content: center;*/
+    /*height: 20px;*/
+    /*border: 1px solid black;*/
+    /*background-color: rgba(255,255,255,0.9);*/
+    position: relative;
+    top: 5%;
+}
+#albumArt {
+    overflow: hidden;
+    width: 50%;
+    height: 100%;
+    float: left;
+    margin: 0;
+    font-size: 1vw;
+    /*border-radius: 5px;*/
+    /*height: 300px;*/
+    /*border: 1px solid black;*/
+    /*background-color: rgba(255,255,255,0.9);*/
+}
+
+#pic {
+    width: 100%;
+    height: 100%;
+}
+
