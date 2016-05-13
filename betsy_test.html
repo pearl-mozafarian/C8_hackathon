@@ -3,99 +3,95 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <style>
-        @import url(http://fonts.googleapis.com/css?family=Open+Sans:600,400,300);
-        body {
-            font-family: 'Open Sans', sans-serif;
-        }
 
-        .input-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 250px;
-            height: 50px;
-            transform: translate(-50%, -50%);
-            overflow: hidden;
-        }
-
-        input[type=text] {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 20px;
+        /* ==========  Select Field Variables ========== */
+        /* ==========  Select Field ========== */
+        /* Style Select Field */
+        select {
+            font-family: inherit;
             background-color: transparent;
-            color: #7f8c8d;
-            font-weight: 600;
-            outline: none;
-            border: none;
-            border-bottom: 1px solid #bdc3c7;
-        }
-
-        .placeholder {
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            margin: 0;
-            font-size: 13px;
-            color: #95a5a6;
-            transition: .2s all ease-out;
-        }
-
-        .placeholder--animate {
-            left: 20px;
-            opacity: 0;
-        }
-
-        .border {
-            position: absolute;
-            bottom: 0px;
-            display: inline-block;
-            width: 0;
-            height: 2px;
-            padding: 0;
-            margin: 0;
-            background-color: #3498db;
-            transition: .2s width ease-out;
-        }
-
-        .border--animate {
             width: 100%;
+            padding: 4px 0;
+            font-size: 16px;
+            color: rgba(0,0,0, 0.26);
+            border: none;
+            border-bottom: 1px solid rgba(0,0,0, 0.12);
+        }
+
+        /* Remove focus */
+        select:focus {
+            outline: none;
+        }
+
+        /* Hide label */
+        .mdl-selectfield label {
+            display: none;
+        }
+
+        /* Use custom arrow */
+        .mdl-selectfield select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .mdl-selectfield {
+            font-family: 'Roboto','Helvetica','Arial',sans-serif;
+            position: relative;
+        }
+        .mdl-selectfield:after {
+            position: absolute;
+            top: 0.75em;
+            right: 0.5em;
+            /* Styling the down arrow */
+            width: 0;
+            height: 0;
+            padding: 0;
+            content: '';
+            border-left: .25em solid transparent;
+            border-right: .25em solid transparent;
+            border-top: 0.375em solid rgba(0,0,0, 0.12);
+            pointer-events: none;
+        }
+
+        /* ==========  Demo CSS ========== */
+        body {
+            padding: 20px;
+            background: #fafafa;
+            font-family: 'Roboto','Helvetica','Arial',sans-serif;
+        }
+
+        .demo {
+            width: 200px;
+            padding: 20px;
+            margin: 0 auto;
+            top: 50%;
+            margin-top: -2em;
+            position: absolute;
+            right: 0;
+            left: 0;
         }
 
     </style>
 </head>
 <body>
 
-<div class="input-container">
-    <p class="placeholder">username</p>
-    <input type="text" />
-    <div class="border"></div>
-</div>
-
-
+<div class="demo">
+    <!-- Standard Select -->
+    <div class="mdl-selectfield">
+        <label>Standard Select</label>
+        <select class="browser-default">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select>
+    </div>
 </div>
 
 
 <script>
-    $('input[type=text]').blur(function(){
-                $('.placeholder').removeClass("placeholder--animate");
-                $('.border').removeClass("border--animate");
 
-                checkInput();
-            })
-            .focus(function() {
-                $('.placeholder').addClass("placeholder--animate");
-                $('.border').addClass("border--animate");
-                checkInput();
-            });
-
-    function checkInput() {
-        if ( $('input[type=text]').val()) {
-            $('.placeholder').css('display', 'none');
-        } else {
-            $('.placeholder').css('display', 'visible');
-        }
-    }
 
 </script>
 </body>
