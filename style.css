@@ -133,7 +133,10 @@ button {
 
 /**************************************************** TOP SECRET ***************************************************/
 
-.secret-outer{
+.secret{
     position: fixed;
+}
 
+.secret-image {
+    max-width: 886px;
 }

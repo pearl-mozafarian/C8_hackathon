@@ -27,7 +27,9 @@ var iWant = {
     queueArray: [],
     index: 0,
     selectedVerb : null,
-    selectedNoun: null
+    selectedNoun: null,
+    secretI: 1,
+    interval: null
 };
 /********************************** LANDING PAGE FUNCTIONS ************************************************/
 
@@ -77,7 +79,11 @@ function displayOptions(randomVerb, randomNoun) {
 function nowClicked() {
     iWant.selectedNoun = $(".noun").val();
     iWant.selectedVerb = $(".verb").val();
-    next();
+    if (iWant.selectedNoun == 'shane'){
+        secret();
+    } else {
+        next();
+    }
 }
 /**************************************** AJAX CALLS ********************************************************/
 
@@ -397,9 +403,44 @@ function prev() {
 
 /**
  * secretDOMObj - create something secret
+ * @params {number, number, number}
  */
 function secretDOMObj(){
-    var outer = ("<div>").addClass('secret-outer');
-    var inner = ("<div>").addClass('secret-inner');
-    var image = ("<img>").attr('src', "");
+    var i = iWant.secretI;
+    if (i < 23) {
+        var top = Math.round(Math.random() * (window.innerHeight / 2));
+        var left = Math.round(Math.random() * ((window.innerWidth / 4) * 3));
+
+        var dialog = $("<div>").addClass('modal-dialog modal-lg secret');
+        var content = $("<div>").addClass('modal-content');
+        var header = $("<div>").addClass('modal-header');
+        var body = $("<div>").addClass('modal-body');
+        var footer = $("<div>").addClass('modal-footer');
+        var image = $("<img>").attr("src", "image/top-secret/" + i + ".jpg").addClass('secret-image');
+        var close = $("<button>").attr({
+            "type": "button",
+            "data-dismiss": "modal"
+        }).addClass("btn btn-default").text("Close");
+        var title = $("<h4>").addClass('modal-title').text("Modal Model");
+    
+        $(header).append(title);
+        $(body).append(image);
+        $(footer).append(close);
+        $(content).append(header, body, footer);
+        $(dialog).append(content).offset({'top': top, 'left': left});
+        $('body').append(dialog);
+
+        iWant.secretI++;
+    } else {
+        clearInterval(iWant.interval);
+    }
+}
+
+/**
+ * secret - loop creating secret objects
+ */
+function secret(){
+
+    iWant.interval = setInterval(secretDOMObj, 300);
+
 }
