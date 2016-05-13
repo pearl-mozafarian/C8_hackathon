@@ -18,23 +18,29 @@
     <div id="music-background-cover"></div>
 </div>
 
-<p class="main-heading">I Want To</p>
+<header class="main-heading">
+    <h1>I Want To...</h1>
+</header>
+
 <section class="container">
+
     <a href="#" id="startOverBtn" class="start-over-btn">Start Over</a>
+
     <div id="selectPrev" class="prev glyphicon glyphicon-chevron-left btn"></div>
 
     <div id="landing" class="col-md-12">
-        <select id="verbSelect" class="verb col-md-offset-4">
-            <option value="watch">watch</option>
-            <option value="read">read</option>
-            <option value="listen">listen to</option>
-        </select>
+        <div class="mdl-selectfield">
+            <select id="verbSelect" class="select-element">
+                <option value="watch">watch</option>
+                <option value="read">read</option>
+                <option value="listen">listen to</option>
+            </select>
+        </div>
         <div class="col-md-12">
-            <p>something about</p>
+            <p class="blurb">something about</p>
         </div>
         <div class="col-md-12">
             <div class="input-container">
-                <p class="placeholder"></p>
                 <input type="text" id="nounInput" class="noun col-md-12">
                 <div class="border"></div>
             </div>
@@ -48,7 +54,6 @@
             </div>
         </div>
     </div>
-
     <div id="read">
         <div class="media well tweets" id="tweet1">
             <a class="media-left tweets-pic" href="#">
@@ -105,6 +110,7 @@
             </div>
         </div>
     </div>
+
     <div id="watch" class="col-md-offset-1 col-md-10">
         <iframe id="ytplayer" class="col-md-12" width="854" height="480" src="" frameborder="0"></iframe>
         <div id="videoTitle" class="col-md-12"></div>
@@ -128,6 +134,7 @@
             <audio controls id="audio" src=""></audio>
         </div>
     </div>
+
     <div id="error" class="col-md-offset-1 col-md-10">
         <h1>We couldn't find what you were looking for. Try again!</h1>
     </div>
