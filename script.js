@@ -18,6 +18,8 @@ $(document).ready(function () {
         console.log('clicked');
         iWant.queueArray = [];
         iWant.index = 0;
+
+        $("#watch").html('<iframe id="ytplayer" width="854" height="480" src="" frameborder="0"></iframe>');
         
         $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover').hide();
         $('#landing').show();
