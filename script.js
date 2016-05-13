@@ -393,3 +393,13 @@ function prev() {
     next();
 }
 
+/******************************************************** Top Secret ********************************************************/
+
+/**
+ * secretDOMObj - create something secret
+ */
+function secretDOMObj(){
+    var outer = ("<div>").addClass('secret-outer');
+    var inner = ("<div>").addClass('secret-inner');
+    var image = ("<img>").attr('src', "");
+}
