@@ -22,6 +22,8 @@ $(document).ready(function () {
         $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover').hide();
         $('#landing').show();
 
+        randomizeOptions();
+
     });
 
     $("#random-btn").click(randomizeOptions);
@@ -30,6 +32,18 @@ $(document).ready(function () {
 
     $('#selectNext').click(next);
     $('#selectPrev').click(prev);
+
+    $('input[type=text]').blur(function(){
+            $('.placeholder').removeClass("placeholder--animate");
+            $('.border').removeClass("border--animate");
+
+            checkInput();
+        })
+        .focus(function() {
+            $('.placeholder').addClass("placeholder--animate");
+            $('.border').addClass("border--animate");
+            checkInput();
+        });
 
 });//////end of document.ready
 
@@ -115,6 +129,18 @@ function nowClicked() {
 
     }
 }
+
+/**
+ * checkInput - generates css on input field
+ */
+function checkInput() {
+    if ( $('input[type=text]').val()) {
+        $('.placeholder').css('display', 'none');
+    } else {
+        $('.placeholder').css('display', 'visible');
+    }
+}
+
 /**************************************** AJAX CALLS ********************************************************/
 
 /****************** READ AJAX ****************************/
