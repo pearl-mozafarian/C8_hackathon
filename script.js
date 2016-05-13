@@ -213,6 +213,7 @@ function listenAjax() {
         success: function (response) {
             console.log('spotify', response);
 
+
             for (i = 0; i < response.tracks.items.length; i++) {
 
                 var tracks = response.tracks.items[i];
@@ -230,6 +231,7 @@ function listenAjax() {
             }
 
             displayListen();
+
 
         }
     });

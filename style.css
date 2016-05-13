@@ -172,26 +172,6 @@ div.tweet-box>div>h3 {
     font-weight: 700;
 }
 
-#albumArtContainer {
-    height: 50%;
-    border: 1px solid black;
-    background-color: rgba(255,255,255,0.9);
-}
-
-#albumName, #songName, #audioLink {
-    height: 10%;
-    border: 1px solid black;
-    background-color: rgba(255,255,255,0.9);
-}
-
-#audioControls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 15%;
-    border: 1px solid black;
-    background-color: rgba(255,255,255,0.9);
-}
 
 #error {
     color: white;
@@ -201,7 +181,7 @@ div.tweet-box>div>h3 {
 }
 
 .glyphicon.glyphicon-apple {
-    font-size: 40px;
+    font-size: 30px;
 }
 
 #start-over {
@@ -218,4 +198,74 @@ div.tweet-box>div>h3 {
 
 .secret-image {
     max-width: 886px;
+}
+
+/****************************************** Pearl for listen page***********************************************/
+#listen {
+    /*border: 1px solid black;*/
+    box-shadow: 5px 5px 10px black;
+    position: relative;
+    background: url("image/background-music-dubai.gif") no-repeat;
+    background-size: cover;
+}
+#listenInfoDiv {
+    font-size: 0;
+    position: absolute;
+    width:80vh;
+    height:40vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#insideInfo {
+    height:100%;
+    width: 50%;
+    float: left;
+    /*border-radius: 10px;*/
+    overflow: hidden;
+    background-color: rgba(64,64,64,0.4);
+    position: relative;
+
+    /*top: 10%*/
+}
+#albumName, #songName, #audioLink, #artistName {
+    padding: .5vh;
+    text-align: left;
+    display: block;
+    color: black;
+    margin: 0;
+    font-size: 1vw;
+    height: 25%;
+    text-shadow: 2px 2px 8px #000000;
+    /*background-color: rgba(255,255,255,0.9);*/
+}
+
+#audioControls {
+    position: absolute;
+    bottom: -15%;
+    margin: 0;
+    display: flex;
+    width: 100%;
+    /*justify-content: center;*/
+    align-items: center;
+    /*height: 20px;*/
+    /*border: 1px solid black;*/
+    /*background-color: rgba(255,255,255,0.9);*/
+}
+#albumArt {
+    overflow: hidden;
+    width: 50%;
+    height: 100%;
+    float: left;
+    margin: 0;
+    font-size: 1vw;
+    /*border-radius: 5px;*/
+    /*height: 300px;*/
+    /*border: 1px solid black;*/
+    /*background-color: rgba(255,255,255,0.9);*/
+}
+
+#pic {
+    width: 100%;
+    height: 100%;
 }
