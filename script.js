@@ -8,7 +8,7 @@ $(document).ready(function () {
     randomizeOptions();
 
     $(".now-button").click(nowClicked);
-    
+
     $("#startOver").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
@@ -28,7 +28,7 @@ var iWant = {
     nounArray: ["cats", "dogs", "space", "nature", "cars", "football", "politics", "comics", "robots", "horses", "science", "ghosts", "Disney", "America", "England", "Japan", "the ocean", "fire", "blues", "hip hop", "basketball", "fashion", "babies", "cute baby animals", "technology", "sloths", "magic", "otters", "bacon", "mysteries"],
     queueArray: [],
     index: 0,
-    selectedVerb : null,
+    selectedVerb: null,
     selectedNoun: null,
     secretI: 1,
     interval: null
@@ -52,7 +52,7 @@ function randomizeOptions() {
  * @return {number}
  */
 function generateRandomNumber(length) {
-    return Math.floor(Math.random()*length);
+    return Math.floor(Math.random() * length);
 }
 /**
  * displayOptions - this function generates a random number to be used in randomize options
@@ -61,12 +61,15 @@ function generateRandomNumber(length) {
 function displayOptions(randomVerb, randomNoun) {
     $(".noun").val(randomNoun);
     // $(".verb option").attr("selected" , false);
-    switch (randomVerb){
-        case "listen to": $(".verb").val('listen');
+    switch (randomVerb) {
+        case "listen to":
+            $(".verb").val('listen');
             break;
-        case "watch": $(".verb").val('watch');
+        case "watch":
+            $(".verb").val('watch');
             break;
-        case "read": $(".verb").val('read');
+        case "read":
+            $(".verb").val('read');
             break;
     }
 }
@@ -80,8 +83,8 @@ function displayOptions(randomVerb, randomNoun) {
 function nowClicked() {
     iWant.selectedNoun = $(".noun").val();
     iWant.selectedVerb = $(".verb").val();
-    
-    if (iWant.selectedNoun == 'shane'){
+
+    if (iWant.selectedNoun == 'shane') {
         secret();
     } else {
         switch (iWant.selectedVerb) {
@@ -114,8 +117,8 @@ function readAjax() {
         },
         method: 'post',
         url: 'http://s-apis.learningfuze.com/hackathon/twitter/index.php',
-        success: function(result) {
-            for (i=0; i < result.tweets.statuses.length; i++){
+        success: function (result) {
+            for (i = 0; i < result.tweets.statuses.length; i++) {
                 var tweet = result.tweets.statuses[i];
 
                 var username = tweet.user.screen_name;
@@ -159,9 +162,9 @@ function watchAjax() {
         url: "http://s-apis.learningfuze.com/hackathon/youtube/search.php",
         success: function (response) {
             if (response.success) {
-                console.log("watch",response);
+                console.log("watch", response);
                 //push response into resultsArray
-                for(i=0;i<response.video.length;i++){
+                for (i = 0; i < response.video.length; i++) {
                     iWant.queueArray.push(response.video[i]);
                 }
                 console.log("results array", iWant.queueArray);
@@ -189,111 +192,37 @@ function watchAjax() {
 
 function listenAjax() {
     //calls query with music as only criteria first
+
     $.ajax({
-
-        dataType: 'jsonp',
+        url: 'https://api.spotify.com/v1/search',
         data: {
-            term: iWant.selectedNoun,
-            media: "music"
+            q: iWant.selectedNoun,
+            type: 'track'
         },
-        method: 'GET',
-        url: "https://itunes.apple.com/search",
+
         success: function (response) {
-            if (response) {
-                console.log("music", response);
-                var musicArray = response.results;
-                //push response into queueArray
+            console.log('spotify', response);
 
-                for(var i=0; i< musicArray.length; i++){
-                    var song = {
-                        artist: musicArray[i].artistName,
-                        album: musicArray[i].collectionName,
-                        title: musicArray[i].trackName,
-                        picture: musicArray[i].artworkUrl100,
-                        audio: musicArray[i].previewUrl,
-                        link: musicArray[i].trackViewUrl
-                    };
+            for (i = 0; i < response.tracks.items.length; i++) {
 
-                    iWant.queueArray.push(song);
-                }
-                console.log("q array: ", iWant.queueArray);
+                var tracks = response.tracks.items[i];
 
-                displayListen();
+                var song = {
+                    artist: tracks.artists[0].name,
+                    album: tracks.album.name,
+                    title: tracks.name,
+                    picture: tracks.album.images[0].url,
+                    audio: tracks.preview_url,
+                    link: tracks.external_urls.spotify
+                };
 
-                // console.log("array before randomize", iWant.queueArray);
-                //randomize method on queue array
-                // var currentIndex = iWant.queueArray.length;
-                // var randomIndex;
-                //
-                // while (currentIndex > 0) {//if there are still indexes left to look at
-                //     randomIndex = Math.floor(Math.random() * currentIndex);
-                //     currentIndex--;
-                //
-                //     /*switches two indexes with use of variable for storing value of first to be switched*/
-                //     var swap = iWant.queueArray[currentIndex];
-                //     iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
-                //     iWant.queueArray[randomIndex] = swap;
-                // }
-
-                // console.log("array after randomize", iWant.queueArray);
-                //call displayListen function
-                //displayListen();
-
-            } else {
-                console.log("music error", response);
-                displayError(listen);
-                //return error message
+                iWant.queueArray.push(song);
             }
-        }///end of success
 
+            displayListen();
+
+        }
     });
-
-
-    // $.ajax({
-    //
-    //     dataType: 'jsonp',
-    //     data: {
-    //         term: input,
-    //         media: "podcast"
-    //     },
-    //     method: 'GET',
-    //     url: "https://itunes.apple.com/search",
-    //     success: function (response) {
-    //         if (response) {
-    //             console.log("podcast," , response);
-    //
-    //             //push response into queueArray
-    //             for(i=0; i<response.results.length; i++){
-    //                 iWant.queueArray.push(response.results[i]);
-    //             }
-    //
-    //             // console.log("array before randomize", iWant.queueArray);
-    //             //randomize method on queue array
-    //             var currentIndex = iWant.queueArray.length;
-    //             var randomIndex;
-    //
-    //             while (currentIndex > 0) {//if there are still indexes left to look at
-    //                 randomIndex = Math.floor(Math.random() * currentIndex);
-    //                 currentIndex--;
-    //
-    //                 /*switches two indexes with use of variable for storing value of first to be switched*/
-    //                 var swap = iWant.queueArray[currentIndex];
-    //                 iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
-    //                 iWant.queueArray[randomIndex] = swap;
-    //             }
-    //
-    //             // console.log("array after randomize", iWant.queueArray);
-    //
-    //             // return results array
-    //             return response;
-    //
-    //         } else {
-    //             //return error message
-    //             console.log("podcast error", response);
-    //         }
-    //     }
-    //
-    // });
 }
 
 /**************************************** Display Functions ********************************************************/
@@ -311,7 +240,7 @@ function displayRead() {
 
     var j = 0;
 
-    for(var i = iWant.index; i < iWant.index + 3; i++) {
+    for (var i = iWant.index; i < iWant.index + 3; i++) {
         var tweet = iWant.queueArray[i];
         var tweetdiv = '#tweet' + (j + 1);
         var avatar = tweetdiv + ' .avatar';
@@ -344,7 +273,7 @@ function displayRead() {
  * displayWatch - inputs video ID from queue array into iframe src to play video
  */
 
-function displayWatch(){
+function displayWatch() {
 
     var id = iWant.queueArray[iWant.index].id;
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
@@ -368,82 +297,81 @@ function displayListen() {
 
     var obj = iWant.queueArray;
     var ind = iWant.index;
-    $("#pic").attr("src", obj[ind].picture);
+    $("#pic").attr("src", iWant.queueArray[iWant.index].picture);
     $("#artistName").text(obj[ind].artist);
     $("#albumName").text(obj[ind].album);
     $("#songName").text(obj[ind].title);
-    $("#audio").attr("src", obj[ind].audio);
     $("#linkForAudio").attr("href", obj[ind].link);
+    $("#audio").attr("src", obj[ind].audio);
     $("#audio")[0].play();
     iWant.index += 1;
 }
 
-    /******************DISPLAY ERROR ***********************/
+/******************DISPLAY ERROR ***********************/
 
-    /**
-     * displayError - If it is called for something other than an ajax fail message, it will display the default please try again, otherwise it will display a message specific to the server failure
-     * @param verb {string} - either read, listen, or watch depending on which ajax call is calling the function
-     */
+/**
+ * displayError - If it is called for something other than an ajax fail message, it will display the default please try again, otherwise it will display a message specific to the server failure
+ * @param verb {string} - either read, listen, or watch depending on which ajax call is calling the function
+ */
 
-    function displayError(verb) {
-        $('#landing, #read, #listen, #watch').hide();
-        $('#error').show();
-        var error_div = $('#error div');
+function displayError(verb) {
+    $('#landing, #read, #listen, #watch').hide();
+    $('#error').show();
+    var error_div = $('#error div');
 
-        switch (verb) {
-            case 'read':
-                error_div.text('Twitter cannot be reached. Please try again');
-                break;
-            case 'watch':
-                error_div.text('YouTube cannot be reached. Please try again');
-                break;
-            case 'listen':
-                error_div.text('iTunes cannot be reached. Please try again');
-                break;
-        }
+    switch (verb) {
+        case 'read':
+            error_div.text('Twitter cannot be reached. Please try again');
+            break;
+        case 'watch':
+            error_div.text('YouTube cannot be reached. Please try again');
+            break;
+        case 'listen':
+            error_div.text('iTunes cannot be reached. Please try again');
+            break;
     }
+}
 
-    /**
-     * next - when next arrow is clicked, it calls the display function for the appropriate verb
-     */
+/**
+ * next - when next arrow is clicked, it calls the display function for the appropriate verb
+ */
 
-    function next() {
-        switch (iWant.selectedVerb) {
-            case "read":
-                displayRead();
-                break;
-            case "listen":
-                displayListen();
-                break;
-            case "watch":
-                displayWatch();
-                break;
-        }
+function next() {
+    switch (iWant.selectedVerb) {
+        case "read":
+            displayRead();
+            break;
+        case "listen":
+            displayListen();
+            break;
+        case "watch":
+            displayWatch();
+            break;
     }
+}
 
-    /**
-     * prev - when previous arrow is clicked, it decremenets the index to the appropriate number according to the current verb
-     */
+/**
+ * prev - when previous arrow is clicked, it decremenets the index to the appropriate number according to the current verb
+ */
 
 
 
-    function prev() {
-        if (iWant.selectedVerb == 'read') {
-            if (iWant.index >= 6) {
-                iWant.index -= 6;
-            }
-            else {
-                iWant.index = 12;
-            }
+function prev() {
+    if (iWant.selectedVerb == 'read') {
+        if (iWant.index >= 6) {
+            iWant.index -= 6;
         }
         else {
-            if (iWant.index > 0) {
-                iWant.index -= 2;
-            }
+            iWant.index = 12;
         }
-        next();
     }
-
+    else {
+        if (iWant.index > 0) {
+            iWant.index -= 2;
+        }
+    }
+    next();
+}
 
 
 /**
@@ -451,7 +379,7 @@ function displayListen() {
  */
 
 function autocomplete() {
-    for (var i = 0; i < iWant.nounArray.length; i++){
+    for (var i = 0; i < iWant.nounArray.length; i++) {
         var option = $("<option>").val(iWant.nounArray[i]);
         $("#noun-list").append(option);
     }
@@ -463,7 +391,7 @@ function autocomplete() {
  * secretDOMObj - create something secret
  * @params {number, number, number}
  */
-function secretDOMObj(){
+function secretDOMObj() {
     var i = iWant.secretI;
     if (i < 23) {
         var top = Math.round(Math.random() * (window.innerHeight / 2));
@@ -480,7 +408,7 @@ function secretDOMObj(){
             "data-dismiss": "modal"
         }).addClass("btn btn-default").text("Close");
         var title = $("<h4>").addClass('modal-title').text("Modal Model");
-    
+
         $(header).append(title);
         $(body).append(image);
         $(footer).append(close);
@@ -497,6 +425,6 @@ function secretDOMObj(){
 /**
  * secret - interval creating secret objects
  */
-function secret(){
+function secret() {
     iWant.interval = setInterval(secretDOMObj, 300);
 }
