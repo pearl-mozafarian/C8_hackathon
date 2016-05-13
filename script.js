@@ -6,7 +6,7 @@ $(document).ready(function () {
     randomizeOptions();
 
     $(".now-button").click(nowClicked);
- 
+
     $("#startOver").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
@@ -16,7 +16,7 @@ $(document).ready(function () {
     
     $('.next').click(next);
     $('.prev').click(prev);
-
+    $('#listen').html('test');
 
 });//////end of document.ready
 
@@ -169,7 +169,7 @@ function watchAjax() {
  * @param input {string} - the search term to use
  */
 
-function listenAjax(input) {
+function listenAjax() {
     //calls query with music as only criteria first
     $.ajax({
 
@@ -186,17 +186,17 @@ function listenAjax(input) {
                 var musicArray = response.results;
                 //push response into queueArray
 
-                for(i=0; i< musicArray.length; i++){
+                for(var i=0; i< musicArray.length; i++){
                     var song = {
-                        atrist: musicArray[i].artistName,
+                        artist: musicArray[i].artistName,
                         album: musicArray[i].collectionName,
                         title: musicArray[i].trackName,
                         picture: musicArray[i].artworkUrl100,
                         audio: musicArray[i].previewUrl,
                         link: musicArray[i].trackViewUrl
                     };
-                    iWant.queueArray.push(song);
 
+                    iWant.queueArray.push(song);
                 }
                 console.log("q array: ", iWant.queueArray);
 
@@ -338,7 +338,6 @@ function displayWatch(){
 function displayListen() {
     $("#landing").hide();
     $("#listen").show();
-
 }
 
 /******************DISPLAY ERROR ***********************/
@@ -392,5 +391,6 @@ function prev() {
     else {
         iWant.index--;
     }
+    next();
 }
 
