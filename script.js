@@ -17,6 +17,7 @@ $(document).ready(function () {
     $('.next').click(next);
     $('.prev').click(prev);
 
+    $('#listen').html('test');
 
 });//////end of document.ready
 
@@ -387,5 +388,6 @@ function prev() {
     else {
         iWant.index--;
     }
+    next();
 }
 

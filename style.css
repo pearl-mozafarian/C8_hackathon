@@ -64,7 +64,7 @@ button{
 }
 
 #read, #watch, #listen {
-    height: 80vh;
+    /*height: 80vh;*/
 }
 
 .tweets {
