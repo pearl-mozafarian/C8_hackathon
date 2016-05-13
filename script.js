@@ -300,9 +300,13 @@ function displayListen() {
     $("#landing").hide();
     $("#listen, #selectNext, #selectPrev, #start-over").show();
 
+    var background = 'url(' +iWant.queueArray[iWant.index].picture + ')';
+    $('#music-background').css('background-image', background);
+
+
     var obj = iWant.queueArray;
     var ind = iWant.index;
-    $("#pic").attr("src", iWant.queueArray[iWant.index].picture);
+    // $("#pic").attr("src", iWant.queueArray[iWant.index].picture);
     $("#artistName").text(obj[ind].artist);
     $("#albumName").text(obj[ind].album);
     $("#songName").text(obj[ind].title);
