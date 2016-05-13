@@ -60,13 +60,13 @@ function generateRandomNumber(length) {
  */
 function displayOptions(randomVerb, randomNoun) {
     $(".noun").val(randomNoun);
-    $(".verb option").attr("selected" , false);
+    // $(".verb option").attr("selected" , false);
     switch (randomVerb){
-        case "listen": $(".verb option[value='listen']").attr("selected" , true);
+        case "listen to": $(".verb").val('listen');
             break;
-        case "watch": $(".verb option[value='watch']").attr("selected" , true);
+        case "watch": $(".verb").val('watch');
             break;
-        case "read": $(".verb option[value='read']").attr("selected" , true);
+        case "read": $(".verb").val('read');
             break;
     }
 }
@@ -95,7 +95,7 @@ function nowClicked() {
                 watchAjax();
                 break;
         }
-        $('.next, .prev').show()
+
     }
 }
 /**************************************** AJAX CALLS ********************************************************/
@@ -173,7 +173,7 @@ function watchAjax() {
                 return response;
             } else {
                 console.log(response);
-
+                displayError(watch);
                 //return error message
             }
         }
@@ -241,7 +241,7 @@ function listenAjax() {
 
             } else {
                 console.log("music error", response);
-
+                displayError(listen);
                 //return error message
             }
         }///end of success
@@ -307,7 +307,7 @@ function listenAjax() {
 
 function displayRead() {
     $('#landing').hide();
-    $('#read').show();
+    $('#read, .next, .prev').show();
 
     var j = 0;
 
@@ -350,7 +350,8 @@ function displayWatch(){
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 
     $('#landing').hide();
-    $('#watch').show();
+    $('#watch, .next, .prev').show();
+
 
     iWant.index++;
 }
@@ -363,7 +364,7 @@ function displayWatch(){
 
 function displayListen() {
     $("#landing").hide();
-    $("#listen").show();
+    $("#listen, .next, .prev").show();
 
     var obj = iWant.queueArray;
     var ind = iWant.index;
