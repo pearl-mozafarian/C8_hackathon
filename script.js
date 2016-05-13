@@ -1,29 +1,39 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error, .next, .prev').hide();
+    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #start-over').hide();
+
+    loadNouns();
 
     autocomplete();
 
     randomizeOptions();
 
-    $(".now-button").click(nowClicked);
-
-    $("#startOver").click(function () {
+    $("#nowButton").click(nowClicked);
+    
+    $("#start-over").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
-        $('#read, #watch, #listen, #error').hide();
+        $('#read, #watch, #listen, #error, #start-over').hide();
         $('#landing').show();
     });
 
-    $('.next').click(next);
-    $('.prev').click(prev);
+    $("#random-btn").click(randomizeOptions);
+
+    $(window).unload(nounStorage);
+
+    $('#selectNext').click(next);
+    $('#selectPrev').click(prev);
 
 });//////end of document.ready
 
 /*********************************************** GLOBAL VARIABLES *****************************************/
-var iWant = {
 
+/**
+ * iWant - main object
+ * @type {{verbArray: string[], nounArray: string[], queueArray: Array, index: number, selectedVerb: null, selectedNoun: null, secretI: number, interval: null}}
+ */
+var iWant = {
     verbArray: ["read", "listen to", "watch"],
     nounArray: ["cats", "dogs", "space", "nature", "cars", "football", "politics", "comics", "robots", "horses", "science", "ghosts", "Disney", "America", "England", "Japan", "the ocean", "fire", "blues", "hip hop", "basketball", "fashion", "babies", "cute baby animals", "technology", "sloths", "magic", "otters", "bacon", "mysteries"],
     queueArray: [],
@@ -33,16 +43,15 @@ var iWant = {
     secretI: 1,
     interval: null
 };
+
 /********************************** LANDING PAGE FUNCTIONS ************************************************/
 
 /**
  * randomizeOptions - randomizeOptions function for randomizing verbs and nouns in landing page
  */
-
 function randomizeOptions() {
     var randomVerb = iWant.verbArray[generateRandomNumber(iWant.verbArray.length)];
     var randomNoun = iWant.nounArray[generateRandomNumber(iWant.nounArray.length)];
-    console.log("random verb: ", randomVerb);
     displayOptions(randomVerb, randomNoun);
 }
 
@@ -54,39 +63,38 @@ function randomizeOptions() {
 function generateRandomNumber(length) {
     return Math.floor(Math.random() * length);
 }
+
 /**
  * displayOptions - this function generates a random number to be used in randomize options
- * @param {string, string}
+ * @params {string, string}
  */
 function displayOptions(randomVerb, randomNoun) {
-    $(".noun").val(randomNoun);
-    // $(".verb option").attr("selected" , false);
-    switch (randomVerb) {
-        case "listen to":
-            $(".verb").val('listen');
+    $("#nounInput").val(randomNoun);
+
+    switch (randomVerb){
+        case "listen to": $("#verbSelect").val('listen');
             break;
-        case "watch":
-            $(".verb").val('watch');
+        case "watch": $("#verbSelect").val('watch');
             break;
-        case "read":
-            $(".verb").val('read');
+        case "read": $("#verbSelect").val('read');
             break;
     }
 }
 
 /**
- * nowClicked
- * @param
- * @return
+ * nowClicked - calls correct ajax call based on the verb chosen
  */
-
 function nowClicked() {
-    iWant.selectedNoun = $(".noun").val();
-    iWant.selectedVerb = $(".verb").val();
-
-    if (iWant.selectedNoun == 'shane') {
+    iWant.selectedNoun = $("#nounInput").val();
+    iWant.selectedVerb = $("#verbSelect").val();
+    
+    if (iWant.selectedNoun == 'shane'){
         secret();
     } else {
+        if (iWant.nounArray.indexOf(iWant.selectedNoun) == -1){
+            iWant.nounArray.push(iWant.selectedNoun);
+        }
+
         switch (iWant.selectedVerb) {
             case "read":
                 readAjax();
@@ -108,7 +116,6 @@ function nowClicked() {
 /**
  * readAjax - pulling text of tweets from twitter api, and creating object with username, and text of tweet
  */
-
 function readAjax() {
     $.ajax({
         dataType: 'json',
@@ -149,7 +156,6 @@ function readAjax() {
 /**
  * watchAjax - calls youtube API using search criteria, returns array of video objects containing title and ID of each. Returns max 50 results.
  */
-
 function watchAjax() {
     $.ajax({
 
@@ -187,9 +193,7 @@ function watchAjax() {
 
 /**
  * listenAjax - calls iTunes API using search criteria, returns array of
- * @param input {string} - the search term to use
  */
-
 function listenAjax() {
     //calls query with music as only criteria first
 
@@ -233,10 +237,9 @@ function listenAjax() {
 /**
  * displayRead - takes the values of each object in the queueArray and injects them into the DOM
  */
-
 function displayRead() {
     $('#landing').hide();
-    $('#read, .next, .prev').show();
+    $('#read, #selectNext, #selectPrev, #start-over').show();
 
     var j = 0;
 
@@ -279,7 +282,7 @@ function displayWatch() {
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 
     $('#landing').hide();
-    $('#watch, .next, .prev').show();
+    $('#watch, #selectNext, #selectPrev, #start-over').show();
 
 
     iWant.index++;
@@ -290,10 +293,9 @@ function displayWatch() {
 /**
  * displayListen - pulls a random song/podcast out of the queueArray and displays that item in the listen element of the page
  */
-
 function displayListen() {
     $("#landing").hide();
-    $("#listen, .next, .prev").show();
+    $("#listen, #selectNext, #selectPrev, #start-over").show();
 
     var obj = iWant.queueArray;
     var ind = iWant.index;
@@ -313,10 +315,9 @@ function displayListen() {
  * displayError - If it is called for something other than an ajax fail message, it will display the default please try again, otherwise it will display a message specific to the server failure
  * @param verb {string} - either read, listen, or watch depending on which ajax call is calling the function
  */
-
 function displayError(verb) {
     $('#landing, #read, #listen, #watch').hide();
-    $('#error').show();
+    $('#error, #start-over').show();
     var error_div = $('#error div');
 
     switch (verb) {
@@ -335,7 +336,6 @@ function displayError(verb) {
 /**
  * next - when next arrow is clicked, it calls the display function for the appropriate verb
  */
-
 function next() {
     switch (iWant.selectedVerb) {
         case "read":
@@ -353,9 +353,6 @@ function next() {
 /**
  * prev - when previous arrow is clicked, it decremenets the index to the appropriate number according to the current verb
  */
-
-
-
 function prev() {
     if (iWant.selectedVerb == 'read') {
         if (iWant.index >= 6) {
@@ -373,16 +370,41 @@ function prev() {
     next();
 }
 
-
 /**
  * autocomplete - sets datalist with autocomplete options
  */
-
 function autocomplete() {
     for (var i = 0; i < iWant.nounArray.length; i++) {
         var option = $("<option>").val(iWant.nounArray[i]);
         $("#noun-list").append(option);
     }
+}
+
+/**
+ * nounStorage - function to store noun array in local storage
+ * @return {string}
+ */
+function nounStorage() {
+    var storage = {
+        'nouns': iWant.nounArray
+    };
+
+    var nouns = JSON.stringify(storage);
+    
+    window.localStorage.setItem('nouns', nouns);
+    return nouns;
+}
+
+/**
+ * loadNouns - function to load stored nouns
+ * @return {Array}
+ */
+function loadNouns() {
+    var nouns = JSON.parse(window.localStorage.getItem('nouns'));
+    if(nouns){
+        iWant.nounArray = nouns.nouns;
+    }
+    return nouns.nouns;
 }
 
 /******************************************************** Top Secret ********************************************************/
