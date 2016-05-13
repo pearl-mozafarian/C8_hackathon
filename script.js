@@ -5,9 +5,7 @@ $(document).ready(function () {
 
     randomizeOptions();
 
-    $("#now-button").click(nowClicked);
-
-    $("#random-btn").click(randomizeOptions);
+    $(".now-button").click(nowClicked);
 
     $("#startOver").click(function () {
         iWant.queueArray = [];
@@ -15,7 +13,7 @@ $(document).ready(function () {
         $('#read, #watch, #listen, #error').hide();
         $('#landing').show();
     });
-    
+
     $('.next').click(next);
     $('.prev').click(prev);
 
@@ -51,9 +49,7 @@ function randomizeOptions() {
  * @return {number}
  */
 function generateRandomNumber(length) {
-
-   return Math.floor(Math.random()*length);
-
+    return Math.floor(Math.random()*length);
 }
 /**
  * displayOptions - this function generates a random number to be used in randomize options
@@ -61,31 +57,26 @@ function generateRandomNumber(length) {
  */
 function displayOptions(randomVerb, randomNoun) {
     $(".noun").val(randomNoun);
-    
-    $(".verb option").attr("selected", false);
+    $(".verb option").attr("selected" , false);
     switch (randomVerb){
-        case "listen":
-            $(".verb option[value='listen']").attr("selected", true);
+        case "listen": $(".verb option[value='listen']").attr("selected" , true);
             break;
-        case "watch":
-            $(".verb option[value='watch']").attr("selected" , true);
+        case "watch": $(".verb option[value='watch']").attr("selected" , true);
             break;
-        case "read":
-            $(".verb option[value='read']").attr("selected" , true);
+        case "read": $(".verb option[value='read']").attr("selected" , true);
             break;
     }
 }
 
 /**
  * nowClicked
- * @param 
- * @return 
+ * @param
+ * @return
  */
 
 function nowClicked() {
     iWant.selectedNoun = $(".noun").val();
     iWant.selectedVerb = $(".verb").val();
-    
     switch (iWant.selectedVerb) {
         case "read":
             readAjax();
@@ -166,7 +157,7 @@ function watchAjax() {
                     iWant.queueArray.push(response.video[i]);
                 }
                 console.log("results array", iWant.queueArray);
-                
+
                 //call display function
                 displayWatch();
 
@@ -309,13 +300,10 @@ function listenAjax() {
 function displayRead() {
     $('#landing').hide();
     $('#read').show();
-    $(".main-heading").text("I Want to " + iWant.selectedVerb + " something about " + iWant.selectedNoun);
 
     var j = 0;
 
     for(var i = iWant.index; i < iWant.index + 3; i++) {
-
-    for(var i = iWant.index; i <= iWant.index + 3; i++) {
         var tweet = iWant.queueArray[i];
         var tweetdiv = '#tweet' + (j + 1);
         var avatar = tweetdiv + ' .avatar';
@@ -349,14 +337,13 @@ function displayRead() {
  */
 
 function displayWatch(){
-    
+
     var id = iWant.queueArray[iWant.index].id;
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 
     $('#landing').hide();
     $('#watch').show();
-    $(".main-heading").text("I Want to " + iWant.selectedVerb + " something about " + iWant.selectedNoun);
-    
+
     iWant.index++;
 }
 
@@ -369,8 +356,6 @@ function displayWatch(){
 function displayListen() {
     $("#landing").hide();
     $("#listen").show();
-
-    $(".main-heading").text("I Want to " + iWant.selectedVerb + " something about " + iWant.selectedNoun);
 }
 
 /******************DISPLAY ERROR ***********************/
@@ -431,7 +416,7 @@ function prev() {
     }
     else {
         if (iWant.index > 0) {
-            iWant.index--;
+            iWant.index -= 2;
         }
     }
     next();
