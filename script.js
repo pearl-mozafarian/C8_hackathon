@@ -41,7 +41,7 @@ var iWant = {
     nounArray: ["cats", "dogs", "space", "nature", "cars", "football", "politics", "comics", "robots", "horses", "science", "ghosts", "Disney", "America", "England", "Japan", "the ocean", "fire", "blues", "hip hop", "basketball", "fashion", "babies", "cute baby animals", "technology", "sloths", "magic", "otters", "bacon", "mysteries"],
     queueArray: [],
     index: 0,
-    selectedVerb : null,
+    selectedVerb: null,
     selectedNoun: null,
     secretI: 1,
     interval: null
@@ -64,7 +64,7 @@ function randomizeOptions() {
  * @return {number}
  */
 function generateRandomNumber(length) {
-    return Math.floor(Math.random()*length);
+    return Math.floor(Math.random() * length);
 }
 
 /**
@@ -73,7 +73,7 @@ function generateRandomNumber(length) {
  */
 function displayOptions(randomVerb, randomNoun) {
     $("#nounInput").val(randomNoun);
-    // $(".verb option").attr("selected" , false);
+
     switch (randomVerb){
         case "listen to": $("#verbSelect").val('listen');
             break;
@@ -127,8 +127,8 @@ function readAjax() {
         },
         method: 'post',
         url: 'http://s-apis.learningfuze.com/hackathon/twitter/index.php',
-        success: function(result) {
-            for (i=0; i < result.tweets.statuses.length; i++){
+        success: function (result) {
+            for (i = 0; i < result.tweets.statuses.length; i++) {
                 var tweet = result.tweets.statuses[i];
 
                 var username = tweet.user.screen_name;
@@ -171,9 +171,9 @@ function watchAjax() {
         url: "http://s-apis.learningfuze.com/hackathon/youtube/search.php",
         success: function (response) {
             if (response.success) {
-                console.log("watch",response);
+                console.log("watch", response);
                 //push response into resultsArray
-                for(i=0;i<response.video.length;i++){
+                for (i = 0; i < response.video.length; i++) {
                     iWant.queueArray.push(response.video[i]);
                 }
                 console.log("results array", iWant.queueArray);
@@ -199,42 +199,36 @@ function watchAjax() {
  */
 function listenAjax() {
     //calls query with music as only criteria first
+
     $.ajax({
-
-        dataType: 'jsonp',
+        url: 'https://api.spotify.com/v1/search',
         data: {
-            term: iWant.selectedNoun,
-            media: "music"
+            q: iWant.selectedNoun,
+            type: 'track'
         },
-        method: 'GET',
-        url: "https://itunes.apple.com/search",
+
         success: function (response) {
-            if (response) {
-                console.log("music", response);
-                var musicArray = response.results;
-                //push response into queueArray
+            console.log('spotify', response);
 
-                for(var i=0; i< musicArray.length; i++){
-                    var song = {
-                        artist: musicArray[i].artistName,
-                        album: musicArray[i].collectionName,
-                        title: musicArray[i].trackName,
-                        picture: musicArray[i].artworkUrl100,
-                        audio: musicArray[i].previewUrl,
-                        link: musicArray[i].trackViewUrl
-                    };
+            for (i = 0; i < response.tracks.items.length; i++) {
 
-                    iWant.queueArray.push(song);
-                }
+                var tracks = response.tracks.items[i];
 
-                displayListen();
+                var song = {
+                    artist: tracks.artists[0].name,
+                    album: tracks.album.name,
+                    title: tracks.name,
+                    picture: tracks.album.images[0].url,
+                    audio: tracks.preview_url,
+                    link: tracks.external_urls.spotify
+                };
 
-            } else {
-                console.log("music error", response);
-                displayError(listen);
-                //return error message
+                iWant.queueArray.push(song);
             }
-        }///end of success
+
+            displayListen();
+
+        }
     });
 }
 
@@ -252,7 +246,7 @@ function displayRead() {
 
     var j = 0;
 
-    for(var i = iWant.index; i < iWant.index + 3; i++) {
+    for (var i = iWant.index; i < iWant.index + 3; i++) {
         var tweet = iWant.queueArray[i];
         var tweetdiv = '#tweet' + (j + 1);
         var avatar = tweetdiv + ' .avatar';
@@ -284,7 +278,8 @@ function displayRead() {
 /**
  * displayWatch - inputs video ID from queue array into iframe src to play video
  */
-function displayWatch(){
+
+function displayWatch() {
 
     var id = iWant.queueArray[iWant.index].id;
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
@@ -307,12 +302,12 @@ function displayListen() {
 
     var obj = iWant.queueArray;
     var ind = iWant.index;
-    $("#pic").attr("src", obj[ind].picture);
+    $("#pic").attr("src", iWant.queueArray[iWant.index].picture);
     $("#artistName").text(obj[ind].artist);
     $("#albumName").text(obj[ind].album);
     $("#songName").text(obj[ind].title);
-    $("#audio").attr("src", obj[ind].audio);
     $("#linkForAudio").attr("href", obj[ind].link);
+    $("#audio").attr("src", obj[ind].audio);
     $("#audio")[0].play();
     iWant.index += 1;
 }
@@ -382,7 +377,7 @@ function prev() {
  * autocomplete - sets datalist with autocomplete options
  */
 function autocomplete() {
-    for (var i = 0; i < iWant.nounArray.length; i++){
+    for (var i = 0; i < iWant.nounArray.length; i++) {
         var option = $("<option>").val(iWant.nounArray[i]);
         $("#noun-list").append(option);
     }
@@ -421,7 +416,7 @@ function loadNouns() {
  * secretDOMObj - create something secret
  * @params {number, number, number}
  */
-function secretDOMObj(){
+function secretDOMObj() {
     var i = iWant.secretI;
     if (i < 23) {
         var top = Math.round(Math.random() * (window.innerHeight / 2));
@@ -438,7 +433,7 @@ function secretDOMObj(){
             "data-dismiss": "modal"
         }).addClass("btn btn-default").text("Close");
         var title = $("<h4>").addClass('modal-title').text("Modal Model");
-    
+
         $(header).append(title);
         $(body).append(image);
         $(footer).append(close);
@@ -455,6 +450,6 @@ function secretDOMObj(){
 /**
  * secret - interval creating secret objects
  */
-function secret(){
+function secret() {
     iWant.interval = setInterval(secretDOMObj, 300);
 }
