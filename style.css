@@ -18,7 +18,7 @@ body {
 
 p {
     font-size: 4em;
-    text-shadow: 0 5px 6px #344152;
+    /*text-shadow: 0 5px 6px #344152;*/
     color: white;
     font-weight: 900;
 }
@@ -193,7 +193,6 @@ a.random-button:active {
 
 #read, #watch, #listen {
     height: 80vh;
-    width: 70vw;
 }
 
 #read {
@@ -207,21 +206,18 @@ a.random-button:active {
     filter: blur(10px);
     -webkit-filter: blur(10px);
     background-size: cover;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: -2%;
     z-index: -1;
 }
 
 #music-background-cover {
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.53);
+    background-color: rgba(255, 255, 255, 0.42);
     position: absolute;
-    margin-top: -2%;
     border: 5px solid white;
 }
 
@@ -270,18 +266,18 @@ div.tweet-box>div>h3 {
 /****************************************** Pearl for listen page***********************************************/
 #listen {
     /*border: 1px solid black;*/
-    box-shadow: 5px 5px 10px black;
+    /*box-shadow: 5px 5px 10px black;*/
     position: relative;
 }
 
 #listenInfoDiv {
     font-size: 0;
-    position: absolute;
-    width:80vh;
-    height:40vh;
+    position: relative;
+    width: 120vh;
+    height: 60vh;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -70%);
 }
 #insideInfo {
     height:100%;
@@ -291,32 +287,39 @@ div.tweet-box>div>h3 {
     overflow: hidden;
     background-color: rgba(64,64,64,0.4);
     position: relative;
+    padding-top: 2%;
 
     /*top: 10%*/
 }
-#albumName, #songName, #audioLink, #artistName {
-    padding: .5vh;
-    text-align: left;
+#albumName, #songName,/* #audioLink,*/ #artistName {
+    text-align: center;
     display: block;
-    color: black;
-    margin: 0;
+    color: #ffffff;
+    margin-bottom: 2%;
     font-size: 1vw;
     height: 25%;
-    text-shadow: 2px 2px 8px #000000;
     /*background-color: rgba(255,255,255,0.9);*/
 }
 
-#audioControls {
+#linkForAudio {
     position: absolute;
-    bottom: -15%;
-    margin: 0;
-    display: flex;
+    bottom: 2%;
+    right: 2%;
+}
+
+#spotify {
+    height: 4vh;
+}
+
+#audioControls {
+    margin: auto;
     width: 100%;
     /*justify-content: center;*/
-    align-items: center;
     /*height: 20px;*/
     /*border: 1px solid black;*/
     /*background-color: rgba(255,255,255,0.9);*/
+    position: relative;
+    top: 5%;
 }
 #albumArt {
     overflow: hidden;
