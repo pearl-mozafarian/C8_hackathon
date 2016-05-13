@@ -290,6 +290,8 @@ function displayRead() {
     $('#landing').hide();
     $('#read').show();
 
+    $(".main-heading").text("I Want to " + iWant.selectedVerb + " something about " + iWant.selectedNoun);
+
     for(var i = iWant.index; i <= iWant.index + 3; i++) {
         var tweet = iWant.queueArray[i];
         var tweetdiv = '#tweet' + (i + 1);
@@ -324,6 +326,7 @@ function displayWatch(){
 
     $('#landing').hide();
     $('#watch').show();
+    $(".main-heading").text("I Want to " + iWant.selectedVerb + " something about " + iWant.selectedNoun);
     
     iWant.index++;
 }
@@ -337,6 +340,8 @@ function displayWatch(){
 function displayListen() {
     $("#landing").hide();
     $("#listen").show();
+
+    $(".main-heading").text("I Want to " + iWant.selectedVerb + " something about " + iWant.selectedNoun);
 }
 
 /******************DISPLAY ERROR ***********************/
@@ -392,4 +397,3 @@ function prev() {
     }
     next();
 }
-
