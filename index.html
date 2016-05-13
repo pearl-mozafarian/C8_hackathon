@@ -13,25 +13,40 @@
 </head>
 <body>
 <p class="main-heading">I Want To</p>
-<section class="container-fluid">
+
+<section class="container">
+
     <button id="start-over" class="btn btn-success btn-lg">Start Over</button>
 
-    <div id="selectPrev" class="prev glyphicon glyphicon-chevron-left btn"></div>
- 
-    <div id="landing" class="col-md-offset-1 col-md-10">
-        <select id="verbSelect" class="verb col-md-offset-4">
-            <option value="watch">watch</option>
-            <option value="read">read</option>
-            <option value="listen">listen to</option>
-         </select>
-             
-        <p class="col-md-12">something about</p>
-        <input id="nounInput" class="noun col-md-12" list="noun-list">
-        <datalist id="noun-list"></datalist>
-            <button id="nowButton" class="now-button col-md-2">NOW</button>
-            <button id="random-btn" type="button" class="now-button col-md-4 col-md-offset-1">Randomize</button>
-    </div>
 
+    <div id="selectPrev" class="prev glyphicon glyphicon-chevron-left btn"></div>
+    <div class="row">
+        <div id="landing" class="col-md-12">
+
+            <select id="verbSelect" class="verb col-md-offset-4">
+
+                <option value="watch">watch</option>
+                <option value="read">read</option>
+                <option value="listen">listen to</option>
+
+             </select>
+                 
+            <p class="col-md-12">something about</p>
+
+            <input id="nounInput" class="noun col-md-12" list="noun-list">
+            <datalist id="noun-list"></datalist>
+            <div class="button-group row">
+
+                <div class="col-md-12">
+                    <a href="#" id="nowButton" class="now-button">NOW</a>
+                </div>
+                <div class="col-md-12 rb-wrapper">
+                    <a href="#" id="random-btn" class="random-button">Randomize</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div id="read" class="col-md-offset-2 col-md-8">
         <div class="tweets col-md-12" id="tweet1">
             <div class="tweets-pic col-md-offset-1 col-md-1"><img class="avatar"></div>
