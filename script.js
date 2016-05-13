@@ -9,7 +9,10 @@ $(document).ready(function () {
 
     randomizeOptions();
 
-    $("#nowButton").click(nowClicked);
+   // $("#nowButton").click(nowClicked);
+    $("#nowButton").on("click", function(){
+        nowClicked();
+    });
     
     $("#start-over").click(function () {
         iWant.queueArray = [];
