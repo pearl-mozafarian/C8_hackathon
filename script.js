@@ -15,9 +15,10 @@ $(document).ready(function () {
     });
 
     $("#startOverBtn").click(function () {
+        console.log('clicked');
         iWant.queueArray = [];
         iWant.index = 0;
-        $("#audio").pause();
+        $("#audio").attr('src', "");
         $('#read, #watch, #listen, #error, #startOverBtn').hide();
 
         $('#landing').show();
