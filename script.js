@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn').hide();
+    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover').hide();
 
     loadNouns();
 
@@ -15,11 +15,15 @@ $(document).ready(function () {
     });
 
     $("#startOverBtn").click(function () {
+        console.log('clicked');
         iWant.queueArray = [];
         iWant.index = 0;
-        $('#read, #watch, #listen, #error, #startOverBtn').hide();
+        
+        $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover').hide();
         $('#landing').show();
+
         randomizeOptions();
+
     });
 
     $("#random-btn").click(randomizeOptions);
@@ -235,6 +239,7 @@ function listenAjax() {
         success: function (response) {
             console.log('spotify', response);
 
+
             for (i = 0; i < response.tracks.items.length; i++) {
 
                 var tracks = response.tracks.items[i];
@@ -252,6 +257,7 @@ function listenAjax() {
             }
 
             displayListen();
+
 
         }
     });
@@ -323,7 +329,11 @@ function displayWatch() {
  */
 function displayListen() {
     $("#landing").hide();
-    $("#listen, #selectNext, #selectPrev, #startOverBtn").show();
+    $("#listen, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover").show();
+
+    var background = 'url(' +iWant.queueArray[iWant.index].picture + ')';
+    $('#music-background').css('background-image', background);
+
 
     var obj = iWant.queueArray;
     var ind = iWant.index;
@@ -445,8 +455,8 @@ function loadNouns() {
 function secretDOMObj() {
     var i = iWant.secretI;
     if (i < 23) {
-        var top = Math.round(Math.random() * (window.innerHeight / 2));
-        var left = Math.round(Math.random() * ((window.innerWidth / 4) * 3));
+        var top = Math.round(Math.random() * 200);
+        var left = Math.round(Math.random() * 800);
 
         var dialog = $("<div>").addClass('modal-dialog modal-lg secret');
         var content = $("<div>").addClass('modal-content');
@@ -477,5 +487,7 @@ function secretDOMObj() {
  * secret - interval creating secret objects
  */
 function secret() {
+    $("#audio").attr("src", "audio/top-secret-song.mp3");
+    $("#audio")[0].play();
     iWant.interval = setInterval(secretDOMObj, 300);
 }
