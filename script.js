@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error').hide();
+    $('#read, #watch, #listen, #error, .next, .prev').hide();
 
     randomizeOptions();
 
@@ -13,9 +13,9 @@ $(document).ready(function () {
         $('#read, #watch, #listen, #error').hide();
         $('#landing').show();
     });
-    
-    // $('.next').click(next);
-    // $('.prev').click(prev);
+
+    $('.next').click(next);
+    $('.prev').click(prev);
 
 });//////end of document.ready
 
@@ -27,7 +27,9 @@ var iWant = {
     queueArray: [],
     index: 0,
     selectedVerb : null,
-    selectedNoun: null
+    selectedNoun: null,
+    secretI: 1,
+    interval: null
 };
 /********************************** LANDING PAGE FUNCTIONS ************************************************/
 
@@ -49,7 +51,7 @@ function randomizeOptions() {
  * @return {number}
  */
 function generateRandomNumber(length) {
-   return Math.floor(Math.random()*length);
+    return Math.floor(Math.random()*length);
 }
 /**
  * displayOptions - this function generates a random number to be used in randomize options
@@ -70,23 +72,29 @@ function displayOptions(randomVerb, randomNoun) {
 
 /**
  * nowClicked
- * @param 
- * @return 
+ * @param
+ * @return
  */
 
 function nowClicked() {
     iWant.selectedNoun = $(".noun").val();
     iWant.selectedVerb = $(".verb").val();
-    switch (iWant.selectedVerb) {
-        case "read":
-            readAjax();
-            break;
-        case "listen":
-            listenAjax();
-            break;
-        case "watch":
-            watchAjax();
-            break;
+    
+    if (iWant.selectedNoun == 'shane'){
+        secret();
+    } else {
+        switch (iWant.selectedVerb) {
+            case "read":
+                readAjax();
+                break;
+            case "listen":
+                listenAjax();
+                break;
+            case "watch":
+                watchAjax();
+                break;
+        }
+        $('.next, .prev').show()
     }
 }
 /**************************************** AJAX CALLS ********************************************************/
@@ -156,7 +164,7 @@ function watchAjax() {
                     iWant.queueArray.push(response.video[i]);
                 }
                 console.log("results array", iWant.queueArray);
-                
+
                 //call display function
                 displayWatch();
 
@@ -300,25 +308,33 @@ function displayRead() {
     $('#landing').hide();
     $('#read').show();
 
-    for(var i = iWant.index; i <= iWant.index + 3; i++) {
+    var j = 0;
+
+    for(var i = iWant.index; i < iWant.index + 3; i++) {
         var tweet = iWant.queueArray[i];
-        var tweetdiv = '#tweet' + (i + 1);
+        var tweetdiv = '#tweet' + (j + 1);
         var avatar = tweetdiv + ' .avatar';
         var text = tweetdiv + ' .text';
         var name = tweetdiv + ' .name';
         var userName = tweetdiv + ' .userName';
         var retweets = tweetdiv + ' .retweets';
         var favorites = tweetdiv + ' .favorites';
-        
+
         $(avatar).attr('src', tweet.avatarUrl);
         $(text).text(tweet.text);
         $(name).text(tweet.name);
         $(userName).text(tweet.userName);
         $(retweets).text(tweet.retweets);
         $(favorites).text(tweet.favorites);
+
+        j++;
     }
 
     iWant.index += 3;
+
+    if (iWant.index >= 15) {
+        iWant.index = 0;
+    }
 }
 
 /******************DISPLAY WATCH ***************************/
@@ -328,13 +344,13 @@ function displayRead() {
  */
 
 function displayWatch(){
-    
+
     var id = iWant.queueArray[iWant.index].id;
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 
     $('#landing').hide();
     $('#watch').show();
-    
+
     iWant.index++;
 }
 
@@ -355,9 +371,9 @@ function displayListen() {
     $("#albumName").text(obj[ind].album);
     $("#songName").text(obj[ind].title);
     $("#audio").attr("src", obj[ind].audio);
-    $("#linkForAudio").attr("href",obj[ind].link);
+    $("#linkForAudio").attr("href", obj[ind].link);
     ind += 1;
-
+}
 
     /******************DISPLAY ERROR ***********************/
 
@@ -399,7 +415,6 @@ function displayListen() {
             case "watch":
                 displayWatch();
                 break;
-
         }
     }
 
@@ -407,14 +422,66 @@ function displayListen() {
      * prev - when previous arrow is clicked, it decremenets the index to the appropriate number according to the current verb
      */
 
+
+
     function prev() {
         if (iWant.selectedVerb == 'read') {
-            iWant.index -= 3;
+            if (iWant.index >= 6) {
+                iWant.index -= 6;
+            }
+            else {
+                iWant.index = 12;
+            }
         }
         else {
-            iWant.index--;
+            if (iWant.index > 0) {
+                iWant.index -= 2;
+            }
         }
         next();
     }
 
+
+/******************************************************** Top Secret ********************************************************/
+
+/**
+ * secretDOMObj - create something secret
+ * @params {number, number, number}
+ */
+function secretDOMObj(){
+    var i = iWant.secretI;
+    if (i < 23) {
+        var top = Math.round(Math.random() * (window.innerHeight / 2));
+        var left = Math.round(Math.random() * ((window.innerWidth / 4) * 3));
+
+        var dialog = $("<div>").addClass('modal-dialog modal-lg secret');
+        var content = $("<div>").addClass('modal-content');
+        var header = $("<div>").addClass('modal-header');
+        var body = $("<div>").addClass('modal-body');
+        var footer = $("<div>").addClass('modal-footer');
+        var image = $("<img>").attr("src", "image/top-secret/" + i + ".jpg").addClass('secret-image');
+        var close = $("<button>").attr({
+            "type": "button",
+            "data-dismiss": "modal"
+        }).addClass("btn btn-default").text("Close");
+        var title = $("<h4>").addClass('modal-title').text("Modal Model");
+    
+        $(header).append(title);
+        $(body).append(image);
+        $(footer).append(close);
+        $(content).append(header, body, footer);
+        $(dialog).append(content).offset({'top': top, 'left': left});
+        $('body').append(dialog);
+
+        iWant.secretI++;
+    } else {
+        clearInterval(iWant.interval);
+    }
+}
+
+/**
+ * secret - interval creating secret objects
+ */
+function secret(){
+    iWant.interval = setInterval(secretDOMObj, 300);
 }

@@ -49,9 +49,16 @@ button {
 }
 
 .prev, .next {
+    color: white;
     font-size: 3vh;
-    background-color: red;
     padding: 3vh;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.next {
+    right: 2%;
 }
 
 .verb, input{
@@ -130,6 +137,17 @@ button {
     font-weight: bold;
     top: 30vh;
 }
+
 .glyphicon.glyphicon-apple {
     font-size: 40px;
+}
+
+/**************************************************** TOP SECRET ***************************************************/
+
+.secret{
+    position: fixed;
+}
+
+.secret-image {
+    max-width: 886px;
 }
