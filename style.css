@@ -67,6 +67,7 @@ button {
     margin: 3vh 0;
     box-shadow: 6px 6px 6px black;
     background-color: rgba(255,255,255,0.9);
+    text-align: center;
 }
 
 #read, #watch, #listen {
