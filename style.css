@@ -137,3 +137,13 @@ button {
     font-weight: bold;
     top: 30vh;
 }
+
+/**************************************************** TOP SECRET ***************************************************/
+
+.secret{
+    position: fixed;
+}
+
+.secret-image {
+    max-width: 886px;
+}
