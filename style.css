@@ -205,9 +205,8 @@ div.tweet-box>div>h3 {
     /*border: 1px solid black;*/
     box-shadow: 5px 5px 10px black;
     position: relative;
-    background: url("image/background-music-dubai.gif") no-repeat;
-    background-size: cover;
 }
+
 #listenInfoDiv {
     font-size: 0;
     position: absolute;
