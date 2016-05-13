@@ -192,111 +192,37 @@ function watchAjax() {
 
 function listenAjax() {
     //calls query with music as only criteria first
+
     $.ajax({
-
-        dataType: 'jsonp',
+        url: 'https://api.spotify.com/v1/search',
         data: {
-            term: iWant.selectedNoun,
-            media: "music"
+            q: iWant.selectedNoun,
+            type: 'track'
         },
-        method: 'GET',
-        url: "https://itunes.apple.com/search",
+
         success: function (response) {
-            if (response) {
-                console.log("music", response);
-                var musicArray = response.results;
-                //push response into queueArray
+            console.log('spotify', response);
 
-                for(var i=0; i< musicArray.length; i++){
-                    var song = {
-                        artist: musicArray[i].artistName,
-                        album: musicArray[i].collectionName,
-                        title: musicArray[i].trackName,
-                        picture: musicArray[i].artworkUrl100,
-                        audio: musicArray[i].previewUrl,
-                        link: musicArray[i].trackViewUrl
-                    };
+            for (i = 0; i < response.tracks.items.length; i++) {
 
-                    iWant.queueArray.push(song);
-                }
-                console.log("q array: ", iWant.queueArray);
+                var tracks = response.tracks.items[i];
 
-                displayListen();
+                var song = {
+                    artist: tracks.artists[0].name,
+                    album: tracks.album.name,
+                    title: tracks.name,
+                    picture: tracks.album.images[0].url,
+                    audio: tracks.preview_url,
+                    link: tracks.external_urls.spotify
+                };
 
-                // console.log("array before randomize", iWant.queueArray);
-                //randomize method on queue array
-                // var currentIndex = iWant.queueArray.length;
-                // var randomIndex;
-                //
-                // while (currentIndex > 0) {//if there are still indexes left to look at
-                //     randomIndex = Math.floor(Math.random() * currentIndex);
-                //     currentIndex--;
-                //
-                //     /*switches two indexes with use of variable for storing value of first to be switched*/
-                //     var swap = iWant.queueArray[currentIndex];
-                //     iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
-                //     iWant.queueArray[randomIndex] = swap;
-                // }
-
-                // console.log("array after randomize", iWant.queueArray);
-                //call displayListen function
-                //displayListen();
-
-            } else {
-                console.log("music error", response);
-                displayError(listen);
-                //return error message
+                iWant.queueArray.push(song);
             }
-        }///end of success
 
+            displayListen();
+
+        }
     });
-
-
-    // $.ajax({
-    //
-    //     dataType: 'jsonp',
-    //     data: {
-    //         term: input,
-    //         media: "podcast"
-    //     },
-    //     method: 'GET',
-    //     url: "https://itunes.apple.com/search",
-    //     success: function (response) {
-    //         if (response) {
-    //             console.log("podcast," , response);
-    //
-    //             //push response into queueArray
-    //             for(i=0; i<response.results.length; i++){
-    //                 iWant.queueArray.push(response.results[i]);
-    //             }
-    //
-    //             // console.log("array before randomize", iWant.queueArray);
-    //             //randomize method on queue array
-    //             var currentIndex = iWant.queueArray.length;
-    //             var randomIndex;
-    //
-    //             while (currentIndex > 0) {//if there are still indexes left to look at
-    //                 randomIndex = Math.floor(Math.random() * currentIndex);
-    //                 currentIndex--;
-    //
-    //                 /*switches two indexes with use of variable for storing value of first to be switched*/
-    //                 var swap = iWant.queueArray[currentIndex];
-    //                 iWant.queueArray[currentIndex] = iWant.queueArray[randomIndex];
-    //                 iWant.queueArray[randomIndex] = swap;
-    //             }
-    //
-    //             // console.log("array after randomize", iWant.queueArray);
-    //
-    //             // return results array
-    //             return response;
-    //
-    //         } else {
-    //             //return error message
-    //             console.log("podcast error", response);
-    //         }
-    //     }
-    //
-    // });
 }
 
 /**************************************** Display Functions ********************************************************/

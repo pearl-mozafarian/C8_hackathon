@@ -1,110 +1,141 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="UTF-8"/>
-    <meta content="iwantto" name="I Want To"/>
-    <meta content="author" name="Erika O'Neil, Morvarid Mozafarian, Jon Rasmussen, Betsy Gottesman, Eugene Kwon"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="style.css"/>
-    <script src="script.js"></script>
-    <title>I Want To...</title>
+        <meta charset="UTF-8"/>
+        <meta content="iwantto" name="I Want To"/>
+        <meta content="author" name="Erika O'Neil, Morvarid Mozafarian, Jon Rasmussen, Betsy Gottesman, Eugene Kwon"/>
+        <link href='https://fonts.googleapis.com/css?family=Raleway:400,700,900' rel='stylesheet' type='text/css'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="style.css"/>
+        <script src="script.js"></script>
+        <title>I Want To...</title>
 </head>
 <body>
 <p class="main-heading">I Want To</p>
-<section class="container-fluid">
 
-    <div class="prev glyphicon glyphicon-chevron-left btn"></div>
- 
-    <div id="landing" class="col-md-offset-1 col-md-10">
-        <select class="verb col-md-offset-4">
-            <option value="watch">watch</option>
-            <option value="read">read</option>
-            <option value="listen">listen to</option>
-         </select>
-             
-        <p class="col-md-12">something about</p>
-        <input class="noun col-md-12" list="noun-list">
-        <datalist id="noun-list"></datalist>
-            <button id="nowButton" class="now-button col-md-2">NOW</button>
-            <button id="random-btn" type="button" class="now-button col-md-4 col-md-offset-1">Randomize</button>
-    </div>
+<section class="container">
 
-    <div id="read" class="col-md-offset-2 col-md-8">
-        <div class="tweets col-md-12" id="tweet1">
-            <div class="tweets-pic col-md-offset-1 col-md-1"><img class="avatar"></div>
-            <div class="tweets-username col-md-9">
-                <span class="name"></span>
-                <span class="userName"></span>
-            </div>
-            <div class="text col-md-9"></div>
-            <div class="shares col-md-offset-2 col-md-9">
-                <span class="glyphicon glyphicon-retweet"></span>
-                <span class="retweets"></span>
-                <span class="glyphicon glyphicon-heart"></span>
-                <span class="favorites"></span>
-            </div>
-        </div>
-        <div class="tweets col-md-12" id="tweet2">
-            <div class="tweets-pic col-md-offset-1 col-md-1">
-                <img class="avatar">
-            </div>
-            <div class="tweets-username col-md-9">
-                <span class="name"></span>
-                <span class="userName"></span>
-            </div>
-            <div class="text col-md-9"></div>
-            <div class="shares col-md-offset-2 col-md-9">
-                <span class="glyphicon glyphicon-retweet"></span>
-                <span class="retweets"></span>
-                <span class="glyphicon glyphicon-heart"></span>
-                <span class="favorites"></span>         
-            </div>
-        </div>
-        <div class="tweets col-md-12" id="tweet3">
-            <div class="tweets-pic col-md-offset-1 col-md-1"><img class="avatar"></div>
-            <div class="tweets-username col-md-9">
-                <span class="name"></span>
-                <span class="userName"></span>
-            </div>
-            <div class="text col-md-9"></div>
-            <div class="shares col-md-offset-2 col-md-9">
-                <span class="glyphicon glyphicon-retweet"></span>
-                <span class="retweets"></span>
-                <span class="glyphicon glyphicon-heart"></span>
-                <span class="favorites"></span>
-            </div>
-        </div>
-    </div>
-    <div id="watch" class="col-md-offset-1 col-md-10">
-        <iframe id="ytplayer" class="col-md-12" width="854" height="480" src="" frameborder="0"></iframe>
-        <div id="videoTitle" class="col-md-12"></div>
-    </div>
+        <a href="#" id="startOverBtn" class="start-over-btn">Start Over</a>
+
+        <div id="selectPrev" class="prev glyphicon glyphicon-chevron-left btn"></div>
+
+        <div id="landing" class="col-md-12">
+            <select id="verbSelect" class="verb col-md-offset-4">
+                <option value="watch">watch</option>
+                <option value="read">read</option>
+                <option value="listen">listen to</option>
+            </select>
+            <div class="col-md-12">
+                <p>something about</p>
+            </div>
+            <div class="col-md-12">
+                <div class="input-container">
+                    <p class="placeholder"></p>
+                    <input type="text" id="nounInput" class="noun col-md-12">
+                    <div class="border"></div>
+                </div>
+            </div>
+            <div class="button-group row">
+                <div class="col-md-12">
+                    <a href="#" id="nowButton" class="now-button">NOW</a>
+                </div>
+                <div class="col-md-12 rb-wrapper">
+                    <a href="#" id="random-btn" class="random-button">Randomize</a>
+                </div>
+            </div>
+        </div>
         
-      <div id="listen" class="col-md-offset-1 col-md-10">     
-           <div id="albumArt" class="col-md-offset-4 col-md-4"><img src="" id="pic"></div>
-           <div id="artistName" class="col-md-offset-4 col-md-4"></div>        
-           <div id="albumName" class="col-md-offset-4 col-md-4"></div>        
-           <div id="songName" class="col-md-offset-4 col-md-4"></div>        
-           <div id="audioControls" class="col-md-offset-4 col-md-4">            
-              <audio controls id="audio">
-                   <source src="">
-              </audio>        
-          </div>
-              <a type="button" id="linkForAudio" href="">
-                  <div id="audioLink" class="col-md-offset-4 col-md-4">
-                      <span class="glyphicon glyphicon-apple"></span>
-                  </div>  
-              </a>
-<!--            <div id="audioLink" class="col-md-offset-4 col-md-4"></div>    -->
-      </div>
-        
-     <div id="error" class="col-md-offset-1 col-md-10">
-                <h1>We couldn't find what you were looking for. Try again!</h1>
-    </div>
+        <div id="read">
+            <div class="media well tweets" id="tweet1">
+                <a class="media-left tweets-pic" href="#">
+                    <img class="media-object avatar" data-src="..." src="" alt="Generic placeholder image">
+                </a>
+                <div class="media-body tweet-box">
+                    <div class="tweets-username">
+                        <h3 class="media-heading name"></h3>
+                        <h4 class="media-heading userName"></h4>
+                    </div>
+                    <div class="text"></div>
+                    <div class="shares">
+                        <span class="glyphicon glyphicon-retweet"></span>
+                        <span class="retweets"></span>
+                        <span class="glyphicon glyphicon-heart"></span>
+                        <span class="favorites"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="media well tweets" id="tweet2">
+                <a class="media-left tweets-pic" href="#">
+                    <img class="media-object avatar" data-src="..." src="" alt="Generic placeholder image">
+                </a>
+                <div class="media-body tweet-box">
+                    <div class="tweets-username">
+                        <h3 class="media-heading name"></h3>
+                        <h4 class="media-heading userName"></h4>
+                    </div>
+                    <div class="text"></div>
+                    <div class="shares">
+                        <span class="glyphicon glyphicon-retweet"></span>
+                        <span class="retweets"></span>
+                        <span class="glyphicon glyphicon-heart"></span>
+                        <span class="favorites"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="media well tweets" id="tweet3">
+                <a class="media-left tweets-pic" href="#">
+                    <img class="media-object avatar" data-src="..." src="" alt="Generic placeholder image">
+                </a>
+                <div class="media-body tweet-box">
+                    <div class="tweets-username">
+                        <h3 class="media-heading name"></h3>
+                        <h4 class="media-heading userName"></h4>
+                    </div>
+                    <div class="text"></div>
+                    <div class="shares">
+                        <span class="glyphicon glyphicon-retweet"></span>
+                        <span class="retweets"></span>
+                        <span class="glyphicon glyphicon-heart"></span>
+                        <span class="favorites"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="next glyphicon glyphicon-chevron-right btn"></div>
+        <div id="watch" class="col-md-offset-1 col-md-10">
+            <iframe id="ytplayer" class="col-md-12" width="854" height="480" src="" frameborder="0"></iframe>
+            <div id="videoTitle" class="col-md-12"></div>
+        </div>
+
+        <div id="listen" class="col-md-offset-1 col-md-10">
+            <div id="music-background">
+                <div id="music-background-cover"></div>
+            </div>
+            <div id="listenInfoDiv">
+                <div id="albumArt" class=""><img src="" id="pic"></div>
+                <div id="insideInfo" class="">
+                    <p id="artistName" class=""></p>
+                    <p id="albumName" class=""></p>
+                    <p id="songName" class=""></p>
+                    <a type="button" id="linkForAudio" href="">
+                        <div id="audioLink" class="">
+                            <span class="glyphicon glyphicon-apple"></span>
+                        </div>
+                    </a>
+                </div>
+                <div id="audioControls" class="">
+                    <audio controls id="audio" src=""></audio>
+                </div>
+            </div>
+        </div>
+
+        <div id="error" class="col-md-offset-1 col-md-10">
+            <h1>We couldn't find what you were looking for. Try again!</h1>
+        </div>
+
+        <div id="selectNext" class="next glyphicon glyphicon-chevron-right btn"></div>
 
 </section>
 </body>
