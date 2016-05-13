@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: url('image/background.jpg')
+    background-image: url('image/background.jpg');
 }
 
 .main-heading {
@@ -23,6 +23,72 @@ p {
     font-weight: 900;
 }
 
+/********* input styles *********/
+
+.input-container {
+    clear:both;
+    position: relative;
+    left: 50%;
+    /*top: 40px;*/
+    width: 500px;
+    height: 150px;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+
+input[type=text] {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /*height: 200px;*/
+    background-color: transparent;
+    color: #fff;
+    font-weight: 600;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #bdc3c7;
+    font-size: 3em;
+    text-align: center;
+
+}
+
+.placeholder {
+    position: relative;
+    bottom: 5px;
+    left: 0;
+    margin: 0;
+    font-size: 13px;
+    color: #95a5a6;
+    transition: .5s all ease-out;
+}
+
+.placeholder--animate {
+    left: 20px;
+    opacity: 0;
+}
+
+.border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    width: 0;
+    height: 2px;
+    padding: 0;
+    margin: 0;
+    background-color: #3498db;
+    transition: .2s width ease-out;
+}
+
+.border--animate {
+    width: 100%;
+}
+
+/* / end of input styles */
+
+/********* button styles *********/
+
 a.start-over-btn {
     position: absolute;
     top: 20px;
@@ -32,7 +98,6 @@ a.start-over-btn {
     color: white;
     width: 115px;
     height: 50px;
-    top: 10px;
     background: #4CAF50;
     padding: 10px;
     font-size: 20px;
@@ -43,7 +108,7 @@ a.start-over-btn {
 
 a.start-over-btn:active {
     top: 18px;
-    box-shadow: 0px 7px 0px 0px #344152;
+    box-shadow: 0 7px 0 0 #344152;
 }
 
 .button-group{
@@ -70,7 +135,7 @@ a.now-button {
 
 a.now-button:active {
     top: 18px;
-    box-shadow: 0px 7px 0px 0px #344152;
+    box-shadow: 0 7px 0 0 #344152;
 }
 
 .rb-wrapper{
@@ -95,12 +160,12 @@ a.random-button {
 
 a.random-button:active {
     top: 8px;
-    box-shadow: 0px 7px 0px 0px #344152;
+    box-shadow: 0 7px 0 0 #344152;
 }
 
 .prev, .next {
     color: white;
-    font-size: 3vh;
+    font-size: 10vh;
     padding: 3vh;
     position: fixed;
     top: 50%;
@@ -111,7 +176,13 @@ a.random-button:active {
     right: 2%;
 }
 
-.verb, input{
+/*end of button styles*/
+
+.prev {
+    left: 2%
+}
+
+.verb{
     font-size: 3em;
     border: 1px solid #b9b9b9;
     margin: 3vh 0;
@@ -122,6 +193,7 @@ a.random-button:active {
 
 #read, #watch, #listen {
     height: 80vh;
+    width: 70vw;
 }
 
 #read {
@@ -129,6 +201,28 @@ a.random-button:active {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+#music-background {
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+#music-background-cover {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.53);
+    position: absolute;
+    margin-top: -2%;
+    border: 5px solid white;
 }
 
 .tweets {
@@ -145,26 +239,6 @@ div.tweet-box>div>h3 {
     font-weight: 700;
 }
 
-#albumArtContainer {
-    height: 50%;
-    border: 1px solid black;
-    background-color: rgba(255,255,255,0.9);
-}
-
-#albumName, #songName, #audioLink {
-    height: 10%;
-    border: 1px solid black;
-    background-color: rgba(255,255,255,0.9);
-}
-
-#audioControls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 15%;
-    border: 1px solid black;
-    background-color: rgba(255,255,255,0.9);
-}
 
 #error {
     color: white;
@@ -174,7 +248,7 @@ div.tweet-box>div>h3 {
 }
 
 .glyphicon.glyphicon-apple {
-    font-size: 40px;
+    font-size: 30px;
 }
 
 #start-over {
@@ -191,4 +265,73 @@ div.tweet-box>div>h3 {
 
 .secret-image {
     max-width: 886px;
+}
+
+/****************************************** Pearl for listen page***********************************************/
+#listen {
+    /*border: 1px solid black;*/
+    box-shadow: 5px 5px 10px black;
+    position: relative;
+}
+
+#listenInfoDiv {
+    font-size: 0;
+    position: absolute;
+    width:80vh;
+    height:40vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#insideInfo {
+    height:100%;
+    width: 50%;
+    float: left;
+    /*border-radius: 10px;*/
+    overflow: hidden;
+    background-color: rgba(64,64,64,0.4);
+    position: relative;
+
+    /*top: 10%*/
+}
+#albumName, #songName, #audioLink, #artistName {
+    padding: .5vh;
+    text-align: left;
+    display: block;
+    color: black;
+    margin: 0;
+    font-size: 1vw;
+    height: 25%;
+    text-shadow: 2px 2px 8px #000000;
+    /*background-color: rgba(255,255,255,0.9);*/
+}
+
+#audioControls {
+    position: absolute;
+    bottom: -15%;
+    margin: 0;
+    display: flex;
+    width: 100%;
+    /*justify-content: center;*/
+    align-items: center;
+    /*height: 20px;*/
+    /*border: 1px solid black;*/
+    /*background-color: rgba(255,255,255,0.9);*/
+}
+#albumArt {
+    overflow: hidden;
+    width: 50%;
+    height: 100%;
+    float: left;
+    margin: 0;
+    font-size: 1vw;
+    /*border-radius: 5px;*/
+    /*height: 300px;*/
+    /*border: 1px solid black;*/
+    /*background-color: rgba(255,255,255,0.9);*/
+}
+
+#pic {
+    width: 100%;
+    height: 100%;
 }
