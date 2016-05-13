@@ -77,7 +77,15 @@ function displayOptions(randomVerb, randomNoun) {
 function nowClicked() {
     iWant.selectedNoun = $(".noun").val();
     iWant.selectedVerb = $(".verb").val();
-    next();
+
+    switch (iWant.selectedVerb) {
+        case "read": readAjax();
+            break;
+        case "listen": listenAjax();
+            break;
+        case "watch": watchAjax();
+            break;
+    }
 }
 /**************************************** AJAX CALLS ********************************************************/
 
@@ -375,11 +383,11 @@ function displayError(verb) {
 
 function next() {
     switch (iWant.selectedVerb) {
-        case "read": readAjax();
+        case "read": displayRead();
             break;
-        case "listen": listenAjax();
+        case "listen": displayListen();
             break;
-        case "watch": watchAjax();
+        case "watch": displayWatch();
             break;
     }
 }
