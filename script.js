@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #start-over').hide();
+    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #start-over, #music-background, #music-background-cover').hide();
 
     loadNouns();
 
@@ -17,8 +17,9 @@ $(document).ready(function () {
     $("#start-over").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
-        $('#read, #watch, #listen, #error, #start-over').hide();
+        $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #start-over, #music-background, #music-background-cover').hide();
         $('#landing').show();
+
     });
 
     $("#random-btn").click(randomizeOptions);
@@ -298,7 +299,7 @@ function displayWatch() {
  */
 function displayListen() {
     $("#landing").hide();
-    $("#listen, #selectNext, #selectPrev, #start-over").show();
+    $("#listen, #selectNext, #selectPrev, #start-over, #music-background, #music-background-cover").show();
 
     var background = 'url(' +iWant.queueArray[iWant.index].picture + ')';
     $('#music-background').css('background-image', background);
