@@ -15,17 +15,17 @@
 <p class="main-heading">I Want To</p>
 <section class="container-fluid">
 
-    <div class="prev glyphicon glyphicon-chevron-left btn"></div>
+    <div id="selectPrev" class="prev glyphicon glyphicon-chevron-left btn"></div>
  
     <div id="landing" class="col-md-offset-1 col-md-10">
-        <select class="verb col-md-offset-4">
+        <select id="verbSelect" class="verb col-md-offset-4">
             <option value="watch">watch</option>
             <option value="read">read</option>
             <option value="listen">listen to</option>
          </select>
              
         <p class="col-md-12">something about</p>
-        <input class="noun col-md-12" list="noun-list">
+        <input id="nounInput" class="noun col-md-12" list="noun-list">
         <datalist id="noun-list"></datalist>
             <button id="nowButton" class="now-button col-md-2">NOW</button>
             <button id="random-btn" type="button" class="now-button col-md-4 col-md-offset-1">Randomize</button>
@@ -104,7 +104,7 @@
                 <h1>We couldn't find what you were looking for. Try again!</h1>
     </div>
 
-    <div class="next glyphicon glyphicon-chevron-right btn"></div>
+    <div id="selectNext" class="next glyphicon glyphicon-chevron-right btn"></div>
 
 </section>
 </body>

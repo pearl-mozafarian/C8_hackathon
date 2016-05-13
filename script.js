@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error, .next, .prev').hide();
+    $('#read, #watch, #listen, #error, #selectNext, #selectPrev').hide();
 
     autocomplete();
 
@@ -18,8 +18,8 @@ $(document).ready(function () {
 
     $("#random-btn").click(randomizeOptions);
 
-    $('.next').click(next);
-    $('.prev').click(prev);
+    $('#selectNext').click(next);
+    $('#selectPrev').click(prev);
 
 });//////end of document.ready
 
@@ -62,14 +62,14 @@ function generateRandomNumber(length) {
  */
 
 function displayOptions(randomVerb, randomNoun) {
-    $(".noun").val(randomNoun);
+    $("#nounInput").val(randomNoun);
     // $(".verb option").attr("selected" , false);
     switch (randomVerb){
-        case "listen to": $(".verb").val('listen');
+        case "listen to": $("#verbSelect").val('listen');
             break;
-        case "watch": $(".verb").val('watch');
+        case "watch": $("#verbSelect").val('watch');
             break;
-        case "read": $(".verb").val('read');
+        case "read": $("#verbSelect").val('read');
             break;
     }
 }
@@ -81,8 +81,8 @@ function displayOptions(randomVerb, randomNoun) {
  */
 
 function nowClicked() {
-    iWant.selectedNoun = $(".noun").val();
-    iWant.selectedVerb = $(".verb").val();
+    iWant.selectedNoun = $("#nounInput").val();
+    iWant.selectedVerb = $("#verbSelect").val();
     
     if (iWant.selectedNoun == 'shane'){
         secret();
@@ -310,7 +310,7 @@ function listenAjax() {
 
 function displayRead() {
     $('#landing').hide();
-    $('#read, .next, .prev').show();
+    $('#read, #selectNext, #selectPrev').show();
 
     var j = 0;
 
@@ -353,7 +353,7 @@ function displayWatch(){
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 
     $('#landing').hide();
-    $('#watch, .next, .prev').show();
+    $('#watch, #selectNext, #selectPrev').show();
 
 
     iWant.index++;
@@ -367,7 +367,7 @@ function displayWatch(){
 
 function displayListen() {
     $("#landing").hide();
-    $("#listen, .next, .prev").show();
+    $("#listen, #selectNext, #selectPrev").show();
 
     var obj = iWant.queueArray;
     var ind = iWant.index;
