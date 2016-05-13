@@ -372,7 +372,8 @@ function displayListen() {
     $("#songName").text(obj[ind].title);
     $("#audio").attr("src", obj[ind].audio);
     $("#linkForAudio").attr("href", obj[ind].link);
-    ind += 1;
+    $("#audio")[0].play();
+    iWant.index += 1;
 }
 
     /******************DISPLAY ERROR ***********************/
