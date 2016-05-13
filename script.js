@@ -16,12 +16,8 @@ $(document).ready(function () {
     
     $('.next').click(next);
     $('.prev').click(prev);
-
-<<<<<<< HEAD
     $('#listen').html('test');
 
-=======
->>>>>>> aa00b1b57c0468794aad6831b366788e33e49d7d
 });//////end of document.ready
 
 /*********************************************** GLOBAL VARIABLES *****************************************/
