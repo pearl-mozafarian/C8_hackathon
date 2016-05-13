@@ -2,36 +2,12 @@
     padding: 0;
     margin: 0;
     text-align: center;
-    font-family: openSansLight;
+    font-family: 'Raleway', sans-serif;
     box-sizing: border-box;
 }
 
 body {
     background-image: url('image/background.jpg');
-}
-
-#music-background {
-    filter: blur(10px);
-    -webkit-filter: blur(10px);
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#music-background-cover {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.53);
-    position: absolute;
-}
-
-@font-face {
-    font-family: openSansLight;
-    src: url(opensanslight.ttf);
 }
 
 .main-heading {
@@ -42,18 +18,33 @@ body {
 
 p {
     font-size: 4em;
-    font-weight: bold;
     text-shadow: 0 5px 6px #344152;
     color: white;
-    font-weight: bold;
+    font-weight: 900;
 }
 
-/*button {*/
-    /*box-shadow: 5px 5px 5px #434345;*/
-    /*color: white;*/
-    /*left: 0;*/
-    /*top: 0;*/
-/*}*/
+a.start-over-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-shadow: 0 1px 1px #344152;
+    text-decoration: none;
+    color: white;
+    width: 115px;
+    height: 50px;
+    top: 10px;
+    background: #4CAF50;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px -2px #344152;
+    transition: all 0.2s;
+}
+
+a.start-over-btn:active {
+    top: 18px;
+    box-shadow: 0px 7px 0px 0px #344152;
+}
 
 .button-group{
     text-align: center;
@@ -78,7 +69,7 @@ a.now-button {
 }
 
 a.now-button:active {
-    top: 28px;
+    top: 18px;
     box-shadow: 0px 7px 0px 0px #344152;
 }
 
@@ -135,43 +126,50 @@ a.random-button:active {
 
 #read, #watch, #listen {
     height: 80vh;
+    width: 70vw;
+}
+
+#read {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#music-background {
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+#music-background-cover {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.53);
+    position: absolute;
+    margin-top: -2%;
+    border: 5px solid white;
 }
 
 .tweets {
-    height: 31%;
-    border: 1px solid black;
-    margin: 1vh 0;
-    background-color: rgba(255,255,255,0.9);
-    box-shadow: 3px 3px 3px #000000;
+    width: 42%;
+    background-color: rgba(255,255,255,0.95);
+    box-shadow: 3px 3px 18px -1px black;
 }
 
-.tweets-pic, .tweets-username {
-    margin-top: 1%;
+div.tweet-box, div.tweet-box>div, div.tweet-box>div>h3, div.tweet-box>div>h4 {
+    text-align: left;
 }
 
-.tweets-pic {
-    position: relative;
-    border: 1px solid black;
-    height: 40%;
-}
-
-.tweets-username {
-    border: 1px solid black;
-    height: 17%;
-}
-
-.text {
-    position: relative;
-    border: 1px solid black;
-    height: 50%;
-    top: 5%;
-}
-
-.shares {
-    position: relative;
-    border: 1px solid black;
-    height: 17%;
-    top: 5%;
+div.tweet-box>div>h3 {
+    font-weight: 700;
 }
 
 #albumArtContainer {

@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #start-over, #music-background, #music-background-cover').hide();
+    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover').hide();
 
     loadNouns();
 
@@ -14,10 +14,12 @@ $(document).ready(function () {
         nowClicked();
     });
 
-    $("#start-over").click(function () {
+    $("#startOverBtn").click(function () {
+        console.log('clicked');
         iWant.queueArray = [];
         iWant.index = 0;
-        $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #start-over, #music-background, #music-background-cover').hide();
+        
+        $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover').hide();
         $('#landing').show();
 
     });
@@ -124,7 +126,7 @@ function readAjax() {
     $.ajax({
         dataType: 'json',
         data: {
-            search_term: iWant.selectedNoun,
+            search_term: iWant.selectedNoun
         },
         method: 'post',
         url: 'http://s-apis.learningfuze.com/hackathon/twitter/index.php',
@@ -243,7 +245,7 @@ function listenAjax() {
  */
 function displayRead() {
     $('#landing').hide();
-    $('#read, #selectNext, #selectPrev, #start-over').show();
+    $('#read, #selectNext, #selectPrev, #startOverBtn').show();
 
     var j = 0;
 
@@ -286,7 +288,7 @@ function displayWatch() {
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 
     $('#landing').hide();
-    $('#watch, #selectNext, #selectPrev, #start-over').show();
+    $('#watch, #selectNext, #selectPrev, #startOverBtn').show();
 
 
     iWant.index++;
@@ -299,7 +301,7 @@ function displayWatch() {
  */
 function displayListen() {
     $("#landing").hide();
-    $("#listen, #selectNext, #selectPrev, #start-over, #music-background, #music-background-cover").show();
+    $("#listen, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover").show();
 
     var background = 'url(' +iWant.queueArray[iWant.index].picture + ')';
     $('#music-background').css('background-image', background);
@@ -325,7 +327,7 @@ function displayListen() {
  */
 function displayError(verb) {
     $('#landing, #read, #listen, #watch').hide();
-    $('#error, #start-over').show();
+    $('#error, #startOverBtn').show();
     var error_div = $('#error div');
 
     switch (verb) {
@@ -425,8 +427,8 @@ function loadNouns() {
 function secretDOMObj() {
     var i = iWant.secretI;
     if (i < 23) {
-        var top = Math.round(Math.random() * (window.innerHeight / 2));
-        var left = Math.round(Math.random() * ((window.innerWidth / 4) * 3));
+        var top = Math.round(Math.random() * 200);
+        var left = Math.round(Math.random() * 800);
 
         var dialog = $("<div>").addClass('modal-dialog modal-lg secret');
         var content = $("<div>").addClass('modal-content');
@@ -457,5 +459,7 @@ function secretDOMObj() {
  * secret - interval creating secret objects
  */
 function secret() {
+    $("#audio").attr("src", "audio/top-secret-song.mp3");
+    $("#audio")[0].play();
     iWant.interval = setInterval(secretDOMObj, 300);
 }
