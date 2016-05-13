@@ -80,17 +80,27 @@
         <iframe id="ytplayer" class="col-md-12" width="854" height="480" src="" frameborder="0"></iframe>
         <div id="videoTitle" class="col-md-12"></div>
     </div>
-    <div id="listen" class="col-md-offset-1 col-md-10">
-        <div id="albumArt" class="col-md-offset-4 col-md-4">Album Art</div>
-        <div id="albumName" class="col-md-offset-4 col-md-4">Album Name</div>
-        <div id="songName" class="col-md-offset-4 col-md-4">Song Name</div>
-        <div id="audioControls" class="col-md-offset-4 col-md-4">
-            <audio controls></audio>
-        </div>
-        <div id="audioLink col-md-offset-4 col-md-4"></div>
-    </div>
-    <div id="error" class="col-md-offset-1 col-md-10">
-        <h1>We couldn't find what you were looking for. Try again!</h1>      
+        
+      <div id="listen" class="col-md-offset-1 col-md-10">     
+           <div id="albumArt" class="col-md-offset-4 col-md-4"><img src="" id="pic"></div>
+           <div id="artistName" class="col-md-offset-4 col-md-4"></div>        
+           <div id="albumName" class="col-md-offset-4 col-md-4"></div>        
+           <div id="songName" class="col-md-offset-4 col-md-4"></div>        
+           <div id="audioControls" class="col-md-offset-4 col-md-4">            
+              <audio controls id="audio">
+                   <source src="">
+              </audio>        
+          </div>
+              <a type="button" id="linkForAudio" href="">
+                  <div id="audioLink" class="col-md-offset-4 col-md-4">
+                      <span class="glyphicon glyphicon-apple"></span>
+                  </div>  
+              </a>
+<!--            <div id="audioLink" class="col-md-offset-4 col-md-4"></div>    -->
+      </div>
+        
+     <div id="error" class="col-md-offset-1 col-md-10">
+                <h1>We couldn't find what you were looking for. Try again!</h1>
     </div>
 
     <div class="next glyphicon glyphicon-chevron-right btn"></div>

@@ -8,7 +8,7 @@ $(document).ready(function () {
     randomizeOptions();
 
     $(".now-button").click(nowClicked);
-
+    
     $("#startOver").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
@@ -159,7 +159,7 @@ function watchAjax() {
         url: "http://s-apis.learningfuze.com/hackathon/youtube/search.php",
         success: function (response) {
             if (response.success) {
-                console.log(response);
+                console.log("watch",response);
                 //push response into resultsArray
                 for(i=0;i<response.video.length;i++){
                     iWant.queueArray.push(response.video[i]);
@@ -364,71 +364,85 @@ function displayWatch(){
 function displayListen() {
     $("#landing").hide();
     $("#listen").show();
+
+    var obj = iWant.queueArray;
+    var ind = iWant.index;
+    $("#pic").attr("src", obj[ind].picture);
+    $("#artistName").text(obj[ind].artist);
+    $("#albumName").text(obj[ind].album);
+    $("#songName").text(obj[ind].title);
+    $("#audio").attr("src", obj[ind].audio);
+    $("#linkForAudio").attr("href", obj[ind].link);
+    $("#audio")[0].play();
+    iWant.index += 1;
 }
 
-/******************DISPLAY ERROR ***********************/
+    /******************DISPLAY ERROR ***********************/
 
-/**
- * displayError - If it is called for something other than an ajax fail message, it will display the default please try again, otherwise it will display a message specific to the server failure
- * @param verb {string} - either read, listen, or watch depending on which ajax call is calling the function
- */
+    /**
+     * displayError - If it is called for something other than an ajax fail message, it will display the default please try again, otherwise it will display a message specific to the server failure
+     * @param verb {string} - either read, listen, or watch depending on which ajax call is calling the function
+     */
 
-function displayError(verb) {
-    $('#landing, #read, #listen, #watch').hide();
-    $('#error').show();
-    var error_div = $('#error div');
+    function displayError(verb) {
+        $('#landing, #read, #listen, #watch').hide();
+        $('#error').show();
+        var error_div = $('#error div');
 
-    switch(verb) {
-        case 'read':
-            error_div.text('Twitter cannot be reached. Please try again');
-            break;
-        case 'watch':
-            error_div.text('YouTube cannot be reached. Please try again');
-            break;
-        case 'listen':
-            error_div.text('iTunes cannot be reached. Please try again');
-            break;
+        switch (verb) {
+            case 'read':
+                error_div.text('Twitter cannot be reached. Please try again');
+                break;
+            case 'watch':
+                error_div.text('YouTube cannot be reached. Please try again');
+                break;
+            case 'listen':
+                error_div.text('iTunes cannot be reached. Please try again');
+                break;
+        }
     }
-}
 
-/**
- * next - when next arrow is clicked, it calls the display function for the appropriate verb
- */
+    /**
+     * next - when next arrow is clicked, it calls the display function for the appropriate verb
+     */
 
-function next() {
-    switch (iWant.selectedVerb) {
-        case "read":
-            displayRead();
-            break;
-        case "listen":
-            displayListen();
-            break;
-        case "watch":
-            displayWatch();
-            break;
+    function next() {
+        switch (iWant.selectedVerb) {
+            case "read":
+                displayRead();
+                break;
+            case "listen":
+                displayListen();
+                break;
+            case "watch":
+                displayWatch();
+                break;
+        }
     }
-}
 
-/**
- * prev - when previous arrow is clicked, it decremenets the index to the appropriate number according to the current verb
- */
+    /**
+     * prev - when previous arrow is clicked, it decremenets the index to the appropriate number according to the current verb
+     */
 
-function prev() {
-    if (iWant.selectedVerb == 'read') {
-        if (iWant.index >= 6) {
-            iWant.index -= 6;
+
+
+    function prev() {
+        if (iWant.selectedVerb == 'read') {
+            if (iWant.index >= 6) {
+                iWant.index -= 6;
+            }
+            else {
+                iWant.index = 12;
+            }
         }
         else {
-            iWant.index = 12;
+            if (iWant.index > 0) {
+                iWant.index -= 2;
+            }
         }
+        next();
     }
-    else {
-        if (iWant.index > 0) {
-            iWant.index -= 2;
-        }
-    }
-    next();
-}
+
 
 
 /**
