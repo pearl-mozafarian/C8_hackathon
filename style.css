@@ -13,6 +13,10 @@ body {
 
 }
 
+section > div {
+    margin-top: 50px;
+}
+
 .main-heading {
     font-size: 6em;
     text-shadow: 0 5px 4px #344152;
