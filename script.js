@@ -77,7 +77,15 @@ function displayOptions(randomVerb, randomNoun) {
 function nowClicked() {
     iWant.selectedNoun = $(".noun").val();
     iWant.selectedVerb = $(".verb").val();
-    next();
+
+    switch (iWant.selectedVerb) {
+        case "read": readAjax();
+            break;
+        case "listen": listenAjax();
+            break;
+        case "watch": watchAjax();
+            break;
+    }
 }
 /**************************************** AJAX CALLS ********************************************************/
 
@@ -290,6 +298,8 @@ function displayRead() {
     $('#landing').hide();
     $('#read').show();
 
+    $(".main-heading").text("I Want to " + iWant.selectedVerb + " something about " + iWant.selectedNoun);
+
     for(var i = iWant.index; i <= iWant.index + 3; i++) {
         var tweet = iWant.queueArray[i];
         var tweetdiv = '#tweet' + (i + 1);
@@ -324,6 +334,7 @@ function displayWatch(){
 
     $('#landing').hide();
     $('#watch').show();
+    $(".main-heading").text("I Want to " + iWant.selectedVerb + " something about " + iWant.selectedNoun);
     
     iWant.index++;
 }
@@ -337,6 +348,8 @@ function displayWatch(){
 function displayListen() {
     $("#landing").hide();
     $("#listen").show();
+
+    $(".main-heading").text("I Want to " + iWant.selectedVerb + " something about " + iWant.selectedNoun);
 }
 
 /******************DISPLAY ERROR ***********************/
@@ -370,11 +383,11 @@ function displayError(verb) {
 
 function next() {
     switch (iWant.selectedVerb) {
-        case "read": readAjax();
+        case "read": displayRead();
             break;
-        case "listen": listenAjax();
+        case "listen": displayListen();
             break;
-        case "watch": watchAjax();
+        case "watch": displayWatch();
             break;
     }
 }
@@ -392,4 +405,3 @@ function prev() {
     }
     next();
 }
-
