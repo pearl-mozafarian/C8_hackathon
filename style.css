@@ -130,3 +130,6 @@ button {
     font-weight: bold;
     top: 30vh;
 }
+.glyphicon.glyphicon-apple {
+    font-size: 40px;
+}
