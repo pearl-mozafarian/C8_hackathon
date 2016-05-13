@@ -6,7 +6,7 @@ $(document).ready(function () {
     randomizeOptions();
 
     $(".now-button").click(nowClicked);
- 
+
     $("#startOver").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
@@ -17,8 +17,11 @@ $(document).ready(function () {
     $('.next').click(next);
     $('.prev').click(prev);
 
+<<<<<<< HEAD
     $('#listen').html('test');
 
+=======
+>>>>>>> aa00b1b57c0468794aad6831b366788e33e49d7d
 });//////end of document.ready
 
 /*********************************************** GLOBAL VARIABLES *****************************************/
@@ -170,7 +173,7 @@ function watchAjax() {
  * @param input {string} - the search term to use
  */
 
-function listenAjax(input) {
+function listenAjax() {
     //calls query with music as only criteria first
     $.ajax({
 
@@ -187,17 +190,17 @@ function listenAjax(input) {
                 var musicArray = response.results;
                 //push response into queueArray
 
-                for(i=0; i< musicArray.length; i++){
+                for(var i=0; i< musicArray.length; i++){
                     var song = {
-                        atrist: musicArray[i].artistName,
+                        artist: musicArray[i].artistName,
                         album: musicArray[i].collectionName,
                         title: musicArray[i].trackName,
                         picture: musicArray[i].artworkUrl100,
                         audio: musicArray[i].previewUrl,
                         link: musicArray[i].trackViewUrl
                     };
-                    iWant.queueArray.push(song);
 
+                    iWant.queueArray.push(song);
                 }
                 console.log("q array: ", iWant.queueArray);
 
@@ -323,6 +326,8 @@ function displayWatch(){
 
     var id = iWant.queueArray[iWant.index].id;
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
+    
+    iWant.index++;
 }
 
 /******************DISPLAY LISTEN TO ***********************/
@@ -334,7 +339,6 @@ function displayWatch(){
 function displayListen() {
     $("#landing").hide();
     $("#listen").show();
-
 }
 
 /******************DISPLAY ERROR ***********************/
