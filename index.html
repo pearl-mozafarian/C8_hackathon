@@ -13,6 +13,11 @@
     <title>I Want To...</title>
 </head>
 <body>
+
+<div id="music-background">
+    <div id="music-background-cover"></div>
+</div>
+
 <header class="main-heading">
     <h1>I Want To...</h1>
 </header>
@@ -112,24 +117,21 @@
     </div>
 
     <div id="listen" class="col-md-offset-1 col-md-10">
-        <div id="music-background">
-            <div id="music-background-cover"></div>
-        </div>
         <div id="listenInfoDiv">
             <div id="albumArt" class=""><img src="" id="pic"></div>
             <div id="insideInfo" class="">
                 <p id="artistName" class=""></p>
                 <p id="albumName" class=""></p>
                 <p id="songName" class=""></p>
-                <a type="button" id="linkForAudio" href="">
+                <a id="linkForAudio" href="">
                     <div id="audioLink" class="">
-                        <span class="glyphicon glyphicon-apple"></span>
+                        <img id="spotify" src="image/spotify.png">
                     </div>
                 </a>
             </div>
-            <div id="audioControls" class="">
-                <audio controls id="audio" src=""></audio>
-            </div>
+        </div>
+        <div id="audioControls" class="">
+            <audio controls id="audio" src=""></audio>
         </div>
     </div>
 
