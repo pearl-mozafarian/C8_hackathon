@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #start-over').hide();
+    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn').hide();
 
     loadNouns();
 
@@ -14,10 +14,10 @@ $(document).ready(function () {
         nowClicked();
     });
 
-    $("#start-over").click(function () {
+    $("#startOverBtn").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
-        $('#read, #watch, #listen, #error, #start-over').hide();
+        $('#read, #watch, #listen, #error, #startOverBtn').hide();
         $('#landing').show();
     });
 
@@ -123,7 +123,7 @@ function readAjax() {
     $.ajax({
         dataType: 'json',
         data: {
-            search_term: iWant.selectedNoun,
+            search_term: iWant.selectedNoun
         },
         method: 'post',
         url: 'http://s-apis.learningfuze.com/hackathon/twitter/index.php',
@@ -242,7 +242,7 @@ function listenAjax() {
  */
 function displayRead() {
     $('#landing').hide();
-    $('#read, #selectNext, #selectPrev, #start-over').show();
+    $('#read, #selectNext, #selectPrev, #startOverBtn').show();
 
     var j = 0;
 
@@ -285,7 +285,7 @@ function displayWatch() {
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 
     $('#landing').hide();
-    $('#watch, #selectNext, #selectPrev, #start-over').show();
+    $('#watch, #selectNext, #selectPrev, #startOverBtn').show();
 
 
     iWant.index++;
@@ -298,7 +298,7 @@ function displayWatch() {
  */
 function displayListen() {
     $("#landing").hide();
-    $("#listen, #selectNext, #selectPrev, #start-over").show();
+    $("#listen, #selectNext, #selectPrev, #startOverBtn").show();
 
     var obj = iWant.queueArray;
     var ind = iWant.index;
@@ -320,7 +320,7 @@ function displayListen() {
  */
 function displayError(verb) {
     $('#landing, #read, #listen, #watch').hide();
-    $('#error, #start-over').show();
+    $('#error, #startOverBtn').show();
     var error_div = $('#error div');
 
     switch (verb) {
