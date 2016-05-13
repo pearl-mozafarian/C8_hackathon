@@ -78,18 +78,15 @@ button {
     height: 35%;
     padding: 2vh 0;
     margin: 1vh 0;
-    background-color: rgba(255,255,255,0.6);
-    box-shadow: 6px 6px 6px #000000;
     text-align: left;
     position: relative;
-    font-family: arial;
 }
 
 .tweets-pic {
     position: relative;
-    height: 34%;
-    width: 17%;
-    left: 4%;
+    height: 26%;
+    width: 9%;
+    left: 6.95%;
 }
 
 .tweets-username{
@@ -100,10 +97,11 @@ button {
 }
 
 .tweets-content {
-    background-color: rgba(0,0,0,0.25);
-    box-shadow: rgba(0,0,0,0.25);
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.89);
     width: 72%;
     height: 99%;
+    border-radius: 1%;
 }
 
 .text {
