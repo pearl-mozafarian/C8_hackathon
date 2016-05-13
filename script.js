@@ -6,26 +6,28 @@ $(document).ready(function () {
     randomizeOptions();
 
     $(".now-button").click(nowClicked);
- 
+    
     $("#startOver").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
         $('#read, #watch, #listen, #error').hide();
         $('#landing').show();
     });
-
+    
+    $('.next').click(next);
+    $('.prev').click(prev);
 
 });//////end of document.ready
 
 /*********************************************** GLOBAL VARIABLES *****************************************/
 var iWant = {
 
-    verbArray: ["read","listen","watch"],
-    nounArray: ["cats","dogs"],
+    verbArray: ["read", "listen to", "watch"],
+    nounArray: ["cats", "dogs", "space", "nature", "cars", "football", "politics", "comics", "robots", "horses", "science", "ghosts", "Disney", "America", "England", "Japan", "the ocean", "fire", "blues", "hip hop", "basketball", "fashion", "babies", "cute baby animals", "technology", "sloths", "magic", "otters", "bacon", "mysteries"],
     queueArray: [],
     index: 0,
     selectedVerb : null,
-    selectedNoun: "cats"
+    selectedNoun: null
 };
 /********************************** LANDING PAGE FUNCTIONS ************************************************/
 
@@ -75,14 +77,7 @@ function displayOptions(randomVerb, randomNoun) {
 function nowClicked() {
     iWant.selectedNoun = $(".noun").val();
     iWant.selectedVerb = $(".verb").val();
-    switch (iWant.selectedVerb) {
-        case "read": readAjax();
-            break;
-        case "listen": listenAjax();
-            break;
-        case "watch": watchAjax();
-            break;
-    }
+    next();
 }
 /**************************************** AJAX CALLS ********************************************************/
 
@@ -189,7 +184,8 @@ function listenAjax() {
                 console.log("music", response);
                 var musicArray = response.results;
                 //push response into queueArray
-                for(i=0; i< musicArray.length; i++){
+
+                for(var i=0; i< musicArray.length; i++){
                     var song = {
                         artist: musicArray[i].artistName,
                         album: musicArray[i].collectionName,
@@ -198,6 +194,7 @@ function listenAjax() {
                         audio: musicArray[i].previewUrl,
                         link: musicArray[i].trackViewUrl
                     };
+
                     iWant.queueArray.push(song);
                 }
                 console.log("q array: ", iWant.queueArray);
@@ -293,7 +290,7 @@ function displayRead() {
     $('#landing').hide();
     $('#read').show();
 
-    for(i = 0; i <= 3; i++) {
+    for(var i = iWant.index; i <= iWant.index + 3; i++) {
         var tweet = iWant.queueArray[i];
         var tweetdiv = '#tweet' + (i + 1);
         var avatar = tweetdiv + ' .avatar';
@@ -310,6 +307,8 @@ function displayRead() {
         $(retweets).text(tweet.retweets);
         $(favorites).text(tweet.favorites);
     }
+
+    iWant.index += 3;
 }
 
 /******************DISPLAY WATCH ***************************/
@@ -319,9 +318,14 @@ function displayRead() {
  */
 
 function displayWatch(){
-
+    
     var id = iWant.queueArray[iWant.index].id;
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
+
+    $('#landing').hide();
+    $('#watch').show();
+    
+    iWant.index++;
 }
 
 /******************DISPLAY LISTEN TO ***********************/
@@ -333,6 +337,7 @@ function displayWatch(){
 function displayListen() {
     $("#landing").hide();
     $("#listen").show();
+
     var obj = iWant.queueArray;
     var ind = iWant.index;
     $("#pic").attr("src",obj[ind].picture);
@@ -342,8 +347,7 @@ function displayListen() {
     $("#audio").attr("src", obj[ind].audio);
     $("#audioLink").text(obj[ind].link);
     ind+=1;
-
-}
+    
 
 /******************DISPLAY ERROR ***********************/
 
@@ -368,5 +372,34 @@ function displayError(verb) {
             error_div.text('iTunes cannot be reached. Please try again');
             break;
     }
+}
+
+/**
+ * next - when next arrow is clicked, it calls the display function for the appropriate verb
+ */
+
+function next() {
+    switch (iWant.selectedVerb) {
+        case "read": readAjax();
+            break;
+        case "listen": listenAjax();
+            break;
+        case "watch": watchAjax();
+            break;
+    }
+}
+
+/**
+ * prev - when previous arrow is clicked, it decremenets the index to the appropriate number according to the current verb
+ */
+
+function prev() {
+    if (iWant.selectedVerb == 'read') {
+        iWant.index -= 3;
+    }
+    else {
+        iWant.index--;
+    }
+    next();
 }
 

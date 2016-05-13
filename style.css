@@ -1,4 +1,4 @@
-*{
+* {
     padding: 0;
     margin: 0;
     text-align: center;
@@ -10,12 +10,12 @@ body {
     background-image: url('image/background.jpg')
 }
 
-@font-face{
+@font-face {
     font-family: openSansLight;
     src: url(opensanslight.ttf);
 }
 
-.main-heading{
+.main-heading {
     font-size: 6em;
     text-shadow: 5px 5px 5px #000000;
     color: white;
@@ -29,14 +29,14 @@ p {
     font-weight: bold;
 }
 
-button{
+button {
     box-shadow: 5px 5px 5px #434345;
     color: white;
     left: 0;
     top: 0;
 }
 
-.now-button{
+.now-button {
     height: 10vh;
     font-size: 5vh;
     margin-top: 5vh;
@@ -47,7 +47,6 @@ button{
 .now-button:hover {
     background-color: #6bafff;
 }
-
 
 .prev, .next {
     font-size: 3vh;
@@ -74,6 +73,7 @@ button{
     background-color: rgba(255,255,255,0.9);
     box-shadow: 3px 3px 3px #000000;
 }
+
 .tweets-pic, .tweets-username {
     margin-top: 1%;
 }
@@ -103,7 +103,7 @@ button{
     top: 5%;
 }
 
-#albumArt {
+#albumArtContainer {
     height: 50%;
     border: 1px solid black;
     background-color: rgba(255,255,255,0.9);
