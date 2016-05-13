@@ -10,10 +10,6 @@ body {
     background-image: url('image/background.jpg')
 }
 
-.container-fluid {
-    position: relative;
-}
-
 @font-face {
     font-family: openSansLight;
     src: url(opensanslight.ttf);
@@ -52,21 +48,20 @@ button {
     background-color: #6bafff;
 }
 
-.navigate {
-    position: relative;
-    height: 100%;
-}
-
 .prev, .next {
     color: white;
     font-size: 3vh;
     padding: 3vh;
-    position: relative;
+    position: fixed;
     top: 50%;
     transform: translateY(-50%);
 }
 
-.verb, input, option, datalist{
+.next {
+    right: 2%;
+}
+
+.verb, input{
     font-size: 3em;
     border: 1px solid #b9b9b9;
     margin: 3vh 0;
