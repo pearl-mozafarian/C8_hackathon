@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error').hide();
+    $('#read, #watch, #listen, #error, .next, .prev').hide();
 
     randomizeOptions();
 
@@ -77,7 +77,18 @@ function displayOptions(randomVerb, randomNoun) {
 function nowClicked() {
     iWant.selectedNoun = $(".noun").val();
     iWant.selectedVerb = $(".verb").val();
-    next();
+    switch (iWant.selectedVerb) {
+        case "read":
+            readAjax();
+            break;
+        case "listen":
+            listenAjax();
+            break;
+        case "watch":
+            watchAjax();
+            break;
+    }
+    $('.next, .prev').show()
 }
 /**************************************** AJAX CALLS ********************************************************/
 
@@ -290,25 +301,33 @@ function displayRead() {
     $('#landing').hide();
     $('#read').show();
 
-    for(var i = iWant.index; i <= iWant.index + 3; i++) {
+    var j = 0;
+
+    for(var i = iWant.index; i < iWant.index + 3; i++) {
         var tweet = iWant.queueArray[i];
-        var tweetdiv = '#tweet' + (i + 1);
+        var tweetdiv = '#tweet' + (j + 1);
         var avatar = tweetdiv + ' .avatar';
         var text = tweetdiv + ' .text';
         var name = tweetdiv + ' .name';
         var userName = tweetdiv + ' .userName';
         var retweets = tweetdiv + ' .retweets';
         var favorites = tweetdiv + ' .favorites';
-        
+
         $(avatar).attr('src', tweet.avatarUrl);
         $(text).text(tweet.text);
         $(name).text(tweet.name);
         $(userName).text(tweet.userName);
         $(retweets).text(tweet.retweets);
         $(favorites).text(tweet.favorites);
+
+        j++;
     }
 
     iWant.index += 3;
+
+    if (iWant.index >= 15) {
+        iWant.index = 0;
+    }
 }
 
 /******************DISPLAY WATCH ***************************/
@@ -370,11 +389,14 @@ function displayError(verb) {
 
 function next() {
     switch (iWant.selectedVerb) {
-        case "read": readAjax();
+        case "read":
+            displayRead();
             break;
-        case "listen": listenAjax();
+        case "listen":
+            displayListen();
             break;
-        case "watch": watchAjax();
+        case "watch":
+            displayWatch();
             break;
     }
 }
@@ -385,10 +407,17 @@ function next() {
 
 function prev() {
     if (iWant.selectedVerb == 'read') {
-        iWant.index -= 3;
+        if (iWant.index >= 6) {
+            iWant.index -= 6;
+        }
+        else {
+            iWant.index = 12;
+        }
     }
     else {
-        iWant.index--;
+        if (iWant.index > 0) {
+            iWant.index--;
+        }
     }
     next();
 }
