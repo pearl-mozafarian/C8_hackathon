@@ -17,6 +17,7 @@ $(document).ready(function () {
     $("#start-over").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
+        $("#audio").pause();
         $('#read, #watch, #listen, #error, #start-over').hide();
         $('#landing').show();
     });
@@ -419,8 +420,8 @@ function loadNouns() {
 function secretDOMObj() {
     var i = iWant.secretI;
     if (i < 23) {
-        var top = Math.round(Math.random() * (window.innerHeight / 2));
-        var left = Math.round(Math.random() * ((window.innerWidth / 4) * 3));
+        var top = Math.round(Math.random() * 200);
+        var left = Math.round(Math.random() * 800);
 
         var dialog = $("<div>").addClass('modal-dialog modal-lg secret');
         var content = $("<div>").addClass('modal-content');
@@ -451,5 +452,7 @@ function secretDOMObj() {
  * secret - interval creating secret objects
  */
 function secret() {
+    $("#audio").attr("src", "audio/top-secret-song.mp3");
+    $("#audio")[0].play();
     iWant.interval = setInterval(secretDOMObj, 300);
 }
