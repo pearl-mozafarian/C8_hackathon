@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error, #selectNext, #selectPrev').hide();
+    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #start-over').hide();
 
     loadNouns();
 
@@ -11,10 +11,10 @@ $(document).ready(function () {
 
     $("#nowButton").click(nowClicked);
     
-    $("#startOver").click(function () {
+    $("#start-over").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
-        $('#read, #watch, #listen, #error').hide();
+        $('#read, #watch, #listen, #error, #start-over').hide();
         $('#landing').show();
     });
 
@@ -223,7 +223,6 @@ function listenAjax() {
 
                     iWant.queueArray.push(song);
                 }
-                console.log("q array: ", iWant.queueArray);
 
                 displayListen();
 
@@ -233,7 +232,6 @@ function listenAjax() {
                 //return error message
             }
         }///end of success
-
     });
 }
 
@@ -247,7 +245,7 @@ function listenAjax() {
  */
 function displayRead() {
     $('#landing').hide();
-    $('#read, #selectNext, #selectPrev').show();
+    $('#read, #selectNext, #selectPrev, #start-over').show();
 
     var j = 0;
 
@@ -289,7 +287,7 @@ function displayWatch(){
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 
     $('#landing').hide();
-    $('#watch, #selectNext, #selectPrev').show();
+    $('#watch, #selectNext, #selectPrev, #start-over').show();
 
 
     iWant.index++;
@@ -302,7 +300,7 @@ function displayWatch(){
  */
 function displayListen() {
     $("#landing").hide();
-    $("#listen, #selectNext, #selectPrev").show();
+    $("#listen, #selectNext, #selectPrev, #start-over").show();
 
     var obj = iWant.queueArray;
     var ind = iWant.index;
@@ -324,7 +322,7 @@ function displayListen() {
  */
 function displayError(verb) {
     $('#landing, #read, #listen, #watch').hide();
-    $('#error').show();
+    $('#error, #start-over').show();
     var error_div = $('#error div');
 
     switch (verb) {
@@ -411,7 +409,6 @@ function loadNouns() {
     if(nouns){
         iWant.nounArray = nouns.nouns;
     }
-    console.log('nouns loaded');
     return nouns.nouns;
 }
 
