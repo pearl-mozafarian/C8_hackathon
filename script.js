@@ -23,12 +23,12 @@ $(document).ready(function () {
 /*********************************************** GLOBAL VARIABLES *****************************************/
 var iWant = {
 
-    verbArray: ["read","listen","watch"],
-    nounArray: ["cats","dogs"],
+    verbArray: ["read", "listen to", "watch"],
+    nounArray: ["cats", "dogs", "space", "nature", "cars", "football", "politics", "comics", "robots", "horses", "science", "ghosts", "Disney", "America", "England", "Japan", "the ocean", "fire", "blues", "hip hop", "basketball", "fashion", "babies", "cute baby animals"],
     queueArray: [],
     index: 0,
     selectedVerb : null,
-    selectedNoun: "cats"
+    selectedNoun: null
 };
 /********************************** LANDING PAGE FUNCTIONS ************************************************/
 
@@ -319,9 +319,12 @@ function displayRead() {
  */
 
 function displayWatch(){
-
+    
     var id = iWant.queueArray[iWant.index].id;
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
+
+    $('#landing').hide();
+    $('#watch').show();
     
     iWant.index++;
 }
