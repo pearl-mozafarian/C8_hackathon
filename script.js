@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #start-over').hide();
+    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn').hide();
 
     loadNouns();
 
@@ -13,12 +13,13 @@ $(document).ready(function () {
     $("#nowButton").on("click", function(){
         nowClicked();
     });
-    
-    $("#start-over").click(function () {
+
+    $("#startOverBtn").click(function () {
         iWant.queueArray = [];
         iWant.index = 0;
         $("#audio").pause();
-        $('#read, #watch, #listen, #error, #start-over').hide();
+        $('#read, #watch, #listen, #error, #startOverBtn').hide();
+
         $('#landing').show();
     });
 
@@ -91,7 +92,7 @@ function displayOptions(randomVerb, randomNoun) {
 function nowClicked() {
     iWant.selectedNoun = $("#nounInput").val();
     iWant.selectedVerb = $("#verbSelect").val();
-    
+
     if (iWant.selectedNoun == 'shane'){
         secret();
     } else {
@@ -124,7 +125,7 @@ function readAjax() {
     $.ajax({
         dataType: 'json',
         data: {
-            search_term: iWant.selectedNoun,
+            search_term: iWant.selectedNoun
         },
         method: 'post',
         url: 'http://s-apis.learningfuze.com/hackathon/twitter/index.php',
@@ -243,7 +244,7 @@ function listenAjax() {
  */
 function displayRead() {
     $('#landing').hide();
-    $('#read, #selectNext, #selectPrev, #start-over').show();
+    $('#read, #selectNext, #selectPrev, #startOverBtn').show();
 
     var j = 0;
 
@@ -286,7 +287,7 @@ function displayWatch() {
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 
     $('#landing').hide();
-    $('#watch, #selectNext, #selectPrev, #start-over').show();
+    $('#watch, #selectNext, #selectPrev, #startOverBtn').show();
 
 
     iWant.index++;
@@ -299,7 +300,7 @@ function displayWatch() {
  */
 function displayListen() {
     $("#landing").hide();
-    $("#listen, #selectNext, #selectPrev, #start-over").show();
+    $("#listen, #selectNext, #selectPrev, #startOverBtn").show();
 
     var obj = iWant.queueArray;
     var ind = iWant.index;
@@ -321,7 +322,7 @@ function displayListen() {
  */
 function displayError(verb) {
     $('#landing, #read, #listen, #watch').hide();
-    $('#error, #start-over').show();
+    $('#error, #startOverBtn').show();
     var error_div = $('#error div');
 
     switch (verb) {
@@ -394,7 +395,7 @@ function nounStorage() {
     };
 
     var nouns = JSON.stringify(storage);
-    
+
     window.localStorage.setItem('nouns', nouns);
     return nouns;
 }
@@ -404,11 +405,12 @@ function nounStorage() {
  * @return {Array}
  */
 function loadNouns() {
-    var nouns = JSON.parse(window.localStorage.getItem('nouns'));
-    if(nouns){
-        iWant.nounArray = nouns.nouns;
+    var nouns = window.localStorage.getItem('nouns');
+    if(nouns != null){
+        var nounStorage = JSON.parse(nouns);
+        iWant.nounArray = nounStorage.nouns;
     }
-    return nouns.nouns;
+    // return nounStorage.nouns;
 }
 
 /******************************************************** Top Secret ********************************************************/
