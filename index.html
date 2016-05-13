@@ -14,16 +14,23 @@
 <body>
 <p class="main-heading">I Want To</p>
 <section class="container-fluid">
+
+    <div class="navigate col-sm-1">
+        <span class="prev glyphicon glyphicon-chevron-left btn pull-left"></span>
+    </div>
+        
     <div id="landing" class="col-md-offset-1 col-md-10">
         <select class="verb col-md-offset-4">
             <option value="watch">watch</option>
             <option value="read">read</option>
             <option value="listen">listen to</option>
-             </select>
+         </select>
+             
         <p class="col-md-12">something about</p>
         <input class="noun col-md-12">
         <button class="now-button col-md-offset-5 col-md-2">NOW</button>
     </div>
+
     <div id="read" class="col-md-offset-2 col-md-8">
         <div class="tweets col-md-12" id="tweet1">
             <div class="tweets-pic col-md-offset-1 col-md-1"><img class="avatar"></div>
@@ -52,7 +59,7 @@
                 <span></span>
                 <span class="retweets"></span>
                 <span></span>
-                <span class="favorites"></span>
+                <span class="favorites"></span>         
             </div>
         </div>
         <div class="tweets col-md-12" id="tweet3">
@@ -84,7 +91,11 @@
         <div id="audioLink col-md-offset-4 col-md-4"></div>
     </div>
     <div id="error" class="col-md-offset-1 col-md-10">
-        <h1>We couldn't find what you were looking for. Try again!</h1>
+        <h1>We couldn't find what you were looking for. Try again!</h1>      
+    </div>
+
+    <div class="navigate col-sm-1">
+        <span class="next glyphicon glyphicon-chevron-right btn push-col-sm-11"></span>
     </div>
 </section>
 </body>

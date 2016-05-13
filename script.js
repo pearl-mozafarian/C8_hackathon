@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error').hide();
+    $('#read, #watch, #listen, #error, .next, .prev').hide();
 
     randomizeOptions();
 
@@ -13,7 +13,7 @@ $(document).ready(function () {
         $('#read, #watch, #listen, #error').hide();
         $('#landing').show();
     });
-    
+
     $('.next').click(next);
     $('.prev').click(prev);
 
@@ -51,7 +51,7 @@ function randomizeOptions() {
  * @return {number}
  */
 function generateRandomNumber(length) {
-   return Math.floor(Math.random()*length);
+    return Math.floor(Math.random()*length);
 }
 /**
  * displayOptions - this function generates a random number to be used in randomize options
@@ -72,17 +72,29 @@ function displayOptions(randomVerb, randomNoun) {
 
 /**
  * nowClicked
- * @param 
- * @return 
+ * @param
+ * @return
  */
 
 function nowClicked() {
     iWant.selectedNoun = $(".noun").val();
     iWant.selectedVerb = $(".verb").val();
+    
     if (iWant.selectedNoun == 'shane'){
         secret();
     } else {
-        next();
+        switch (iWant.selectedVerb) {
+            case "read":
+                readAjax();
+                break;
+            case "listen":
+                listenAjax();
+                break;
+            case "watch":
+                watchAjax();
+                break;
+        }
+        $('.next, .prev').show()
     }
 }
 /**************************************** AJAX CALLS ********************************************************/
@@ -152,7 +164,7 @@ function watchAjax() {
                     iWant.queueArray.push(response.video[i]);
                 }
                 console.log("results array", iWant.queueArray);
-                
+
                 //call display function
                 displayWatch();
 
@@ -296,25 +308,33 @@ function displayRead() {
     $('#landing').hide();
     $('#read').show();
 
-    for(var i = iWant.index; i <= iWant.index + 3; i++) {
+    var j = 0;
+
+    for(var i = iWant.index; i < iWant.index + 3; i++) {
         var tweet = iWant.queueArray[i];
-        var tweetdiv = '#tweet' + (i + 1);
+        var tweetdiv = '#tweet' + (j + 1);
         var avatar = tweetdiv + ' .avatar';
         var text = tweetdiv + ' .text';
         var name = tweetdiv + ' .name';
         var userName = tweetdiv + ' .userName';
         var retweets = tweetdiv + ' .retweets';
         var favorites = tweetdiv + ' .favorites';
-        
+
         $(avatar).attr('src', tweet.avatarUrl);
         $(text).text(tweet.text);
         $(name).text(tweet.name);
         $(userName).text(tweet.userName);
         $(retweets).text(tweet.retweets);
         $(favorites).text(tweet.favorites);
+
+        j++;
     }
 
     iWant.index += 3;
+
+    if (iWant.index >= 15) {
+        iWant.index = 0;
+    }
 }
 
 /******************DISPLAY WATCH ***************************/
@@ -324,13 +344,13 @@ function displayRead() {
  */
 
 function displayWatch(){
-    
+
     var id = iWant.queueArray[iWant.index].id;
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 
     $('#landing').hide();
     $('#watch').show();
-    
+
     iWant.index++;
 }
 
@@ -376,11 +396,14 @@ function displayError(verb) {
 
 function next() {
     switch (iWant.selectedVerb) {
-        case "read": readAjax();
+        case "read":
+            displayRead();
             break;
-        case "listen": listenAjax();
+        case "listen":
+            displayListen();
             break;
-        case "watch": watchAjax();
+        case "watch":
+            displayWatch();
             break;
     }
 }
@@ -391,10 +414,17 @@ function next() {
 
 function prev() {
     if (iWant.selectedVerb == 'read') {
-        iWant.index -= 3;
+        if (iWant.index >= 6) {
+            iWant.index -= 6;
+        }
+        else {
+            iWant.index = 12;
+        }
     }
     else {
-        iWant.index--;
+        if (iWant.index > 0) {
+            iWant.index -= 2;
+        }
     }
     next();
 }
@@ -437,10 +467,8 @@ function secretDOMObj(){
 }
 
 /**
- * secret - loop creating secret objects
+ * secret - interval creating secret objects
  */
 function secret(){
-
     iWant.interval = setInterval(secretDOMObj, 300);
-
 }
