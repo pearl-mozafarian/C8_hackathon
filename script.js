@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn').hide();
+    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover').hide();
 
     loadNouns();
 
@@ -18,10 +18,10 @@ $(document).ready(function () {
         console.log('clicked');
         iWant.queueArray = [];
         iWant.index = 0;
-        $("#audio").attr('src', "");
-        $('#read, #watch, #listen, #error, #startOverBtn').hide();
-
+        
+        $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover').hide();
         $('#landing').show();
+
     });
 
     $("#random-btn").click(randomizeOptions);
@@ -303,7 +303,11 @@ function displayWatch() {
  */
 function displayListen() {
     $("#landing").hide();
-    $("#listen, #selectNext, #selectPrev, #startOverBtn").show();
+    $("#listen, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover").show();
+
+    var background = 'url(' +iWant.queueArray[iWant.index].picture + ')';
+    $('#music-background').css('background-image', background);
+
 
     var obj = iWant.queueArray;
     var ind = iWant.index;
