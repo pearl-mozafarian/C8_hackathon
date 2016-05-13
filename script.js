@@ -18,7 +18,6 @@ $(document).ready(function () {
 
     $('.next').click(next);
     $('.prev').click(prev);
-    $('.randomize').click(randomizeOptions);
 
 });//////end of document.ready
 
