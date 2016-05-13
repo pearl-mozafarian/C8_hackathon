@@ -7,7 +7,7 @@ $(document).ready(function () {
 
     randomizeOptions();
 
-    $(".now-button").click(nowClicked);
+    $("#nowButton").click(nowClicked);
     
     $("#startOver").click(function () {
         iWant.queueArray = [];
@@ -15,6 +15,8 @@ $(document).ready(function () {
         $('#read, #watch, #listen, #error').hide();
         $('#landing').show();
     });
+
+    $("#random-btn").click(randomizeOptions);
 
     $('.next').click(next);
     $('.prev').click(prev);
@@ -58,15 +60,16 @@ function generateRandomNumber(length) {
  * displayOptions - this function generates a random number to be used in randomize options
  * @param {string, string}
  */
+
 function displayOptions(randomVerb, randomNoun) {
     $(".noun").val(randomNoun);
-    $(".verb option").attr("selected" , false);
+    // $(".verb option").attr("selected" , false);
     switch (randomVerb){
-        case "listen": $(".verb option[value='listen']").attr("selected" , true);
+        case "listen to": $(".verb").val('listen');
             break;
-        case "watch": $(".verb option[value='watch']").attr("selected" , true);
+        case "watch": $(".verb").val('watch');
             break;
-        case "read": $(".verb option[value='read']").attr("selected" , true);
+        case "read": $(".verb").val('read');
             break;
     }
 }
