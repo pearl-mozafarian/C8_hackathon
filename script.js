@@ -491,3 +491,4 @@ function secret() {
     $("#audio")[0].play();
     iWant.interval = setInterval(secretDOMObj, 300);
 }
+
