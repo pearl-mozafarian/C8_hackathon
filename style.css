@@ -183,6 +183,12 @@ a.random-button:active {
     font-size: 40px;
 }
 
+#start-over {
+    position: fixed;
+    top: 5%;
+    left: 5%;
+}
+
 /**************************************************** TOP SECRET ***************************************************/
 
 .secret{
