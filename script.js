@@ -1,7 +1,7 @@
 /*********************************************** DOCUMENT.READY *****************************************/
 $(document).ready(function () {
     //hiding all other wrappers beside the landing page
-    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover').hide();
+    $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover, #twitter-share-button').hide();
 
     loadNouns();
 
@@ -23,7 +23,7 @@ $(document).ready(function () {
 
         $("#audio").attr("src", "");
         
-        $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover').hide();
+        $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover, #twitter-share-button').hide();
         $('#landing').show();
 
         randomizeOptions();
@@ -285,7 +285,7 @@ function listenAjax() {
  */
 function displayRead() {
     $('#landing').hide();
-    $('#read, #selectNext, #selectPrev, #startOverBtn').show();
+    $('#read, #selectNext, #selectPrev, #startOverBtn, #twitter-share-button').show();
 
     var j = 0;
 
@@ -328,7 +328,7 @@ function displayWatch() {
     $("#ytplayer").attr("src", "http://www.youtube.com/embed/" + id + "?autoplay=1");
 
     $('#landing').hide();
-    $('#watch, #selectNext, #selectPrev, #startOverBtn').show();
+    $('#watch, #selectNext, #selectPrev, #startOverBtn, #twitter-share-button').show();
 
 
     iWant.index++;
@@ -341,7 +341,7 @@ function displayWatch() {
  */
 function displayListen() {
     $("#landing").hide();
-    $("#listen, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover").show();
+    $("#listen, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover, #twitter-share-button").show();
 
     var background = 'url(' +iWant.queueArray[iWant.index].picture + ')';
     $('#music-background').css('background-image', background);
