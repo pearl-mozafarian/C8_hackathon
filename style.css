@@ -348,6 +348,10 @@ div.tweet-box>div>h3 {
     height: 4vh;
 }
 
+#spotify:hover {
+    transform: scale(1.1);
+}
+
 #audioControls {
     margin: auto;
     width: 100%;
