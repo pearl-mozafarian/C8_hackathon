@@ -330,9 +330,8 @@ div.tweet-box>div>h3 {
 }
 #albumName, #songName,/* #audioLink,*/ #artistName {
     text-align: center;
-    display: block;
     color: #ffffff;
-    margin-bottom: 2%;
+    margin-bottom: 3%;
     font-size: 2vw;
     height: 25%;
     /*background-color: rgba(255,255,255,0.9);*/
@@ -362,6 +361,7 @@ div.tweet-box>div>h3 {
     position: relative;
     top: 5%;
 }
+
 #albumArt {
     overflow: hidden;
     width: 50%;
@@ -373,6 +373,16 @@ div.tweet-box>div>h3 {
     /*height: 300px;*/
     /*border: 1px solid black;*/
     /*background-color: rgba(255,255,255,0.9);*/
+}
+
+.track-info {
+    display: inline-block;
+}
+
+i.track-info,
+span.track-info {
+    color: #282828;
+    margin-right: 10px;
 }
 
 #pic {

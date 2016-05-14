@@ -347,13 +347,14 @@ function displayListen() {
     $('#music-background').css('background-image', background);
 
 
+
     var obj = iWant.queueArray;
     var ind = iWant.index;
     $("#pic").attr("src", iWant.queueArray[iWant.index].picture);
-    $("#artistName").text(obj[ind].artist);
-    $("#albumName").text(obj[ind].album);
-    $("#songName").text(obj[ind].title);
-    var url = $("#linkForAudio").attr("href", obj[ind].link).attr('target','_blank');
+    $("#artistName").html('<span class="track-info glyphicon glyphicon-user"></span><span>' + obj[ind].artist + '</span>');
+    $("#albumName").html('<i class="track-info material-icons">album</i><span>' + obj[ind].album + '</span>');
+    $("#songName").html('<span class="track-info glyphicon glyphicon-music"></span><span>' + obj[ind].title + '</span>');
+    $("#linkForAudio").attr("href", obj[ind].link).attr('target','_blank');
     $("#audio").attr("src", obj[ind].audio);
     $("#audio")[0].play();
     iWant.index += 1;
