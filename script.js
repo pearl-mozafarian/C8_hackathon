@@ -353,7 +353,7 @@ function displayListen() {
     $("#artistName").text(obj[ind].artist);
     $("#albumName").text(obj[ind].album);
     $("#songName").text(obj[ind].title);
-    $("#linkForAudio").attr("href", obj[ind].link);
+    var url = $("#linkForAudio").attr("href", obj[ind].link).attr('target','_blank');
     $("#audio").attr("src", obj[ind].audio);
     $("#audio")[0].play();
     iWant.index += 1;
