@@ -68,6 +68,10 @@ input[type=text] {
 
 }
 
+input[type=text]:hover{
+    cursor: pointer;
+}
+
 .border {
     position: absolute;
     bottom: 0;
@@ -198,6 +202,13 @@ select {
 select:focus {
     outline: none;
 }
+
+select:hover {
+    color: #BA68C8;
+    border-bottom: 2px solid #BA68C8;
+    cursor: pointer;
+}
+
 /* Use custom arrow */
 .mdl-selectfield select {
     -webkit-appearance: none;
