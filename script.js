@@ -18,6 +18,10 @@ $(document).ready(function () {
         console.log('clicked');
         iWant.queueArray = [];
         iWant.index = 0;
+
+        $("#watch").html('<iframe id="ytplayer" width="854" height="480" src="" frameborder="0"></iframe>');
+
+        $("#audio").attr("src", "");
         
         $('#read, #watch, #listen, #error, #selectNext, #selectPrev, #startOverBtn, #music-background, #music-background-cover, #twitter-share-button').hide();
         $('#landing').show();
@@ -44,6 +48,14 @@ $(document).ready(function () {
             $('.border').addClass("border--animate");
             checkInput();
         });
+    //enter selects "now" but only if landing is visible
+    $(document).keypress(function(e) {
+        if(e.which == 13) {
+
+                nowClicked();
+            
+        }
+    });
 
 });//////end of document.ready
 
