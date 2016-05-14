@@ -48,6 +48,14 @@ $(document).ready(function () {
             $('.border').addClass("border--animate");
             checkInput();
         });
+    //enter selects "now" but only if landing is visible
+    $(document).keypress(function(e) {
+        if(e.which == 13) {
+
+                nowClicked();
+            
+        }
+    });
 
 });//////end of document.ready
 
